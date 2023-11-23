@@ -15,4 +15,41 @@ model User {
   avatar    String?
   email     String?  @unique
   password  String?
+  roles     Role[]
+}
+
+model Role {
+  id        String   @id @unique @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  groupID   String
+  group     Group    @relation(fields: [groupID], references: [id])
+}
+
+model Group {
+  id            String   @id @unique @default(cuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  name          String
+  roleIDs       String[]
+  roles         Role[]
+  childGroups   Group[]  @relation("GroupToFatherGroup")
+  fatherGroupID String?
+  fatherGroup   Group?   @relation("GroupToFatherGroup", fields: [fatherGroupID], references: [id])
+  Event         Event?
+}
+
+model Event {
+  id          String   @id @unique @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  name        String
+  mainGroupID String   @unique
+  mainGroup   Group    @relation(fields: [mainGroupID], references: [id])
+  date        DateTime
+  location    String
+  description String?
 }
