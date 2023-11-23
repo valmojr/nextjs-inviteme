@@ -29,7 +29,7 @@ services:
             - DATABASE_URL=postgresql://myuser:mypassword@172.20.0.2:5432/mydb
         networks:
             inviteme_network:
-                ipv4_address: 172.20.0.5
+                ipv4_address: 172.20.0.3
         depends_on:
             - db
         working_dir: /usr/src/app
