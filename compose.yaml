@@ -37,14 +37,17 @@ services:
         develop:
             watch:
                 - action: sync
-                  path: ./web
-                  target: /src/web
+                  path: ./
+                  target: ./usr/src/app
                   ignore:
                     - node_modules/
                     - .next/
                     - .git/
                 - action: rebuild
                   path: package.json
+        build:
+            context: .
+            dockerfile: Dockerfile
         command: sh -c "npm install && npm run dev"
 
 networks:
