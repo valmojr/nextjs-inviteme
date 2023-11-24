@@ -16,6 +16,7 @@ model User {
   email     String?  @unique
   password  String?
   roles     Role[]
+  ownedEvents Event[]
 }
 
 model Role {
@@ -50,6 +51,8 @@ model Event {
   mainGroupID String   @unique
   mainGroup   Group    @relation(fields: [mainGroupID], references: [id])
   date        DateTime
+  ownerID     String?
+  owner       User?    @relation(fields: [ownerID], references: [id])
   location    String
   description String?
 }
