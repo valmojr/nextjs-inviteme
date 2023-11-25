@@ -8,14 +8,14 @@ datasource db {
 }
 
 model User {
-  id        String   @id @unique @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name      String
-  avatar    String?
-  email     String?  @unique
-  password  String?
-  roles     Role[]
+  id          String   @id @unique @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  name        String
+  avatar      String?
+  email       String?  @unique
+  password    String?
+  roles       Role[]
   ownedEvents Event[]
 }
 
@@ -48,6 +48,7 @@ model Event {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   name        String
+  thumbnail   String?
   mainGroupID String   @unique
   mainGroup   Group    @relation(fields: [mainGroupID], references: [id])
   date        DateTime
