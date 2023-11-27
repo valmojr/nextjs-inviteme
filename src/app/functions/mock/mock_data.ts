@@ -100,6 +100,14 @@ export const roles: Role[] = [
         userId: randomUsers[0].id,
         groupID: '9d0c7b2e-6a1f-4f8e-8c3d-5b9a0e2f1c7',
     },
+    {
+        id: 'gewji3f9-8d6a-40a2-9e87-cb9cfeef3171',
+        name: 'Árbitro',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        userId: randomUsers[0].id,
+        groupID: 'jrfw8e2d-5a7b-493c-6e0d-8c9a1f3b2e7',
+    },
 ];
 
 export const groups: Group[] = [
@@ -127,19 +135,57 @@ export const groups: Group[] = [
         fatherGroupID: '4f8e2d1c-5a7b-493c-6e0d-8c9a1f3b2e7',
         roleIDs: ['2f9c8e1b-6a4d-4b9f-a0c8-5e3d7a8f1c9e', 'b2e0d9c8-1f5d-4a8e-9c7b-3a6f2d4c5e8a'],
     },
+    {
+        id: 'jrfw8e2d-5a7b-493c-6e0d-8c9a1f3b2e7',
+        name: 'Arbitragem',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        fatherGroupID: null,
+        roleIDs: [],
+    }
 ];
 
-export const assignedEvents: Event[] = [{
-    id: '3a1e6f9c-8b5d-4c7a-9e2d-1f0c2e5b8d4',
-    name: 'Evento Um',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    date: new Date(),
-    description: 'Uma breve descrição do Evento 1',
-    thumbnail: 'https://sportlife.com.br/wp-content/uploads/2023/05/Beach-Tennis.jpg',
-    location: 'Praia do Forte',
-    ownerID: '72e8b3a1-9f6c-4d14-b472-8e1c5638a92c',
-    mainGroupID: '4f8e2d1c-5a7b-493c-6e0d-8c9a1f3b2e7',
-}];
+export const assignedEvents: Event[] = [
+    {
+        id: '3a1e6f9c-8b5d-4c7a-9e2d-1f0c2e5b8d4',
+        name: 'Evento Um',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        // set start date to 5 day from now
+        startDate: new Date(new Date().setDate(new Date().getDate() + 5)),
+        endDate: new Date(new Date().setDate(new Date().getDate() + 6)),
+        description: 'Uma breve descrição do Evento 1',
+        thumbnail: 'https://sportlife.com.br/wp-content/uploads/2023/05/Beach-Tennis.jpg',
+        location: 'Praia do Forte',
+        ownerID: '72e8b3a1-9f6c-4d14-b472-8e1c5638a92c',
+        mainGroupID: '4f8e2d1c-5a7b-493c-6e0d-8c9a1f3b2e7',
+    },
+    {
+        id: '1f0c2e5b-8b5d-4c7a-9e2d-3a1e6f9c8d4',
+        name: 'Evento Dois',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        startDate: new Date(new Date().setDate(new Date().getDate() + 5)),
+        endDate: new Date(new Date().setDate(new Date().getDate() + 6)),
+        description: 'Uma breve descrição do Evento 2',
+        thumbnail: 'https://www.adobe.com/content/dam/www/us/en/events/overview-page/eventshub_evergreen_opengraph_1200x630_2x.jpg',
+        location: 'Praia do Forte',
+        ownerID: '72e8b3a1-9f6c-4d14-b472-8e1c5638a92c',
+        mainGroupID: 'jrfw8e2d-5a7b-493c-6e0d-8c9a1f3b2e7',
+    },
+    {
+        id: '8b5d4c7a-9e2d-1f0c-2e5b-3a1e6f9c8d4',
+        name: 'Evento Três',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        startDate: new Date(new Date().setDate(new Date().getDate() + 1)),
+        endDate: new Date(new Date().setDate(new Date().getDate() + 2)),
+        description: 'Uma breve descrição do Evento 3',
+        thumbnail: '',
+        location: 'Sala de Eventos',
+        ownerID: '72e8b3a1-9f6c-4d14-b472-8e1c5638a92c',
+        mainGroupID: 'https://venues.be/wp-content/uploads/2021/03/20230311_great_027-856x1024.jpg',
+    }
+];
 
 export const avaliableEvents: Event[] = [];
