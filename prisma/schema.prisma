@@ -14,9 +14,9 @@ model User {
   name        String
   avatar      String?
   email       String?  @unique
-  password    String?
   roles       Role[]
   ownedEvents Event[]
+  houses      House[]
 }
 
 model Role {
@@ -55,6 +55,17 @@ model Event {
   mainGroup   Group     @relation(fields: [mainGroupID], references: [id])
   ownerID     String?
   owner       User?     @relation(fields: [ownerID], references: [id])
-  location    String
+  location    String?
   description String?
+  House       House?    @relation(fields: [houseId], references: [id])
+  houseId     String?
+}
+
+model House {
+  id        String   @id @unique @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  users     User[]
+  events    Event[]
 }
