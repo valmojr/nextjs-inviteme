@@ -35,14 +35,14 @@ export default async function IncomingEvents() {
 		);
 
 		return (
-			<div className={'flex flex-col flex-nowrap gap-2'}>
+			<div className={'flex flex-col flex-nowrap gap-3 px-4 my-4'}>
 				<Card
 					event={closestEvent}
 					type={'hero_event'}
 					showTimeLeft={true}
 					key={closestEvent.id}
 				/>
-				<div className={'flex flex-row flex-wrap gap-2'}>
+				<div className={'flex flex-row flex-nowrap gap-3'}>
 					{closeEvents.map((event) => (
 						<Card event={event} type={'medium'} key={event.id} />
 					))}
