@@ -1,3 +1,11 @@
+import AvaliableEvents from '@/app/ui/dashboard/AvaliableEvents';
+import IncomingEvents from '@/app/ui/dashboard/IncomingEvents';
+
 export default function Page() {
-    return <h1>Dashboard</h1>
+	return (
+		<>
+			<IncomingEvents />
+			<AvaliableEvents />
+		</>
+	);
 }
