@@ -9,7 +9,7 @@ export function AvaliableEventCard(
 	return (
 		<div
 			className={
-				'flex flex-row flex-nowrap items-center justify-center gap-2 shadow-lg rounded-md p-2 bg-gradient-to-t from-neutral-700 via-neutral-600 to-neutral-500'
+				'flex flex-row flex-nowrap rounded-lg overflow-hidden w-full shadow-md max-w-[600px] bg-neutral-600'
 			}
 		>
 			<Image
@@ -21,7 +21,7 @@ export function AvaliableEventCard(
 			/>
 			<div
 				className={
-					'flex flex-col flex-nowrap gap-1 justify-start w-full'
+					'flex flex-col flex-nowrap gap-2 justify-center mx-4'
 				}
 			>
 				<h1 className={'text-3xl font-bold'}>{props.event.name}</h1>
@@ -37,7 +37,7 @@ export default async function AvaliableEvents() {
 	const events = avaliableEvents;
 
 	return (
-		<div className="flex flex-col flex-nowrap gap-3 w-full max-w-[600px] px-4">
+		<div className="flex flex-col flex-wrap items-center justify-center gap-3 px-4 my-4 w-full">
 			{events.map((event) => (
 				<AvaliableEventCard key={event.id} event={event} />
 			))}
