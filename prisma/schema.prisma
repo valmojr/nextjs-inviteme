@@ -44,16 +44,17 @@ model Group {
 }
 
 model Event {
-  id          String   @id @unique @default(cuid())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id          String    @id @unique @default(cuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  startDate   DateTime
+  endDate     DateTime?
   name        String
   thumbnail   String?
-  mainGroupID String   @unique
-  mainGroup   Group    @relation(fields: [mainGroupID], references: [id])
-  date        DateTime
+  mainGroupID String    @unique
+  mainGroup   Group     @relation(fields: [mainGroupID], references: [id])
   ownerID     String?
-  owner       User?    @relation(fields: [ownerID], references: [id])
+  owner       User?     @relation(fields: [ownerID], references: [id])
   location    String
   description String?
 }
