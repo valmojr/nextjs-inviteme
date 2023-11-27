@@ -1,5 +1,6 @@
+'use client';
+import { useRouter } from 'next/router';
+
 export default function Home() {
-  return (
-    <h1>Main Page File</h1>
-  )
+	return <></>;
 }
