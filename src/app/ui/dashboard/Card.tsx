@@ -1,6 +1,4 @@
 import { Event } from '@prisma/client';
-import { AspectRatio } from '@radix-ui/react-aspect-ratio';
-import clsx from 'clsx';
 import Image from 'next/image';
 import { ComponentProps } from 'react';
 import Avatar from '../util/avatar';
@@ -13,9 +11,9 @@ const CardTypeVariants = tv({
 	base: 'relative rounded-lg overflow-hidden bg-slate-900',
 	variants: {
 		type: {
-			hero_event: ' w-full shadow-md',
+			hero_event: 'w-full shadow-md max-w-[600px]',
 			large: 'w-72 shadow-md',
-			medium: 'w-48 shadow-md',
+			medium: 'w-1/2 shadow-md max-w-[294px]',
 			small: 'w-24 shadow-sm',
 		},
 	},
