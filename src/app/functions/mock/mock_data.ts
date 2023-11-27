@@ -181,7 +181,7 @@ export const assignedEvents: Event[] = [
         startDate: new Date(new Date().setDate(new Date().getDate() + 1)),
         endDate: new Date(new Date().setDate(new Date().getDate() + 2)),
         description: 'Uma breve descrição do Evento 3',
-        thumbnail: '',
+        thumbnail: 'https://kayevent.vn/wp-content/uploads/2020/03/mall-img.png',
         location: 'Sala de Eventos',
         ownerID: '72e8b3a1-9f6c-4d14-b472-8e1c5638a92c',
         mainGroupID: 'https://venues.be/wp-content/uploads/2021/03/20230311_great_027-856x1024.jpg',
