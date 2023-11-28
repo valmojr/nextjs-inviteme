@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "test": "dotenv -e .env.dev -- jest --coverage --verbose --watchAll",
-    "prisma:migrate": "dotenv -e .env.dev -- npx prisma migrate deploy",
+    "prisma:migrate_deploy": "dotenv -e .env.dev -- npx prisma migrate deploy",
+    "prisma:migrate_dev": "dotenv -e .env.dev -- npx prisma migrate dev",
+    "prisma:push": "dotenv -e .env.dev -- npx prisma db push",
+    "prisma:pull": "dotenv -e .env.dev -- npx prisma db pull",
     "prisma:generate": "dotenv -e .env.dev -- npx prisma generate"
   },
   "dependencies": {
