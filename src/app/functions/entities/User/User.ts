@@ -44,6 +44,10 @@ export class UserDTO extends Connector {
         }
     }
 
+    public async getAll(): Promise<User[]> {
+        return await this.prisma.user.findMany();
+    }
+
     public async update(data: Partial<User>): Promise<User> {
         if (!data.id) {
             throw new Error("User ID is required");

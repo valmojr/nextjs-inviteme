@@ -42,6 +42,10 @@ export class HouseDTO extends Connector {
         }
     }
 
+    public async getAll(): Promise<House[]> {
+        return await this.prisma.house.findMany();
+    }
+
     public async getUsers(house: House | string): Promise<User[]> {
         let houseId;
 

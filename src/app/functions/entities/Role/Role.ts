@@ -50,6 +50,10 @@ export class RoleDTO extends Connector {
         }
     }
 
+    public async getAll(): Promise<Role[]> {
+        return await this.prisma.role.findMany();
+    }
+
     public async getByUser(userId: string): Promise<Role[]> {
         return await this.prisma.role.findMany({
             where: {

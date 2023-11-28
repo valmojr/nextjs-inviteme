@@ -48,6 +48,10 @@ export class GroupDTO extends Connector {
         }
     }
 
+    public async getAll(): Promise<Group[]> {
+        return await this.prisma.group.findMany();
+    }
+
     public async update(data: Partial<Group>): Promise<Group> {
         if (!data.id) {
             throw new Error("Group ID is required");

@@ -78,6 +78,10 @@ export class EventDTO extends Connector {
         }
     }
 
+    public async getAll(): Promise<Event[]> {
+        return await this.prisma.event.findMany();
+    }
+
     public async getByOwner(ownerId: string): Promise<Event[]> {
         return await this.prisma.event.findMany({
             where: {
