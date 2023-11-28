@@ -9,7 +9,7 @@ export function AvaliableEventCard(
 	return (
 		<div
 			className={
-				'flex flex-row flex-nowrap rounded-lg overflow-hidden w-full shadow-md max-w-[600px] bg-neutral-600'
+				'flex flex-row flex-nowrap rounded-lg overflow-hidden w-full shadow-xl max-w-[600px] bg-neutral-600'
 			}
 		>
 			<Image
