@@ -24,7 +24,7 @@ export default function RootLayout({
 					accentColor="blue"
 					grayColor="sage"
 					className={
-						'flex flex-row flex-wrap h-screen w-screen items-start justify-center bg-gradient-to-r from-neutral-700 via-neutral-500 to-neutral-400'
+						'flex flex-row flex-wrap h-screen w-screen items-center justify-center bg-gradient-to-r from-neutral-700 via-neutral-500 to-neutral-400'
 					}
 				>
 					{children}
