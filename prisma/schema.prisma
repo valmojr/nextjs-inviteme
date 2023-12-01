@@ -58,8 +58,7 @@ model Event {
   owner       User?     @relation(fields: [ownerID], references: [id])
   location    String?
   description String?
-  House       House?    @relation(fields: [houseId], references: [id])
-  houseId     String?
+  House       House[]
 }
 
 model House {
