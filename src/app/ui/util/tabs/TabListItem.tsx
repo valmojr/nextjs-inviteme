@@ -2,6 +2,7 @@
 import { useRouter, usePathname } from 'next/navigation';
 import { ComponentProps } from 'react';
 import { twMerge } from 'tailwind-merge';
+import ThirdTitle from '../Text/ThirdTitle';
 
 export default function TabListItem(
 	props: {
@@ -13,6 +14,8 @@ export default function TabListItem(
 	const router = useRouter();
 
 	const localRoute = usePathname();
+
+	const isSelected = !!(localRoute == props.route);
 
 	const extractSegments = (urlPath: string): string | null => {
 		const segments: string[] = urlPath.split('/').filter(Boolean);
@@ -27,12 +30,15 @@ export default function TabListItem(
 	return (
 		<div
 			className={twMerge(
-				'flex-1 first:rounded-tl-xl last:rounded-tr-xl h-45px flex items-center justify-center bg-white font-size-15 line-height-1 text-mauve-11 select-none text-black',
+				'flex-1 first:rounded-tl-xl last:rounded-tr-xl h-[45px] flex items-center justify-center bg-white font-size-15 line-height-1 text-mauve-11 select-none text-black',
+				isSelected ? 'bg-blue-600' : 'hover:bg-blue-300',
 				props.className
 			)}
 			onClick={() => router.push(props.route)}
 		>
-			{extractSegments(props.route)?.toUpperCase()}
+			<ThirdTitle color={isSelected ? 'secondary' : 'primary'}>
+				{extractSegments(props.route)?.toUpperCase()}
+			</ThirdTitle>
 		</div>
 	);
 }
