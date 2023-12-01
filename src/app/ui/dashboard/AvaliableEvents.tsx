@@ -9,7 +9,7 @@ export function AvaliableEventCard(
 	return (
 		<div
 			className={
-				'flex flex-row flex-nowrap rounded-lg overflow-hidden w-full shadow-md shadow-neutral-700 max-w-[600px] bg-neutral-600'
+				'flex flex-row flex-nowrap rounded-lg overflow-hidden w-full shadow-md max-w-[600px] bg-neutral-100'
 			}
 		>
 			<Image
@@ -17,7 +17,7 @@ export function AvaliableEventCard(
 				width={300}
 				height={200}
 				alt={`${props.event.description}`}
-				className={'object-cover w-32 h-24 rounded-md'}
+				className={'object-cover w-32 h-24 rounded-l-md'}
 			/>
 			<div
 				className={
