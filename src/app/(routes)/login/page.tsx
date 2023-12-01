@@ -28,8 +28,6 @@ export default function Page() {
 					onChange={(event) => setStoredPassword(event.target.value)}
 				/>
 			</fieldset>
-			<p>Usuário: {storedUsername}</p>
-			<p>Senha: {storedPassword}</p>
 			<SubmitButton color={'primary'}>Save Changes</SubmitButton>
 		</>
 	);
