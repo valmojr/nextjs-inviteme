@@ -1,3 +1,5 @@
+import FirstTitle from '@/app/ui/util/Text/FirstTitle';
+
 export default function Page() {
-	return <h1>Forgot Password Page</h1>;
+	return <FirstTitle>(TODO) Forgot Password Page</FirstTitle>;
 }
