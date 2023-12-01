@@ -19,7 +19,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body
 				className={twMerge(
-					'flex flex-row flex-wrap h-screen w-screen items-center justify-center bg-gradient-to-r from-neutral-700 via-neutral-500 to-neutral-400 text-neutral-800',
+					'flex flex-row flex-wrap h-screen w-screen items-center justify-center bg-gradient-to-tl from-cyan-900 to-indigo-500 text-neutral-800',
 					inter.className
 				)}
 			>
