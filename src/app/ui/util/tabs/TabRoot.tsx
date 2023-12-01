@@ -6,7 +6,12 @@ export default function TabRoot({
 	className,
 }: { children: React.ReactNode; className?: string } & ComponentProps<'div'>) {
 	return (
-		<div className={twMerge('flex flex-col w-300px shadow-md', className)}>
+		<div
+			className={twMerge(
+				'flex flex-col w-1/2 min-w-[320px] max-w-[400px] shadow-md',
+				className
+			)}
+		>
 			{children}
 		</div>
 	);

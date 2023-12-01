@@ -27,7 +27,7 @@ export default function TabListItem(
 	return (
 		<div
 			className={twMerge(
-				'flex-1 h-45px flex items-center justify-center px-20 bg-white font-size-15 line-height-1 text-mauve-11 select-none text-black',
+				'flex-1 first:rounded-tl-xl last:rounded-tr-xl h-45px flex items-center justify-center bg-white font-size-15 line-height-1 text-mauve-11 select-none text-black',
 				props.className
 			)}
 			onClick={() => router.push(props.route)}
