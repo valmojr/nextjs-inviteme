@@ -44,6 +44,14 @@ export class UserDTO extends Connector {
         }
     }
 
+    public async getByName(name: string) {
+        return await this.prisma.user.findUnique({
+            where: {
+                name
+            }
+        })
+    }
+
     public async getAll(): Promise<User[]> {
         return await this.prisma.user.findMany();
     }
