@@ -16,7 +16,7 @@ export default function Page() {
 				<Label htmlFor="name">Username</Label>
 				<Input
 					id="username"
-					defaultValue={'username'}
+					placeholder={'username'}
 					onChange={(event) => setStoredUsername(event.target.value)}
 				/>
 			</fieldset>
@@ -24,7 +24,7 @@ export default function Page() {
 				<Label htmlFor="username">Password</Label>
 				<Input
 					id="password"
-					defaultValue={'12345678'}
+					placeholder={'********'}
 					onChange={(event) => setStoredPassword(event.target.value)}
 				/>
 			</fieldset>
