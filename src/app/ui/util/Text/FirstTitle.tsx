@@ -1,12 +1,11 @@
 import { twMerge } from 'tailwind-merge';
 
-export default function FirstTitle({
-	children,
-	color,
-}: {
+export default function FirstTitle(props: {
 	children?: React.ReactNode;
 	color?: 'primary' | 'secondary' | 'blue';
 }) {
+	const { children, color } = props;
+
 	return (
 		<h1
 			className={twMerge(
@@ -17,6 +16,7 @@ export default function FirstTitle({
 				color == 'secondary' ? 'text-neutral-100' : '',
 				color == 'blue' ? 'text-blue-500' : ''
 			)}
+			{...props}
 		>
 			{children}
 		</h1>

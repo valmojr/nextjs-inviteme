@@ -20,6 +20,7 @@ export default function SubmitButton(
 				color == 'danger' ? 'bg-red-500' : '',
 				props.className
 			)}
+			{...props}
 		>
 			{props.children}
 		</button>
