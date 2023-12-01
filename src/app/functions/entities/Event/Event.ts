@@ -4,31 +4,31 @@ import { Event } from "@prisma/client";
 
 export class EventDTO extends Connector {
     public async create(data: Partial<Event>): Promise<Event> {
-        if (!data.name || data.name === "") {
+        if (!data?.name || data.name === "") {
             throw new Error("Event Name is required");
         }
 
-        if (!data.startDate) {
+        if (!data?.startDate) {
             throw new Error("Event Start Date is required");
         }
 
-        if (!data.endDate) {
+        if (!data?.endDate) {
             throw new Error("Event End Date is required");
         }
 
-        if ((data.startDate < new Date())) {
+        if ((data?.startDate < new Date())) {
             throw new Error("Event Start Date cannot be past");
         }
 
-        if (data.endDate < new Date()) {
+        if (data?.endDate < new Date()) {
             throw new Error("Event EndDate cannot be past");
         }
 
-        if (data.endDate < data.startDate) {
+        if (data?.endDate < data?.startDate) {
             throw new Error("Event EndDate cannot be before StartDate");
         }
 
-        if (!data.mainGroupID) {
+        if (!data?.mainGroupID) {
             throw new Error("Event Main Group is required");
         }
 
