@@ -7,9 +7,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<TabRoot>
 			<TabList>
-				<TabListItem route={'login'} defaultRoute={true} />
-				<TabListItem route={'register'} />
-				<TabListItem route={'forgot'} />
+				<TabListItem route={'/login'} />
+				<TabListItem route={'/login/register'} />
+				<TabListItem route={'/login/forgot'} />
 			</TabList>
 			<TabContent>{children}</TabContent>
 		</TabRoot>
