@@ -3,7 +3,7 @@ import Connector from "../Connector";
 import { Event } from "@prisma/client";
 
 export class EventDTO extends Connector {
-    public async create(data: Partial<Event>): Promise<Event> {
+    public async create(data: Event): Promise<Event> {
         if (!data?.name || data.name === "") {
             throw new Error("Event Name is required");
         }
