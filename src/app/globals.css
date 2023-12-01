@@ -25,3 +25,7 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+button, fieldset, input {
+  all: unset;
+}
