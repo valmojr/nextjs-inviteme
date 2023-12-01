@@ -3,19 +3,20 @@ import { twMerge } from 'tailwind-merge';
 
 export default function Paragrath({
 	children,
-	type,
+	color,
 }: {
 	children: React.ReactNode;
-	type?: 'primary' | 'secondary';
+	type?: 'primary' | 'secondary' | 'blue';
 } & ComponentProps<'p'>) {
 	return (
 		<p
 			className={twMerge(
-				'mt-0 mb-5 text-base block',
-				type == 'primary' || type == undefined
+				'',
+				color == 'primary' || color == undefined
 					? 'text-neutral-800'
 					: '',
-				type == 'secondary' ? 'text-neutral-200' : ''
+				color == 'secondary' ? 'text-neutral-300' : '',
+				color == 'blue' ? 'text-blue-500' : ''
 			)}
 		>
 			{children}
