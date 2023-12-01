@@ -11,7 +11,7 @@ export default function ThirdTitle({
 	return (
 		<h3
 			className={twMerge(
-				'text-lg',
+				'text-lg font-semibold',
 				color == 'primary' || color == undefined
 					? 'text-neutral-800'
 					: '',
