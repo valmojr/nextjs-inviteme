@@ -11,11 +11,11 @@ export default function SecondTitle({
 	return (
 		<h2
 			className={twMerge(
-				'',
+				'text-2xl',
 				color == 'primary' || color == undefined
 					? 'text-neutral-800'
 					: '',
-				color == 'secondary' ? 'text-neutral-300' : '',
+				color == 'secondary' ? 'text-neutral-100' : '',
 				color == 'blue' ? 'text-blue-500' : ''
 			)}
 		>

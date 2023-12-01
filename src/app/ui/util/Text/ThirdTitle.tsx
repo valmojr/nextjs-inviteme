@@ -11,11 +11,11 @@ export default function ThirdTitle({
 	return (
 		<h3
 			className={twMerge(
-				'',
+				'text-lg',
 				color == 'primary' || color == undefined
 					? 'text-neutral-800'
 					: '',
-				color == 'secondary' ? 'text-neutral-300' : '',
+				color == 'secondary' ? 'text-neutral-100' : '',
 				color == 'blue' ? 'text-blue-500' : ''
 			)}
 		>

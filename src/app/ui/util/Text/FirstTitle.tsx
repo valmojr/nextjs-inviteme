@@ -10,11 +10,11 @@ export default function FirstTitle({
 	return (
 		<h1
 			className={twMerge(
-				'',
+				'text-3xl',
 				color == 'primary' || color == undefined
 					? 'text-neutral-800'
 					: '',
-				color == 'secondary' ? 'text-neutral-300' : '',
+				color == 'secondary' ? 'text-neutral-100' : '',
 				color == 'blue' ? 'text-blue-500' : ''
 			)}
 		>
