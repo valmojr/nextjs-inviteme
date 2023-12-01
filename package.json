@@ -12,7 +12,8 @@
     "prisma:migrate_dev": "dotenv -e .env.dev -- npx prisma migrate dev",
     "prisma:push": "dotenv -e .env.dev -- npx prisma db push",
     "prisma:pull": "dotenv -e .env.dev -- npx prisma db pull",
-    "prisma:generate": "dotenv -e .env.dev -- npx prisma generate"
+    "prisma:generate": "dotenv -e .env.dev -- npx prisma generate",
+    "prisma:studio": "dotenv -e .env.dev -- npx prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^5.6.0",
