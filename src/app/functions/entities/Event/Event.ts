@@ -49,7 +49,6 @@ export class EventDTO extends Connector {
                 thumbnail: data.thumbnail,
                 mainGroupID: data.mainGroupID,
                 ownerID: data.ownerID,
-                houseId: data.houseId,
             }
         });
     }
@@ -93,7 +92,11 @@ export class EventDTO extends Connector {
     public async getByHouse(houseId: string): Promise<Event[]> {
         return await this.prisma.event.findMany({
             where: {
-                houseId
+                House: {
+                    some: {
+                        id: houseId
+                    }
+                }
             }
         });
     }
@@ -149,7 +152,6 @@ export class EventDTO extends Connector {
                 thumbnail: data.thumbnail,
                 mainGroupID: data.mainGroupID,
                 ownerID: data.ownerID,
-                houseId: data.houseId,
             }
         });
     }

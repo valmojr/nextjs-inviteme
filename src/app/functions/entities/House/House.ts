@@ -77,7 +77,11 @@ export class HouseDTO extends Connector {
 
         return await this.prisma.event.findMany({
             where: {
-                houseId
+                House: {
+                    some: {
+                        id: houseId
+                    }
+                }
             }
         });
     }
