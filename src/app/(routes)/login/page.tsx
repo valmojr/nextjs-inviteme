@@ -5,6 +5,8 @@ import Input from '@/app/ui/util/Forms/Input';
 import Label from '@/app/ui/util/Forms/Label';
 import Paragrath from '@/app/ui/util/Text/Paragrath';
 import { useState } from 'react';
+import DiscordLogo from './../../../../public/image/discord-mark-white.svg';
+import Image from 'next/image';
 
 export default function Page() {
 	const [storedUsername, setStoredUsername] = useState<string>('');
@@ -42,14 +44,30 @@ export default function Page() {
 					onChange={(event) => setStoredPassword(event.target.value)}
 				/>
 			</fieldset>
-			<SubmitButton color={loginStatus} onClick={() => handleSubmit()}>
-				Save Changes
-			</SubmitButton>
-			<SubmitButton>
-				<Paragrath color={'secondary'} className={'text-xs py-1'}>
-					Discord Login
-				</Paragrath>
-			</SubmitButton>
+			<div className={'flex flex-row flex-nowrap gap-2'}>
+				<SubmitButton
+					color={loginStatus}
+					onClick={() => handleSubmit()}
+				>
+					LOGIN
+				</SubmitButton>
+				<SubmitButton>
+					<Paragrath
+						color={'secondary'}
+						className={
+							'py-1 flex flex-row flex-nowrap items-center justify-center gap-2'
+						}
+					>
+						<Image
+							src={DiscordLogo}
+							width={25}
+							height={25}
+							alt={''}
+						/>
+						Discord
+					</Paragrath>
+				</SubmitButton>
+			</div>
 		</>
 	);
 }
