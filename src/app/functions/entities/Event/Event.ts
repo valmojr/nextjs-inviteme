@@ -104,7 +104,7 @@ export class EventDTO extends Connector {
     public async getUsers(eventOrEventId: Event | string) {
         const id = (typeof eventOrEventId == 'string') ? eventOrEventId : eventOrEventId.id;
         
-        return id;
+        return await this.prisma.user.findMany({where: {events: {some: {id}}}})
     }
 
     public async update(data: Partial<Event>): Promise<Event> {

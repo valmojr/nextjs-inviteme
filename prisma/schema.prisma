@@ -57,12 +57,11 @@ model Event {
   mainGroupID String    @unique
   mainGroup   Group     @relation(fields: [mainGroupID], references: [id])
   ownerID     String?
-  owner       User?     @relation("UserToOwnedEvents", fields: [userId], references: [id])
+  owner       User?     @relation("UserToOwnedEvents", fields: [ownerID], references: [id])
   location    String?
   description String?
   House       House[]
   users       User[]    @relation("UserToAttendedEvents")
-  userId      String?
 }
 
 model House {
