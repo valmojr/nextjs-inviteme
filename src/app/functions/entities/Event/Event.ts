@@ -101,6 +101,12 @@ export class EventDTO extends Connector {
         });
     }
 
+    public async getUsers(eventOrEventId: Event | string) {
+        const id = (typeof eventOrEventId == 'string') ? eventOrEventId : eventOrEventId.id;
+        
+        return id;
+    }
+
     public async update(data: Partial<Event>): Promise<Event> {
         if (!data.id) {
             throw new Error("Event ID is required");

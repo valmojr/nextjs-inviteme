@@ -7,6 +7,8 @@ import Paragrath from '@/app/ui/util/Text/Paragrath';
 import { useState } from 'react';
 import DiscordLogo from './../../../../public/image/discord-mark-white.svg';
 import Image from 'next/image';
+import { redirect } from 'next/navigation';
+import { config } from 'dotenv';
 
 export default function Page() {
 	const [storedUsername, setStoredUsername] = useState<string>('');
@@ -24,6 +26,8 @@ export default function Page() {
 
 		await validateLogin(loginData);
 	}
+
+	config();
 
 	return (
 		<>
@@ -51,22 +55,26 @@ export default function Page() {
 				>
 					LOGIN
 				</SubmitButton>
-				<SubmitButton>
-					<Paragrath
-						color={'secondary'}
-						className={
-							'py-1 flex flex-row flex-nowrap items-center justify-center gap-2'
-						}
-					>
-						<Image
-							src={DiscordLogo}
-							width={25}
-							height={25}
-							alt={''}
-						/>
-						Discord
-					</Paragrath>
-				</SubmitButton>
+				<a
+					href={`https://discord.com/api/oauth2/authorize?client_id=1180503448979001414&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Flogin%2Fredirect&scope=identify+guilds`}
+				>
+					<SubmitButton>
+						<Paragrath
+							color={'secondary'}
+							className={
+								'py-1 flex flex-row flex-nowrap items-center justify-center gap-2'
+							}
+						>
+							<Image
+								src={DiscordLogo}
+								width={25}
+								height={25}
+								alt={''}
+							/>
+							DISCORD
+						</Paragrath>
+					</SubmitButton>
+				</a>
 			</div>
 		</>
 	);
