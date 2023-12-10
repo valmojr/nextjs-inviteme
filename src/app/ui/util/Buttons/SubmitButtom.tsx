@@ -16,8 +16,8 @@ export default function SubmitButton(
 					? 'bg-blue-500 text-neutral-100'
 					: null,
 				color == 'secondary' ? 'bg-neutral-200 text-neutral-800' : '',
-				color == 'success' ? 'bg-emerald-600' : '',
-				color == 'danger' ? 'bg-red-500' : '',
+				color == 'success' ? 'bg-emerald-600 text-neutral-200' : '',
+				color == 'danger' ? 'bg-red-500 text-neutral-200' : '',
 				props.className
 			)}
 			{...props}
