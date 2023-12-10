@@ -7,7 +7,7 @@ import Paragrath from '@/app/ui/util/Text/Paragrath';
 import { useState } from 'react';
 import DiscordLogo from './../../../../public/image/discord-mark-white.svg';
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { config } from 'dotenv';
 
 export default function Page() {
@@ -18,13 +18,10 @@ export default function Page() {
 		'primary' | 'success' | 'danger'
 	>('primary');
 
-	async function handleSubmit() {
-		const loginData = {
-			username: storedUsername,
-			password: storedPassword,
-		};
+	const { push } = useRouter();
 
-		await validateLogin(loginData);
+	async function HandleSubmit() {
+		push('dashboard');
 	}
 
 	config();
@@ -51,7 +48,7 @@ export default function Page() {
 			<div className={'flex flex-row flex-nowrap gap-2'}>
 				<SubmitButton
 					color={loginStatus}
-					onClick={() => handleSubmit()}
+					onClick={() => HandleSubmit()}
 				>
 					LOGIN
 				</SubmitButton>
