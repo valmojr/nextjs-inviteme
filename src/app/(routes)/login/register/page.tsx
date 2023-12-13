@@ -20,11 +20,11 @@ export default function Page() {
 			</fieldset>
 			<fieldset>
 				<Label>Password</Label>
-				<Input></Input>
+				<Input id="password" type="password"></Input>
 			</fieldset>
 			<fieldset>
 				<Label>Confirm Password</Label>
-				<Input></Input>
+				<Input id="confirmPassword" type="password"></Input>
 			</fieldset>
 			<div className={'flex flex-row flex-nowrap gap-2'}>
 				<SubmitButton color={'primary'}>Register</SubmitButton>
