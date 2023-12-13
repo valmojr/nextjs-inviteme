@@ -1,5 +1,4 @@
 'use client';
-import { validateLogin } from '@/app/functions/ValidateLogin';
 import SubmitButton from '@/app/ui/util/Buttons/SubmitButtom';
 import Input from '@/app/ui/util/Forms/Input';
 import Label from '@/app/ui/util/Forms/Label';
@@ -7,7 +6,7 @@ import Paragrath from '@/app/ui/util/Text/Paragrath';
 import { useState } from 'react';
 import DiscordLogo from './../../../../public/image/discord-mark-white.svg';
 import Image from 'next/image';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { config } from 'dotenv';
 
 export default function Page() {
@@ -42,6 +41,7 @@ export default function Page() {
 				<Input
 					id="password"
 					placeholder={'********'}
+					type={'password'}
 					onChange={(event) => setStoredPassword(event.target.value)}
 				/>
 			</fieldset>
