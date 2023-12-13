@@ -11,7 +11,7 @@ export default function MainContainer(
 	return (
 		<div
 			className={twMerge(
-				'flex flex-col flex-nowrap items-center justify-center',
+				'flex flex-col flex-nowrap items-center justify-between gap-2',
 				color === 'primary' ? 'bg-neutral-700' : '',
 				color === 'secondary' ? 'bg-neutral-100' : '',
 				color === undefined ? '' : '',
