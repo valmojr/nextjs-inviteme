@@ -1,7 +1,7 @@
 import { Event } from '@prisma/client';
 import Image from 'next/image';
 import { ComponentProps } from 'react';
-import Avatar from '../util/avatar';
+import Avatar from '../util/Avatar';
 import { getMissingTime } from '@/app/functions/util/TimeHandler';
 import { tv } from 'tailwind-variants';
 

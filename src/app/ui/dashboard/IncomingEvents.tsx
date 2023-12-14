@@ -1,7 +1,7 @@
 import { assignedEvents } from '@/app/functions/mock/mock_data';
 import Card from './Card';
 import { Event } from '@prisma/client';
-import Avatar from '../util/avatar';
+import Avatar from '../util/Avatar';
 
 export default async function IncomingEvents() {
 	const events = assignedEvents;
