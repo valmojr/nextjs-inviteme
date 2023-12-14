@@ -1,6 +1,6 @@
 import { User } from '@prisma/client';
 import Image from 'next/image';
-import { ComponentProps, Suspense } from 'react';
+import { ComponentProps } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 export function FallbackAvatar() {
