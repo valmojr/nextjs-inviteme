@@ -1,38 +1,19 @@
-'use server';
+'use strict';
 
-export default async function GetUser({ code }: { code: string }) {
-	const API_ENDPOINT = 'https://discord.com/api/oauth2/token';
+import { GetToken, GetUser } from '@/app/functions/authentication/OAuth2';
 
-	async function refreshToken(code: string): Promise<any> {
-		const body = new URLSearchParams({
-			client_id: `${process.env.DISCORD_CLIENT_ID}`,
-			client_secret: `${process.env.DISCORD_CLIENT_SECRET}`,
-			grant_type: 'authorization_code',
-			code,
-			redirect_uri: `${process.env.DISCORD_OAUTH2_URL}`,
-		});
-
-		const headers = {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			'Accept-Encoding': 'application/x-www-form-urlencoded',
-		};
-
-		const response = await fetch(`${API_ENDPOINT}`, {
-			method: 'POST',
-			body,
-			headers,
-		});
-
-		if (!response.ok) {
-			throw new Error(`Failed to refresh token: ${response.status}`);
-		}
-
-		return await response.json();
-	}
+export default async function GetUserInfo({ code }: { code: string }) {
+	const response = await GetToken(code);
+	const user = await GetUser(response);
 
 	return (
 		<>
-			<p>{refreshToken(code)}</p>
+			<h1>
+				{'CLIENT ID: ' +
+					JSON.stringify(process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID)}
+			</h1>
+			<h1>{'RESPONSE: ' + JSON.stringify(response)}</h1>
+			<h1>{'USER: ' + JSON.stringify(user)}</h1>
 		</>
 	);
 }
