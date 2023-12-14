@@ -13,9 +13,11 @@ model User {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   name        String   @unique
+  displayName String?
   password    String?
   avatar      String?
   email       String?  @unique
+  bannerColor String?
   roles       Role[]
   ownedEvents Event[]  @relation("UserToOwnedEvents")
   houses      House[]
