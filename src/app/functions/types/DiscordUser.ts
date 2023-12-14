@@ -11,7 +11,7 @@ type DiscordUser = {
     global_name:string,
     avatar_decoration_data:string,
     banner_color:string,
-    mfa_enabled:false,
+    mfa_enabled:boolean,
     locale:string,
     email:string,
     verified:true
