@@ -1,3 +1,5 @@
+import DiscordUser from "../types/DiscordUser";
+
 export type TokenResponse = {
     access_token: string;
     token_type: string;
@@ -38,7 +40,7 @@ export async function GetUser({access_token}: TokenResponse) {
         headers,
     });
 
-    const user = await response.json();
+    const user = await response.json() as DiscordUser;
     
     return user;
 }
