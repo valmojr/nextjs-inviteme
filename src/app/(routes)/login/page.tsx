@@ -52,9 +52,7 @@ export default function Page() {
 				>
 					LOGIN
 				</SubmitButton>
-				<a
-					href={`https://discord.com/api/oauth2/authorize?client_id=1180503448979001414&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Flogin%2Fredirect&scope=identify+guilds`}
-				>
+				<a href={process.env.NEXT_PUBLIC_DISCORD_OAUTH2_URL}>
 					<SubmitButton>
 						<Paragrath
 							color={'secondary'}

@@ -27,23 +27,25 @@ export default function Page() {
 				<Input id="confirmPassword" type="password"></Input>
 			</fieldset>
 			<div className={'flex flex-row flex-nowrap gap-2'}>
-				<SubmitButton color={'primary'}>Register</SubmitButton>
-				<SubmitButton>
-					<Paragrath
-						color={'secondary'}
-						className={
-							'py-1 flex flex-row flex-nowrap items-center justify-center gap-2'
-						}
-					>
-						<Image
-							src={DiscordLogo}
-							width={25}
-							height={25}
-							alt={''}
-						/>
-						Discord
-					</Paragrath>
-				</SubmitButton>
+				<SubmitButton color={'primary'}>REGISTER</SubmitButton>
+				<a href={process.env.NEXT_PUBLIC_DISCORD_OAUTH2_URL}>
+					<SubmitButton>
+						<Paragrath
+							color={'secondary'}
+							className={
+								'py-1 flex flex-row flex-nowrap items-center justify-center gap-2'
+							}
+						>
+							<Image
+								src={DiscordLogo}
+								width={25}
+								height={25}
+								alt={''}
+							/>
+							DISCORD
+						</Paragrath>
+					</SubmitButton>
+				</a>
 			</div>
 		</>
 	);
