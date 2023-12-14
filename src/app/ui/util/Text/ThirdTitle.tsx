@@ -3,23 +3,22 @@ import { twMerge } from 'tailwind-merge';
 
 export default function ThirdTitle(
 	props: {
-		children: React.ReactNode;
-		color?: 'primary' | 'secondary' | 'blue';
-	} & ComponentProps<'p'>
+		strengh?: 'strong' | 'normal' | 'weak';
+		children?: React.ReactNode;
+	} & ComponentProps<'h3'>
 ) {
-	const { children, color } = props;
+	const { children, strengh } = props;
 
 	return (
 		<h3
-			className={twMerge(
-				'text-lg font-semibold',
-				color == 'primary' || color == undefined
-					? 'text-neutral-800'
-					: '',
-				color == 'secondary' ? 'text-neutral-100' : '',
-				color == 'blue' ? 'text-blue-500' : ''
-			)}
 			{...props}
+			className={twMerge(
+				'text-md',
+				strengh == 'strong' ? 'font-bold' : '',
+				strengh == 'normal' || !strengh ? 'font-normal' : '',
+				strengh == 'weak' ? 'font-thin' : '',
+				props.className
+			)}
 		>
 			{children}
 		</h3>

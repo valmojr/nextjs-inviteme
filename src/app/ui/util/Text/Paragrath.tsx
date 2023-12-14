@@ -3,23 +3,22 @@ import { twMerge } from 'tailwind-merge';
 
 export default function Paragrath(
 	props: {
-		children: React.ReactNode;
-		type?: 'primary' | 'secondary' | 'blue';
+		strengh?: 'strong' | 'normal' | 'weak';
+		children?: React.ReactNode;
 	} & ComponentProps<'p'>
 ) {
-	const { children, color } = props;
+	const { children, strengh } = props;
 
 	return (
 		<p
-			className={twMerge(
-				'',
-				color == 'primary' || color == undefined
-					? 'text-neutral-800'
-					: '',
-				color == 'secondary' ? 'text-neutral-100' : '',
-				color == 'blue' ? 'text-blue-500' : ''
-			)}
 			{...props}
+			className={twMerge(
+				'text-sm',
+				strengh == 'strong' ? 'font-bold' : '',
+				strengh == 'normal' || !strengh ? 'font-normal' : '',
+				strengh == 'weak' ? 'font-thin' : '',
+				props.className
+			)}
 		>
 			{children}
 		</p>
