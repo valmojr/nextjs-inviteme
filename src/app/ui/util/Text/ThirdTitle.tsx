@@ -14,9 +14,9 @@ export default function ThirdTitle(
 			{...props}
 			className={twMerge(
 				'text-md',
-				strengh == 'strong' ? 'font-bold' : '',
+				strengh == 'strong' ? 'font-extrabold' : '',
 				strengh == 'normal' || !strengh ? 'font-normal' : '',
-				strengh == 'weak' ? 'font-thin' : '',
+				strengh == 'weak' ? 'font-light' : '',
 				props.className
 			)}
 		>

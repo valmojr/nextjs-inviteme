@@ -16,7 +16,7 @@ export default function Paragrath(
 				'text-sm',
 				strengh == 'strong' ? 'font-bold' : '',
 				strengh == 'normal' || !strengh ? 'font-normal' : '',
-				strengh == 'weak' ? 'font-thin' : '',
+				strengh == 'weak' ? 'font-light' : '',
 				props.className
 			)}
 		>

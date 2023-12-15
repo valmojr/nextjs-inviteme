@@ -14,9 +14,9 @@ export default function FirstTitle(
 			{...props}
 			className={twMerge(
 				'text-3xl',
-				strengh == 'strong' ? 'font-bold' : '',
+				strengh == 'strong' ? 'font-extrabold' : '',
 				strengh == 'normal' || !strengh ? 'font-normal' : '',
-				strengh == 'weak' ? 'font-thin' : '',
+				strengh == 'weak' ? 'font-extralight' : '',
 				props.className
 			)}
 		>
