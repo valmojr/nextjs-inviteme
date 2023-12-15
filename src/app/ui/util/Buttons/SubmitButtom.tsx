@@ -6,7 +6,13 @@ export default function SubmitButton(
 		color?: 'primary' | 'secondary' | 'success' | 'danger';
 	} & ComponentProps<'button'>
 ) {
-	const { color } = props;
+	const { color, children } = props;
+
+	let child;
+
+	typeof children == 'string'
+		? (child = children.toUpperCase())
+		: (child = children);
 
 	return (
 		<button
@@ -19,16 +25,16 @@ export default function SubmitButton(
 					? 'bg-neutral-200 text-neutral-800 hover:bg-neutral-300'
 					: '',
 				color == 'success'
-					? 'bg-emerald-600 text-neutral-200 hover:bg-emerald-700'
+					? 'bg-emerald-600 text-neutral-100 hover:bg-emerald-700'
 					: '',
 				color == 'danger'
-					? 'bg-red-500 text-neutral-200 hover:bg-red-600'
+					? 'bg-red-500 text-neutral-100 hover:bg-red-600'
 					: '',
 				props.className
 			)}
 			{...props}
 		>
-			{props.children}
+			{child}
 		</button>
 	);
 }
