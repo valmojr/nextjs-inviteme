@@ -10,7 +10,7 @@ export default async function ContentContainer(
 		<div
 			{...props}
 			className={twMerge(
-				'flex flex-wrap bg-neutral-200 items-center justify-center gap-3 drop-shadow-md',
+				'flex flex-wrap bg-neutral-200 items-center justify-center gap-3 drop-shadow-md px-3 py-2 rounded-md',
 				orientation == 'row' ? 'flex-row' : 'flex-col',
 				className
 			)}
