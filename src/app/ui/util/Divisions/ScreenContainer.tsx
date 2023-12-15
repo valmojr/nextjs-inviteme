@@ -10,7 +10,7 @@ export default async function ScreenContainer(
 		<div
 			{...props}
 			className={twMerge(
-				'flex flex-col flex-nowrap min-h-screen h-fit bg-neutral-300 items-center justify-center gap-3 px-3 py-2',
+				'flex flex-col flex-nowrap min-h-screen h-fit w-[100%] bg-neutral-300 items-center justify-center gap-3 px-3 py-2',
 				className
 			)}
 		></div>
