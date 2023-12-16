@@ -10,7 +10,7 @@ export class UserDTO extends Connector {
 
         return await this.prisma.user.create({
             data: {
-                id: randomUUID(),
+                id: data.id || randomUUID(),
                 createdAt: new Date(),
                 updatedAt: new Date(),
                 username: data.username,
@@ -24,21 +24,21 @@ export class UserDTO extends Connector {
         username = username || '';
         
         return await this.prisma.user.upsert({
-            create: {
-                id: randomUUID(),
-                createdAt: new Date(),
-                updatedAt: new Date(),
-                username,
-                avatar,
-                email,
-            },
+            where: {id},
             update: {
                 updatedAt: new Date(),
                 username,
                 avatar,
                 email
             },
-            where: {id}
+            create: {
+                id: id || randomUUID(),
+                createdAt: new Date(),
+                updatedAt: new Date(),
+                username,
+                avatar,
+                email,
+            },
         })
     }
 
