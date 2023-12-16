@@ -1,5 +1,5 @@
 import { User } from '@prisma/client';
-import { UserDTO } from './entities/User/User';
+import { UserDTO } from '../entities/User/User';
 
 export async function validateLogin(loginData: {
 	username: string;
@@ -7,7 +7,7 @@ export async function validateLogin(loginData: {
 }): Promise<User> {
 	const userDTO = new UserDTO();
 
-	const fetchedUsername = await userDTO.getByName(loginData.username);
+	const fetchedUsername = await userDTO.getByUsername(loginData.username);
 
 	if (!fetchedUsername) {
 		throw new Error('User not found');
