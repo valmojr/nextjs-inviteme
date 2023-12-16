@@ -4,8 +4,8 @@ import { randomUUID } from "crypto";
 
 export class UserDTO extends Connector {
     public async create(data: Partial<User>): Promise<User> {
-        if (data.name == undefined || data.name === "") {
-            throw new Error("User name is required");
+        if (data.username == undefined || data.username === "") {
+            throw new Error("User username is required");
         }
 
         return await this.prisma.user.create({
@@ -13,11 +13,33 @@ export class UserDTO extends Connector {
                 id: randomUUID(),
                 createdAt: new Date(),
                 updatedAt: new Date(),
-                name: data.name,
+                username: data.username,
                 avatar: data.avatar,
                 email: data.email,
             },
         });
+    }
+
+    public async parse({id, username, avatar, email}: Partial<User>): Promise<User> {
+        username = username || '';
+        
+        return await this.prisma.user.upsert({
+            create: {
+                id: randomUUID(),
+                createdAt: new Date(),
+                updatedAt: new Date(),
+                username,
+                avatar,
+                email,
+            },
+            update: {
+                updatedAt: new Date(),
+                username,
+                avatar,
+                email
+            },
+            where: {id}
+        })
     }
 
     public async get(userOrUserId: User | string): Promise<User> {
@@ -44,10 +66,10 @@ export class UserDTO extends Connector {
         }
     }
 
-    public async getByName(name: string) {
+    public async getByUsername(username: string) {
         return await this.prisma.user.findUnique({
             where: {
-                name
+                username
             }
         })
     }
@@ -61,8 +83,8 @@ export class UserDTO extends Connector {
             throw new Error("User ID is required");
         }
 
-        if (data.name == undefined || data.name === "") {
-            throw new Error("User name is required");
+        if (data.username == undefined || data.username === "") {
+            throw new Error("User username is required");
         }
 
         return await this.prisma.user.update({
@@ -71,7 +93,7 @@ export class UserDTO extends Connector {
             },
             data: {
                 updatedAt: new Date(),
-                name: data.name,
+                username: data.username,
                 avatar: data.avatar,
                 email: data.email,
             }
