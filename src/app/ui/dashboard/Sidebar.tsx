@@ -8,10 +8,12 @@ export default function Sidebar({ loggedUser }: { loggedUser: User }) {
 				src={`${loggedUser.avatar}`}
 				width={40}
 				height={40}
-				alt={`${loggedUser.name}'s Picture`}
+				alt={`${loggedUser.username}'s Picture`}
 				className={'rounded-full'}
 			/>
-			<h1 className={'text-2xl'}>{`${loggedUser.name.toUpperCase()}`}</h1>
+			<h1
+				className={'text-2xl'}
+			>{`${loggedUser.username.toUpperCase()}`}</h1>
 		</div>
 	);
 }
