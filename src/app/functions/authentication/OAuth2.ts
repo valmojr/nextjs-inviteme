@@ -19,28 +19,36 @@ export async function GetToken(code: string) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     
-    const response = await fetch(api_url, {
-        method: 'POST',
-        headers,
-        body,
-    });
-
-    const token = await response.json() as TokenResponse;
+    try {
+        const response = await fetch(api_url, {
+            method: 'POST',
+            headers,
+            body,
+        });
     
-    return token;
+        const token = await response.json() as TokenResponse;
+        
+        return token;
+    } catch (error) {
+        throw new Error(`Failed to get access token: ${error}`);
+    }
 }
 
-export async function GetUser({access_token}: TokenResponse) {
+export async function GetUser({ access_token }: TokenResponse) {
     const api_url = 'https://discord.com/api/users/@me';
     const headers = new Headers();
     headers.append('Authorization', `Bearer ${access_token}`);
 
-    const response = await fetch(api_url, {
-        method: 'GET',
-        headers,
-    });
-
-    const user = await response.json() as DiscordUser;
+    try {
+        const response = await fetch(api_url, {
+            method: 'GET',
+            headers,
+        });
     
-    return user;
+        const user = await response.json() as DiscordUser;
+        
+        return user;            
+    } catch (error) {
+        throw new Error(`Failed to get user: ${error}`);
+    }
 }
