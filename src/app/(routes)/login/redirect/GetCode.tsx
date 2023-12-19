@@ -11,7 +11,6 @@ export default function GetCode() {
 		async function generateToken() {
 			router.push('/login/redirect/callback/' + code);
 		}
-
 		generateToken();
 	}, [code, router]);
 
