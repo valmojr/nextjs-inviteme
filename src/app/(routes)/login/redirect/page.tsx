@@ -1,10 +1,10 @@
-import GetUser from './GetCode';
+import GetCode from './GetCode';
 
 export default function RedirectPage() {
 	return (
 		<>
 			<h1>Redirecting...</h1>
-			<GetUser />
+			<GetCode />
 		</>
 	);
 }
