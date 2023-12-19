@@ -18,7 +18,7 @@ export async function GetToken(code: string) {
     body.append('redirect_uri', process.env.NEXT_PUBLIC_DISCORD_REDIRECT_URI || '');
     const headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    
+
     try {
         const response = await fetch(api_url, {
             method: 'POST',
