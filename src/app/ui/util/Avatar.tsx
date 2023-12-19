@@ -1,3 +1,5 @@
+import DiscordUser from '@/app/functions/types/DiscordUser';
+import DiscordAvatarParser from '@/app/functions/util/DiscordAvatarParser';
 import { User } from '@prisma/client';
 import Image from 'next/image';
 import { ComponentProps } from 'react';
@@ -10,7 +12,7 @@ export function FallbackAvatar() {
 export default function Avatar(
 	props: {
 		image?: string;
-		profile?: User;
+		profile?: Partial<User> | Partial<DiscordUser>;
 		border?: 'circle' | 'rounded' | 'square';
 		size?: 'small' | 'medium' | 'large';
 		alt?: string;
@@ -20,6 +22,16 @@ export default function Avatar(
 
 	if (profile && !profile?.avatar) {
 		profile.avatar = '';
+	}
+
+	// if profile.avatar doesnt starts with https://cdn.discordapp.com, add it
+	if (
+		profile &&
+		profile.avatar &&
+		typeof profile.avatar == 'string' &&
+		!profile.avatar.startsWith('https://cdn.discordapp.com')
+	) {
+		profile.avatar = DiscordAvatarParser(profile.id || '', profile.avatar);
 	}
 
 	if (image) {
