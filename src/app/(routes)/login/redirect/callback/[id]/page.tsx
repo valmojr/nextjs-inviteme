@@ -1,6 +1,4 @@
-import GenerateJWT from '@/app/functions/authentication/GenerateJWT';
 import { GetToken, GetUser } from '@/app/functions/authentication/OAuth2';
-import DiscordAvatarParser from '@/app/functions/util/DiscordAvatarParser';
 import Avatar from '@/app/ui/util/Avatar';
 import FirstTitle from '@/app/ui/util/Text/FirstTitle';
 import ThirdTitle from '@/app/ui/util/Text/ThirdTitle';
