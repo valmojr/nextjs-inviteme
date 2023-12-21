@@ -1,9 +1,10 @@
+import FirstTitle from '@/app/ui/util/Text/FirstTitle';
 import GetCode from './GetCode';
 
 export default function RedirectPage() {
 	return (
 		<>
-			<h1>Redirecting...</h1>
+			<FirstTitle>Redirecting...</FirstTitle>
 			<GetCode />
 		</>
 	);
