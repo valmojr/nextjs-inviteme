@@ -1,3 +1,5 @@
+'use server';
+
 import { randomUUID } from "crypto";
 import Connector from "../Connector";
 import { Event } from "@prisma/client";

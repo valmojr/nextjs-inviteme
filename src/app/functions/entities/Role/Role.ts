@@ -1,3 +1,5 @@
+'use server';
+
 import { Role } from "@prisma/client";
 import Connector from "../Connector";
 import { randomUUID } from "crypto";

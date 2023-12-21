@@ -1,3 +1,5 @@
+'use server';
+
 import { Group } from "@prisma/client";
 import { randomUUID } from "crypto";
 import Connector from "../Connector";
