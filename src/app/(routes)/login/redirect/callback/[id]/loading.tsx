@@ -1,3 +1,7 @@
+import FirstTitle from '@/app/ui/util/Text/FirstTitle';
+
 export default function LoadingPage() {
-	return <h1>LOADING USER INFO...</h1>;
+	return (
+		<FirstTitle className="text-center">LOADING USER INFO...</FirstTitle>
+	);
 }
