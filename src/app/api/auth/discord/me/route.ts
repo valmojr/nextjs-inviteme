@@ -4,7 +4,7 @@ import { sign } from 'jsonwebtoken';
 import { User } from '@prisma/client';
 import StreamToBuffer from '@/app/functions/util/StreamToBuffer';
 import { NextApiResponse } from 'next';
-import ResponseAPI from '@/app/functions/API/ResponseAPI';
+import ResponseAPI from '@/app/functions/API/HttpResponses';
 
 type ResponseData = {
 	message: string;
