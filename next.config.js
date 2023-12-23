@@ -9,7 +9,10 @@ const nextConfig = {
                 pathname: '/**'
             }
         ],
-    }
+    },
+    experimental: {
+        forceSwcTransforms: true,
+    },
 }
 
 module.exports = nextConfig
