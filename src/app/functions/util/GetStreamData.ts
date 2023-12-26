@@ -1,4 +1,4 @@
-export default function getStreamData(
+export default function GetStreamData(
 	readableStream: ReadableStream<Uint8Array> | null
 ): Promise<string> {
 	if (!readableStream) {
