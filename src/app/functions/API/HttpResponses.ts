@@ -1,10 +1,22 @@
+import { User } from '@prisma/client';
 import { NextResponse } from 'next/server';
+
+type UserResponse = {
+	status?: number;
+	message?: string;
+	user?: User;
+};
+
+type ThrowedError = {
+	status?: number;
+	message?: string;
+};
 
 export default class HttpResponses {
 	constructor() {}
 
 	public UnauthorizedMethod() {
-		return new NextResponse(
+		return new NextResponse<ThrowedError>(
 			JSON.stringify({
 				status: 405,
 				headers: {
@@ -19,7 +31,7 @@ export default class HttpResponses {
 	}
 
 	public Unauthorized() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 401,
 				headers: {
@@ -34,7 +46,7 @@ export default class HttpResponses {
 	}
 
 	public BadRequest() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 400,
 				headers: {
@@ -49,7 +61,7 @@ export default class HttpResponses {
 	}
 
 	public InternalServerError() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 500,
 				headers: {
@@ -63,8 +75,8 @@ export default class HttpResponses {
 		);
 	}
 
-	public Ok(body: any) {
-		return new NextResponse(
+	public Ok(body: UserResponse) {
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 200,
 				headers: {
@@ -79,7 +91,7 @@ export default class HttpResponses {
 	}
 
 	public Created(body: any) {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 201,
 				headers: {
@@ -94,7 +106,7 @@ export default class HttpResponses {
 	}
 
 	public NoContent() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 204,
 				headers: {
@@ -109,7 +121,7 @@ export default class HttpResponses {
 	}
 
 	public NotFound() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 404,
 				headers: {
@@ -124,7 +136,7 @@ export default class HttpResponses {
 	}
 
 	public Conflict() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 409,
 				headers: {
@@ -139,7 +151,7 @@ export default class HttpResponses {
 	}
 
 	public Forbidden() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 403,
 				headers: {
@@ -154,7 +166,7 @@ export default class HttpResponses {
 	}
 
 	public Gone() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 410,
 				headers: {
@@ -169,7 +181,7 @@ export default class HttpResponses {
 	}
 
 	public LengthRequired() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 411,
 				headers: {
@@ -184,7 +196,7 @@ export default class HttpResponses {
 	}
 
 	public PayloadTooLarge() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 413,
 				headers: {
@@ -199,7 +211,7 @@ export default class HttpResponses {
 	}
 
 	public RequestURITooLong() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 414,
 				headers: {
@@ -214,7 +226,7 @@ export default class HttpResponses {
 	}
 
 	public UnsupportedMediaType() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 415,
 				headers: {
@@ -229,7 +241,7 @@ export default class HttpResponses {
 	}
 
 	public UnprocessableEntity() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 422,
 				headers: {
@@ -244,7 +256,7 @@ export default class HttpResponses {
 	}
 
 	public TooManyRequests() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 429,
 				headers: {
@@ -259,7 +271,7 @@ export default class HttpResponses {
 	}
 
 	public ServiceUnavailable() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 503,
 				headers: {
@@ -274,7 +286,7 @@ export default class HttpResponses {
 	}
 
 	public GatewayTimeout() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 504,
 				headers: {
@@ -289,7 +301,7 @@ export default class HttpResponses {
 	}
 
 	public HTTPVersionNotSupported() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 505,
 				headers: {
@@ -304,7 +316,7 @@ export default class HttpResponses {
 	}
 
 	public VariantAlsoNegotiates() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 506,
 				headers: {
@@ -319,7 +331,7 @@ export default class HttpResponses {
 	}
 
 	public InsufficientStorage() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 507,
 				headers: {
@@ -334,7 +346,7 @@ export default class HttpResponses {
 	}
 
 	public LoopDetected() {
-		return new NextResponse(
+		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 508,
 				headers: {
