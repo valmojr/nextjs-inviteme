@@ -2,25 +2,50 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { sign } from 'jsonwebtoken';
 import { User } from '@prisma/client';
-import StreamToBuffer from '@/app/functions/util/StreamToBuffer';
+import StreamToBuffer from '@/app/functions/util/GetStreamData';
 import { NextApiResponse } from 'next';
-import ResponseAPI from '@/app/functions/API/HttpResponses';
+import HttpResponse from '@/app/functions/API/HttpResponses';
+import DiscordUser from '@/app/functions/types/DiscordUser';
 
 type ResponseData = {
-	message: string;
+	status: number;
+	headers: { 'Content-Type': string };
+	message?: string;
+	body: { status: number; user: User };
 };
 
-function isUser(user: any): user is User {
-	return user && user.id && user.username && user.displayName;
+function userCheck(user: any) {
+	if (!user) return false;
+	if (!user?.id) return false;
+	if (!user?.username) return false;
+	if (!user?.avatar) return false;
+	if (!user?.email) return false;
+	if (!user?.banner_color) return false;
+	if (!user?.global_name) return false;
+	return true;
 }
 
-async function handler(req: NextRequest, res: NextApiResponse) {
+async function handler(req: NextRequest, res: NextApiResponse<ResponseData>) {
 	const body = JSON.parse(await StreamToBuffer(req?.body));
-	const user = body?.user;
 
-	if (!user || !isUser(user)) {
-		return new ResponseAPI().Unauthorized();
+	if (!userCheck(body?.user)) {
+		return new HttpResponse().BadRequest();
 	}
+
+	const { id, username, avatar, email, banner_color, global_name } =
+		body?.user;
+
+	const user: User = {
+		id,
+		username,
+		avatar,
+		email,
+		bannerColor: banner_color,
+		displayName: global_name,
+		createdAt: new Date(),
+		updatedAt: new Date(),
+		password: null,
+	};
 
 	const jwt = sign(user, process.env.AUTH_SECRET as string);
 
@@ -32,18 +57,9 @@ async function handler(req: NextRequest, res: NextApiResponse) {
 		secure: true,
 	});
 
-	const response = new NextResponse(
-		JSON.stringify({
-			status: 200,
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: {
-				status: 200,
-				user,
-			},
-		})
-	);
+	const response = new HttpResponse().Ok({
+		user,
+	});
 
 	return response;
 }
@@ -51,7 +67,7 @@ async function handler(req: NextRequest, res: NextApiResponse) {
 export const POST = handler;
 
 function UnauthorizedMethod() {
-	return new ResponseAPI().UnauthorizedMethod();
+	return new HttpResponse().UnauthorizedMethod();
 }
 
 export {
