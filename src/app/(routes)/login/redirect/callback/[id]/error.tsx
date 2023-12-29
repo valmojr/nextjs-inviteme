@@ -12,7 +12,9 @@ export default function Error({
 	return (
 		<>
 			<FirstTitle>Error</FirstTitle>
-			<ThirdTitle>{error.message.toUpperCase()}</ThirdTitle>
+			<ThirdTitle className="text-center">
+				{error.message.toUpperCase()}
+			</ThirdTitle>
 		</>
 	);
 }
