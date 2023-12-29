@@ -1,11 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { cookies } from 'next/headers';
 import { sign } from 'jsonwebtoken';
 import { User } from '@prisma/client';
 import StreamToBuffer from '@/app/functions/util/GetStreamData';
 import { NextApiResponse } from 'next';
 import HttpResponse from '@/app/functions/API/HttpResponses';
-import DiscordUser from '@/app/functions/types/DiscordUser';
 
 type ResponseData = {
 	status: number;
