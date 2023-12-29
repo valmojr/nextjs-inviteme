@@ -7,7 +7,6 @@ import DiscordUser from '@/app/functions/types/DiscordUser';
 import DiscordAvatarParser from '@/app/functions/util/DiscordAvatarParser';
 import CookieParser from '@/app/ui/authentication/CookieParser';
 import Avatar from '@/app/ui/util/Avatar';
-import Paragrath from '@/app/ui/util/Text/Paragrath';
 import SecondTitle from '@/app/ui/util/Text/SecondTitle';
 
 export default async function Page({ params }: { params: { id: string } }) {
