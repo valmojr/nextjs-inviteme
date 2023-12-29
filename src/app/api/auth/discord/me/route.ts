@@ -50,7 +50,7 @@ async function handler(req: NextRequest, res: NextApiResponse<ResponseData>) {
 
 	cookies().set('token', jwt, {
 		path: '/',
-		httpOnly: true,
+		httpOnly: false,
 		sameSite: 'strict',
 		maxAge: 31536000,
 		secure: true,
