@@ -1,11 +1,9 @@
-'use server';
-
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 export default class Connector {
-    protected prisma: PrismaClient;
+	protected prisma: PrismaClient;
 
-    constructor() {
-        this.prisma = new PrismaClient();
-    }
+	constructor() {
+		this.prisma = new PrismaClient();
+	}
 }
