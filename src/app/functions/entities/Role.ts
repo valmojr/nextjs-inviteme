@@ -1,5 +1,7 @@
+'use server';
+
 import prisma from '../Database';
-import { Role } from '@prisma/client';
+import { Group, Role } from '@prisma/client';
 
 export async function create(data: Role) {
 	return await prisma.role.create({ data });
@@ -17,6 +19,10 @@ export async function getByGroupId(groupID: string) {
 	return await prisma.role.findMany({ where: { groupID } });
 }
 
+export async function getByGroup(group: Group) {
+	return await prisma.role.findMany({ where: { group: { id: group.id } } });
+}
+
 export async function getByRole(role: Role) {
 	return await prisma.role.findUnique({ where: { id: role.id } });
 }
@@ -28,3 +34,16 @@ export async function update(data: Partial<Role>) {
 export async function remove(id: string) {
 	return await prisma.role.delete({ where: { id } });
 }
+
+const RoleDTO = {
+	create,
+	get,
+	getById,
+	getByGroupId,
+	getByGroup,
+	getByRole,
+	update,
+	remove,
+};
+
+export default RoleDTO;
