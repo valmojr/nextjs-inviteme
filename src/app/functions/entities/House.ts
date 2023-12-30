@@ -1,4 +1,5 @@
 'use server';
+
 import prisma from '../Database';
 import { Event, House, User } from '@prisma/client';
 
