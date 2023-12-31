@@ -1,4 +1,3 @@
-import { loggedUser as mockUser } from '@/app/functions/mock/mock_data';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
