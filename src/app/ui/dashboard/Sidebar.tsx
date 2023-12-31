@@ -1,19 +1,17 @@
+import getAuthenticatedUser from '@/app/functions/authentication/JWT';
 import { User } from '@prisma/client';
-import Image from 'next/image';
+import { cookies } from 'next/headers';
+import Avatar from '../util/Avatar';
+import SecondTitle from '../util/Text/SecondTitle';
+export default async function Sidebar() {
+	const token = cookies().get('token')?.value as string;
 
-export default function Sidebar({ loggedUser }: { loggedUser: User }) {
+	const loggedUser = (await getAuthenticatedUser(token)) as User;
+
 	return (
-		<div className="absolute h-16 w-screen top-0 bg-neutral-900 text-white flex flex-row flex-nowrap justify-center items-center gap-4 shadow-neutral-500 shadow-lg">
-			<Image
-				src={`${loggedUser.avatar}`}
-				width={40}
-				height={40}
-				alt={`${loggedUser.username}'s Picture`}
-				className={'rounded-full'}
-			/>
-			<h1
-				className={'text-2xl'}
-			>{`${loggedUser.username.toUpperCase()}`}</h1>
+		<div className="h-14 w-screen top-0 bg-neutral-900 text-white flex flex-row flex-nowrap justify-center items-center gap-4 shadow-neutral-500 shadow-lg">
+			<SecondTitle>{`${loggedUser.displayName}`}</SecondTitle>
+			<Avatar profile={loggedUser} size={'small'} border={'circle'} />
 		</div>
 	);
 }
