@@ -1,11 +1,13 @@
 import { User } from '@prisma/client';
+import { randomUUID } from 'crypto';
 import { sign } from 'jsonwebtoken';
 
 describe('JWT authorization tests', () => {
 	const url = process.env.ENVIRONMENT_URI + '/api/auth/check';
 
 	const validUser: User = {
-		id: '272187905240203266',
+		id: randomUUID(),
+		discordId: '272187905240203266',
 		createdAt: new Date(),
 		updatedAt: new Date(),
 		username: 'valmo',

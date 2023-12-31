@@ -1,6 +1,4 @@
 import DiscordUser from '@/app/functions/types/DiscordUser';
-import { User } from '@prisma/client';
-import { sign } from 'jsonwebtoken';
 
 describe('Discord OAuth2 Authentication Tests', () => {
 	const url = process.env.ENVIRONMENT_URI + '/api/auth/discord/me';
@@ -14,7 +12,7 @@ describe('Discord OAuth2 Authentication Tests', () => {
 		banner_color: '#a12c2c',
 	};
 
-	test('should only allow POST request', async () => {
+	it('should only allow POST request', async () => {
 		const getResponse = await fetch(url, {
 			method: 'GET',
 			headers: {
@@ -59,7 +57,7 @@ describe('Discord OAuth2 Authentication Tests', () => {
 
 		expect(deleteData.body.message).toEqual('method not allowed');
 	});
-	test('should return bad request if the user is not provided', async () => {
+	it('should return bad request if the user is not provided', async () => {
 		const response = await fetch(url, {
 			method: 'POST',
 			headers: {
@@ -72,7 +70,7 @@ describe('Discord OAuth2 Authentication Tests', () => {
 
 		expect(data.body.message).toEqual('bad request');
 	});
-	test('should return bad request if the user provides a invalid user', async () => {
+	it('should return bad request if the user provides a invalid user', async () => {
 		const response = await fetch(url, {
 			method: 'POST',
 			headers: {
@@ -85,7 +83,7 @@ describe('Discord OAuth2 Authentication Tests', () => {
 
 		expect(data.body.message).toEqual('bad request');
 	});
-	test('should return ok if the user provided a valid user', async () => {
+	it('should return ok if the user provided a valid user', async () => {
 		const response = await fetch(url, {
 			method: 'POST',
 			headers: {
@@ -97,12 +95,12 @@ describe('Discord OAuth2 Authentication Tests', () => {
 		const data = await response.json();
 
 		expect(data.status).toEqual(200);
-		expect(data.body.user.id).toEqual(validUser.id);
+		expect(data.body.user.discordId).toEqual(validUser.id);
 		expect(data.body.user.username).toEqual(validUser.username);
 		expect(data.body.user.displayName).toEqual(validUser.global_name);
 		expect(data.body.user.avatar).toEqual(validUser.avatar);
 	});
-	test('should return a valid json web token with the cookie', async () => {
+	it('should return a valid json web token with the cookie', async () => {
 		const response = await fetch(url, {
 			method: 'POST',
 			headers: {
