@@ -2,6 +2,7 @@ import { User, Event, Group, Role } from '@prisma/client';
 
 export const loggedUser: User = {
 	id: '72e8b3a1-9f6c-4d14-b472-8e1c5638a92c',
+	discordId: '12245363456789',
 	username: 'Valmo',
 	displayName: 'Valmin',
 	createdAt: new Date(),
