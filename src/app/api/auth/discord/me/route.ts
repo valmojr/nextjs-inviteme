@@ -5,6 +5,12 @@ import { User } from '@prisma/client';
 import StreamToBuffer from '@/app/functions/util/GetStreamData';
 import { NextApiResponse } from 'next';
 import HttpResponse from '@/app/functions/API/HttpResponses';
+import { randomUUID } from 'crypto';
+import DiscordUser from '@/app/functions/types/DiscordUser';
+import {
+	getByDiscordId,
+	getByDiscordUser,
+} from '@/app/functions/entities/User';
 
 type ResponseData = {
 	status: number;
@@ -31,16 +37,16 @@ async function handler(req: NextRequest, res: NextApiResponse<ResponseData>) {
 		return new HttpResponse().BadRequest();
 	}
 
-	const { id, username, avatar, email, banner_color, global_name } =
-		body?.user;
+	const fetchedUser: DiscordUser = body?.user;
 
 	const user: User = {
-		id,
-		username,
-		avatar,
-		email,
-		bannerColor: banner_color,
-		displayName: global_name,
+		id: randomUUID(),
+		discordId: fetchedUser.id,
+		username: fetchedUser.username,
+		avatar: fetchedUser.avatar,
+		email: fetchedUser.email,
+		bannerColor: fetchedUser.banner_color,
+		displayName: fetchedUser.global_name,
 		createdAt: new Date(),
 		updatedAt: new Date(),
 		password: null,
