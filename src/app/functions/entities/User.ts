@@ -3,7 +3,6 @@
 import { User } from '@prisma/client';
 import prisma from '../Database';
 import DiscordUser from '../types/DiscordUser';
-import { randomUUID } from 'crypto';
 
 export async function create(data: User) {
 	return await prisma.user.create({ data });
@@ -26,28 +25,7 @@ export async function getByUser(user: User) {
 }
 
 export async function getByDiscordUser(user: DiscordUser) {
-	return await prisma.user.upsert({
-		where: { discordId: user.id },
-		update: {
-			username: user.username,
-			avatar: user.avatar,
-			email: user.email,
-			bannerColor: user.banner_color,
-			displayName: user.global_name,
-			updatedAt: new Date(),
-		},
-		create: {
-			id: randomUUID(),
-			discordId: user.id,
-			username: user.username,
-			avatar: user.avatar,
-			email: user.email,
-			bannerColor: user.banner_color,
-			displayName: user.global_name,
-			createdAt: new Date(),
-			updatedAt: new Date(),
-		},
-	});
+	return await prisma.user.findUnique({ where: { discordId: user.id } });
 }
 
 export async function getByHouseId(houseId: string) {
