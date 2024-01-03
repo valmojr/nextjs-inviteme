@@ -50,18 +50,3 @@ export async function update(data: Partial<House>) {
 export async function remove(id: string) {
 	return await prisma.house.delete({ where: { id } });
 }
-
-const HouseDTO = {
-	create,
-	get,
-	getById,
-	getByHouse,
-	getByUser,
-	getByUserId,
-	getByEvent,
-	getByEventId,
-	update,
-	remove,
-};
-
-export default HouseDTO;

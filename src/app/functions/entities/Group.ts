@@ -52,20 +52,3 @@ export async function update(data: Partial<Group>) {
 export async function remove(id: string) {
 	return await prisma.group.delete({ where: { id } });
 }
-
-const GroupDTO = {
-	create,
-	get,
-	getById,
-	getByGroup,
-	getByRole,
-	getByRoleId,
-	getChildGroups,
-	getFatherGroup,
-	getByEvent,
-	getByEventId,
-	update,
-	remove,
-};
-
-export default GroupDTO;

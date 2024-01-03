@@ -58,20 +58,3 @@ export async function update(data: Partial<Event>) {
 export async function remove(id: string) {
 	return await prisma.event.delete({ where: { id } });
 }
-
-const EventDTO = {
-	create,
-	get,
-	getById,
-	getByEvent,
-	getByOwner,
-	getByOwnerId,
-	getByHouse,
-	getByHouseId,
-	getByUser,
-	getByUserId,
-	update,
-	remove,
-};
-
-export default EventDTO;

@@ -34,16 +34,3 @@ export async function update(data: Partial<Role>) {
 export async function remove(id: string) {
 	return await prisma.role.delete({ where: { id } });
 }
-
-const RoleDTO = {
-	create,
-	get,
-	getById,
-	getByGroupId,
-	getByGroup,
-	getByRole,
-	update,
-	remove,
-};
-
-export default RoleDTO;

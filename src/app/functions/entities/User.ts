@@ -51,19 +51,3 @@ export async function update(data: Partial<User>) {
 export async function remove(id: string) {
 	return await prisma.user.delete({ where: { id } });
 }
-
-const UserDTO = {
-	create,
-	get,
-	getById,
-	getByDiscordId,
-	getByUser,
-	getByDiscordUser,
-	getByHouseId,
-	getByEventId,
-	getByEmail,
-	update,
-	remove,
-};
-
-export default UserDTO;
