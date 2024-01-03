@@ -5,6 +5,7 @@ import {
 } from '@/app/functions/authentication/DiscordOAuth2';
 import DiscordUser from '@/app/functions/types/DiscordUser';
 import DiscordAvatarParser from '@/app/functions/util/DiscordAvatarParser';
+import { CookieHandler } from '@/app/ui/authentication/CookieHandler';
 import CookieParser from '@/app/ui/authentication/CookieParser';
 import Avatar from '@/app/ui/util/Avatar';
 import SecondTitle from '@/app/ui/util/Text/SecondTitle';
@@ -44,7 +45,9 @@ export default async function Page({ params }: { params: { id: string } }) {
 			<SecondTitle
 				className={'text-center'}
 			>{`Logged in as ${global_name}!`}</SecondTitle>
-			<CookieParser cookies={fetchedCookies as string} />
+			<CookieHandler>
+				<CookieParser cookies={fetchedCookies as string} />
+			</CookieHandler>
 		</>
 	);
 }
