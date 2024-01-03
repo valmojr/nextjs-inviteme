@@ -1,9 +1,8 @@
 import HttpResponse from '@/app/functions/API/HttpResponses';
 import { verify } from 'jsonwebtoken';
 import { cookies } from 'next/headers';
-import { NextRequest } from 'next/server';
 
-async function Handler(req: NextRequest) {
+async function Handler(req: Request) {
 	const jwt = cookies().get('token');
 	if (req.method !== 'POST') {
 		return new HttpResponse().UnauthorizedMethod();

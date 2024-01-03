@@ -28,7 +28,7 @@ function userCheck(user: any) {
 	return true;
 }
 
-async function handler(req: NextRequest, res: NextApiResponse<ResponseData>) {
+async function handler(req: Request) {
 	const body = JSON.parse(await StreamToBuffer(req?.body));
 
 	if (!userCheck(body?.user)) {
