@@ -1,5 +1,4 @@
-'use server';
-
+import { getByDiscordId, getByEmail } from '../entities/User';
 import DiscordUser from '../types/DiscordUser';
 
 export type TokenResponse = {
@@ -55,5 +54,30 @@ export async function GetUser({ access_token }: TokenResponse) {
 		return user;
 	} catch (error) {
 		throw new Error(`Failed to get user: ${error}`);
+	}
+}
+
+export type ProvidedData = {
+	id: string;
+	username: string;
+	avatar: string;
+	email: string;
+	banner_color: string;
+	global_name: string;
+} & any;
+
+export async function GetUserFromDatabase(user: ProvidedData) {
+	const UserFromDiscordId = await getByDiscordId(user.id);
+
+	if (UserFromDiscordId) {
+		return UserFromDiscordId;
+	} else {
+		const UserFromEmail = await getByEmail(user.email);
+
+		if (UserFromEmail) {
+			return UserFromEmail;
+		} else {
+			throw new Error('User not found');
+		}
 	}
 }
