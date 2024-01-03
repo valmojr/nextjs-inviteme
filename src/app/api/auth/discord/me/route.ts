@@ -7,11 +7,7 @@ import { NextApiResponse } from 'next';
 import HttpResponse from '@/app/functions/API/HttpResponses';
 import { randomUUID } from 'crypto';
 import DiscordUser from '@/app/functions/types/DiscordUser';
-import {
-	create,
-	getByDiscordId,
-	getByDiscordUser,
-} from '@/app/functions/entities/User';
+import { create as CreateUser } from '@/app/functions/entities/User';
 import { GetUserFromDatabase } from '@/app/functions/authentication/DiscordOAuth2';
 
 type ResponseData = {
@@ -59,7 +55,7 @@ async function handler(req: NextRequest, res: NextApiResponse<ResponseData>) {
 	try {
 		user = await GetUserFromDatabase(userData);
 	} catch (error) {
-		user = await create(userData);
+		user = await CreateUser(userData);
 	}
 
 	const jwt = sign(user || '', process.env.AUTH_SECRET as string);
