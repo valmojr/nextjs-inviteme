@@ -8,9 +8,11 @@ import HttpResponse from '@/app/functions/API/HttpResponses';
 import { randomUUID } from 'crypto';
 import DiscordUser from '@/app/functions/types/DiscordUser';
 import {
+	create,
 	getByDiscordId,
 	getByDiscordUser,
 } from '@/app/functions/entities/User';
+import { GetUserFromDatabase } from '@/app/functions/authentication/DiscordOAuth2';
 
 type ResponseData = {
 	status: number;
@@ -39,7 +41,7 @@ async function handler(req: NextRequest, res: NextApiResponse<ResponseData>) {
 
 	const fetchedUser: DiscordUser = body?.user;
 
-	const user: User = {
+	const userData: User = {
 		id: randomUUID(),
 		discordId: fetchedUser.id,
 		username: fetchedUser.username,
@@ -52,7 +54,15 @@ async function handler(req: NextRequest, res: NextApiResponse<ResponseData>) {
 		password: null,
 	};
 
-	const jwt = sign(user, process.env.AUTH_SECRET as string);
+	let user: User | undefined = undefined;
+
+	try {
+		user = await GetUserFromDatabase(userData);
+	} catch (error) {
+		user = await create(userData);
+	}
+
+	const jwt = sign(user || '', process.env.AUTH_SECRET as string);
 
 	cookies().set('token', jwt, {
 		path: '/',

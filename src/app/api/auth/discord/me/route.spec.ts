@@ -80,7 +80,6 @@ describe('Discord OAuth2 Authentication Tests', () => {
 		});
 
 		const data = await response.json();
-
 		expect(data.body.message).toEqual('bad request');
 	});
 	it('should return ok if the user provided a valid user', async () => {
@@ -93,7 +92,6 @@ describe('Discord OAuth2 Authentication Tests', () => {
 		});
 
 		const data = await response.json();
-
 		expect(data.status).toEqual(200);
 		expect(data.body.user.discordId).toEqual(validUser.id);
 		expect(data.body.user.username).toEqual(validUser.username);
