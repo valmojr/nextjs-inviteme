@@ -24,6 +24,12 @@ export async function getUserByUser(user: User) {
 	return await prisma.user.findUnique({ where: { id: user.id } });
 }
 
+export async function getUserByName(username: string) {
+	return await prisma.user.findMany({
+		where: { username: { contains: username } },
+	});
+}
+
 export async function getUserByDiscordUser(user: DiscordUser) {
 	return await prisma.user.findUnique({ where: { discordId: user.id } });
 }
