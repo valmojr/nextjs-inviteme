@@ -4,50 +4,50 @@ import { User } from '@prisma/client';
 import prisma from '../Database';
 import DiscordUser from '../types/DiscordUser';
 
-export async function create(data: User) {
+export async function createUser(data: User) {
 	return await prisma.user.create({ data });
 }
 
-export async function get() {
+export async function getUser() {
 	return await prisma.user.findMany();
 }
 
-export async function getById(id: string) {
+export async function getUserById(id: string) {
 	return await prisma.user.findUnique({ where: { id } });
 }
 
-export async function getByDiscordId(discordId: string) {
+export async function getUserByDiscordId(discordId: string) {
 	return await prisma.user.findUnique({ where: { discordId } });
 }
 
-export async function getByUser(user: User) {
+export async function getUserByUser(user: User) {
 	return await prisma.user.findUnique({ where: { id: user.id } });
 }
 
-export async function getByDiscordUser(user: DiscordUser) {
+export async function getUserByDiscordUser(user: DiscordUser) {
 	return await prisma.user.findUnique({ where: { discordId: user.id } });
 }
 
-export async function getByHouseId(houseId: string) {
+export async function getUserByHouseId(houseId: string) {
 	return await prisma.user.findMany({
 		where: { houses: { some: { id: houseId } } },
 	});
 }
 
-export async function getByEventId(eventId: string) {
+export async function getUserByEventId(eventId: string) {
 	return await prisma.user.findMany({
 		where: { events: { some: { id: eventId } } },
 	});
 }
 
-export async function getByEmail(email: string) {
+export async function getUserByEmail(email: string) {
 	return await prisma.user.findUnique({ where: { email } });
 }
 
-export async function update(data: Partial<User>) {
+export async function updateUser(data: Partial<User>) {
 	return await prisma.user.update({ where: { id: data.id }, data });
 }
 
-export async function remove(id: string) {
+export async function removeUser(id: string) {
 	return await prisma.user.delete({ where: { id } });
 }

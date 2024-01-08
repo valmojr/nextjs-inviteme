@@ -3,52 +3,52 @@
 import prisma from '../Database';
 import { Event, Group, Role } from '@prisma/client';
 
-export async function create(data: Group) {
+export async function createGroup(data: Group) {
 	return await prisma.group.create({ data });
 }
 
-export async function get() {
+export async function getAllGroups() {
 	return await prisma.group.findMany();
 }
 
-export async function getById(id: string) {
+export async function getGroupById(id: string) {
 	return await prisma.group.findUnique({ where: { id } });
 }
 
-export async function getByGroup(group: Group) {
+export async function getGroupByGroup(group: Group) {
 	return await prisma.group.findUnique({ where: { id: group.id } });
 }
 
-export async function getByRole(role: Role) {
+export async function getGroupByRole(role: Role) {
 	return await prisma.group.findUnique({ where: { id: role.groupID } });
 }
 
-export async function getByRoleId(roleId: string) {
+export async function getGroupByRoleId(roleId: string) {
 	return await prisma.group.findUnique({ where: { id: roleId } });
 }
 
-export async function getChildGroups(group: Group) {
+export async function getGroupChildGroups(group: Group) {
 	return await prisma.group.findMany({ where: { fatherGroupID: group.id } });
 }
 
-export async function getFatherGroup(group: Group) {
+export async function getGroupFatherGroup(group: Group) {
 	return await prisma.group.findUnique({
 		where: { id: group.fatherGroupID as string },
 	});
 }
 
-export async function getByEvent(event: Event) {
+export async function getGroupByEvent(event: Event) {
 	return await prisma.group.findMany({ where: { Event: { id: event.id } } });
 }
 
-export async function getByEventId(eventId: string) {
+export async function getGroupByEventId(eventId: string) {
 	return await prisma.group.findMany({ where: { Event: { id: eventId } } });
 }
 
-export async function update(data: Partial<Group>) {
+export async function updateGroup(data: Partial<Group>) {
 	return await prisma.group.update({ where: { id: data.id }, data });
 }
 
-export async function remove(id: string) {
+export async function removeGroup(id: string) {
 	return await prisma.group.delete({ where: { id } });
 }
