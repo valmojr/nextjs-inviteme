@@ -194,7 +194,7 @@ export default function BottomMenuButtom(
 		<button
 			className={twMerge(
 				'flex flex-row flex-nowrap items-center gap-2 justify-center w-8 h-8 text-white rounded-full duration-150 bg-blue-400 cursor-pointer',
-				isHovered ? 'w-24' : ''
+				isHovered ? 'w-24 bg-blue-500' : ''
 			)}
 			onMouseEnter={handleHover}
 			onMouseLeave={handleHover}

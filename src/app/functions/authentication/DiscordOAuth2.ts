@@ -1,4 +1,4 @@
-import { getByDiscordId, getByEmail } from '../entities/User';
+import { getUserByDiscordId, getUserByEmail } from '../entities/User';
 import DiscordUser from '../types/DiscordUser';
 
 export type TokenResponse = {
@@ -67,12 +67,12 @@ export type ProvidedData = {
 } & any;
 
 export async function GetUserFromDatabase(user: ProvidedData) {
-	const UserFromDiscordId = await getByDiscordId(user.id);
+	const UserFromDiscordId = await getUserByDiscordId(user.id);
 
 	if (UserFromDiscordId) {
 		return UserFromDiscordId;
 	} else {
-		const UserFromEmail = await getByEmail(user.email);
+		const UserFromEmail = await getUserByEmail(user.email);
 
 		if (UserFromEmail) {
 			return UserFromEmail;

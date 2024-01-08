@@ -15,6 +15,10 @@ export async function getHouseById(id: string) {
 	return await prisma.house.findUnique({ where: { id } });
 }
 
+export async function getHouseByName(name: string) {
+	return await prisma.house.findMany({ where: { name: { contains: name } } });
+}
+
 export async function getHouseByHouse(house: House) {
 	return await prisma.house.findUnique({ where: { id: house.id } });
 }

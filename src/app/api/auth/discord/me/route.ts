@@ -3,11 +3,10 @@ import { cookies } from 'next/headers';
 import { sign } from 'jsonwebtoken';
 import { User } from '@prisma/client';
 import StreamToBuffer from '@/app/functions/util/GetStreamData';
-import { NextApiResponse } from 'next';
 import HttpResponse from '@/app/functions/API/HttpResponses';
 import { randomUUID } from 'crypto';
 import DiscordUser from '@/app/functions/types/DiscordUser';
-import { create as CreateUser } from '@/app/functions/entities/User';
+import { createUser } from '@/app/functions/entities/User';
 import { GetUserFromDatabase } from '@/app/functions/authentication/DiscordOAuth2';
 
 type ResponseData = {
@@ -55,7 +54,7 @@ async function handler(req: Request) {
 	try {
 		user = await GetUserFromDatabase(userData);
 	} catch (error) {
-		user = await CreateUser(userData);
+		user = await createUser(userData);
 	}
 
 	const jwt = sign(user || '', process.env.AUTH_SECRET as string);
