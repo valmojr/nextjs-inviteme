@@ -14,7 +14,7 @@ export default function Avatar(
 		image?: string;
 		profile?: Partial<User> | Partial<DiscordUser>;
 		border?: 'circle' | 'rounded' | 'square';
-		size?: 'small' | 'medium' | 'large';
+		size?: 'small' | 'medium' | 'large' | 'extralarge';
 		alt?: string;
 	} & ComponentProps<'img'>
 ) {
@@ -52,7 +52,8 @@ export default function Avatar(
 					size === 'medium' || size === undefined
 						? 'w-16 h-16'
 						: null,
-					size === 'large' ? 'w-20 h-20' : null
+					size === 'large' ? 'w-20 h-20' : null,
+					size === 'extralarge' ? 'w-40 h-40' : null
 				)}
 			/>
 		);
@@ -74,7 +75,8 @@ export default function Avatar(
 					size === 'medium' || size === undefined
 						? 'w-16 h-16'
 						: null,
-					size === 'large' ? 'w-20 h-20' : null
+					size === 'large' ? 'w-20 h-20' : null,
+					size === 'extralarge' ? 'w-40 h-40' : null
 				)}
 			/>
 		);
@@ -96,7 +98,8 @@ export default function Avatar(
 					size === 'medium' || size === undefined
 						? 'w-16 h-16'
 						: null,
-					size === 'large' ? 'w-20 h-20' : null
+					size === 'large' ? 'w-20 h-20' : null,
+					size === 'extralarge' ? 'w-40 h-40' : null
 				)}
 			/>
 		);
