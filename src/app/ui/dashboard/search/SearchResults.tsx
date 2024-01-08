@@ -1,3 +1,4 @@
+import { Event } from '@prisma/client';
 import ContentContainer from '../../util/Divisions/ContentContainer';
 
 export default async function SearchResults({
@@ -7,7 +8,7 @@ export default async function SearchResults({
 	search: string;
 	type: 'event' | 'user' | 'house';
 }) {
-	const events = await fetch(
+	const response = await fetch(
 		`${process.env.ENVIRONMENT_URI}/api/events/search`,
 		{
 			method: 'POST',
@@ -17,11 +18,14 @@ export default async function SearchResults({
 			body: JSON.stringify({ type, search }),
 		}
 	);
+
+	const events = await response.json();
+
 	return (
 		<ContentContainer className={'w-9/12 h-24'}>
-			{/* events.map((event) => {
+			{events.map((event: Event) => {
 				return <div key={event.id}>{event.name}</div>;
-			}) */}
+			})}
 		</ContentContainer>
 	);
 }
