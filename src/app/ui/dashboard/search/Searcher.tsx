@@ -15,20 +15,12 @@ export default function Searcher({ placeholder }: { placeholder: string }) {
 
 	function handleTermSearch(term: string) {
 		setSearchTerm(term);
-		const params = new URLSearchParams(searchParams);
-		if (term) {
-			params.set('type', selectedType);
-			params.set('query', searchTerm);
-		} else {
-			params.delete('type');
-			params.delete('query');
-		}
-		replace(`${pathname}?${params.toString()}`);
+		replace(`${pathname}?query=${term}&type=${selectedType}`);
 	}
 
 	function handleTypeChange(type: 'user' | 'event' | 'house') {
 		setSelectedType(type);
-		handleTermSearch(searchTerm);
+		replace(`${pathname}?query=${searchTerm}&type=${type}`);
 	}
 
 	return (
