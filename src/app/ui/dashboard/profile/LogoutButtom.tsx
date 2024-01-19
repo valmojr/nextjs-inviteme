@@ -1,6 +1,6 @@
 'use client';
-import { ExitIcon } from '@radix-ui/react-icons';
 import { redirect } from 'next/navigation';
+import BottomMenuButtom from '../BottomMenu/BottomMenuButtom';
 
 export default function LogoutButtom() {
 	const logout = () => {
@@ -8,5 +8,11 @@ export default function LogoutButtom() {
 		redirect('/login');
 	};
 
-	return <ExitIcon onClick={logout} className={'cursor-pointer'} />;
+	return (
+		<BottomMenuButtom
+			onClick={() => console.log('BOOM! not implemented')}
+			icon={'logout'}
+			label={'Logout'}
+		/>
+	);
 }
