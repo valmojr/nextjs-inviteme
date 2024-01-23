@@ -45,7 +45,7 @@ export default class HttpResponses {
 		);
 	}
 
-	public BadRequest() {
+	public BadRequest(customMessage?: string) {
 		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 400,
@@ -54,7 +54,9 @@ export default class HttpResponses {
 				},
 				body: {
 					status: 400,
-					message: 'bad request',
+					message:
+						'bad request' +
+						(customMessage ? `: ${customMessage}` : ''),
 				},
 			})
 		);
