@@ -6,6 +6,7 @@ import Paragrath from '@/app/ui/util/Text/Paragrath';
 import { useState } from 'react';
 import Image from 'next/image';
 import DiscordLogo from './../../../../../public/image/discord-mark-white.svg';
+import FirstTitle from '@/app/ui/util/Text/FirstTitle';
 
 export default function Page() {
 	const [registerUsername, setRegisterUsername] = useState<string>();
@@ -14,6 +15,8 @@ export default function Page() {
 
 	return (
 		<>
+			<FirstTitle>(TODO) Register Page / Handler</FirstTitle>
+			{/*
 			<fieldset>
 				<Label>Username</Label>
 				<Input></Input>
@@ -46,7 +49,7 @@ export default function Page() {
 						</Paragrath>
 					</SubmitButton>
 				</a>
-			</div>
+			</div> */}
 		</>
 	);
 }
