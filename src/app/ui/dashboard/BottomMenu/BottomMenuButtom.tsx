@@ -225,6 +225,12 @@ export default function BottomMenuButtom(
 			case 'config':
 				redirect(`/dashboard/config`);
 				break;
+			case 'login':
+				redirect(`/dashboard`);
+				break;
+			case 'logout':
+				redirect(`/login`);
+				break;
 			default:
 				break;
 		}
@@ -234,6 +240,7 @@ export default function BottomMenuButtom(
 		<button
 			className={twMerge(
 				'flex flex-row flex-nowrap items-center gap-2 justify-center w-8 h-8 text-white rounded-full duration-150 bg-blue-400 cursor-pointer',
+				props.className,
 				isHovered ? 'w-24 bg-blue-500' : ''
 			)}
 			onMouseEnter={handleHover}
