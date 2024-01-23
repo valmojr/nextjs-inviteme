@@ -1,5 +1,5 @@
 import Verify from '@/app/functions/authentication/Verify';
-import LogoutButtom from '@/app/ui/dashboard/profile/LogoutButtom';
+import BottomMenuButtom from '@/app/ui/dashboard/BottomMenu/BottomMenuButtom';
 import Avatar from '@/app/ui/util/Avatar';
 import FirstTitle from '@/app/ui/util/Text/FirstTitle';
 import { User } from '@prisma/client';
@@ -13,7 +13,7 @@ export default function Page() {
 		<>
 			<Avatar profile={profile} size={'extralarge'} border={'circle'} />
 			<FirstTitle>{profile.displayName}</FirstTitle>
-			<LogoutButtom />
+			<BottomMenuButtom icon={'logout'} label={'Logout'} />
 		</>
 	);
 }
