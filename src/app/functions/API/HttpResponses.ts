@@ -5,6 +5,7 @@ type UserResponse = {
 	status?: number;
 	message?: string;
 	user?: User;
+	cache?: any;
 };
 
 type ThrowedError = {
@@ -77,7 +78,7 @@ export default class HttpResponses {
 		);
 	}
 
-	public Ok(body: UserResponse) {
+	public Ok(body?: UserResponse) {
 		return new NextResponse<UserResponse>(
 			JSON.stringify({
 				status: 200,
