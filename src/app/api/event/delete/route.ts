@@ -36,9 +36,11 @@ async function handler(req: Request) {
 		return new HttpResponses().Unauthorized();
 	}
 
-	removeEvent(eventID);
+	const deletedEvent = await removeEvent(eventID);
 
-	return new HttpResponses().Ok();
+	return new HttpResponses().Ok({
+		message: `Event ${deletedEvent.name} was deleted`,
+	});
 }
 
 export {
