@@ -40,7 +40,7 @@ export default function EventForm() {
 				<SecondTitle>House:</SecondTitle>
 				<Input
 					placeholder="House"
-					{...(register('house'), { required: true })}
+					{...(register('house'), { required: false })}
 				/>
 			</Row>
 			<Row>
