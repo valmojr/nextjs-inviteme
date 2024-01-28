@@ -1,6 +1,7 @@
 describe('Event Create Route Tests', () => {
 	const url = `${process.env.ENVIRONMENT_URI}/api/event/create`;
 	const validJWT = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE3NzE3Y2NmLTJmMGMtNDQxOS1hZWVlLWI2OWIxNThhZDIzYSIsImRpc2NvcmRJZCI6IjI3MjE4NzkwNTI0MDIwMzI2NiIsImNyZWF0ZWRBdCI6IjIwMjQtMDEtMDNUMDU6NDY6MjcuOTU4WiIsInVwZGF0ZWRBdCI6IjIwMjQtMDEtMDNUMDU6NDY6MjcuOTU4WiIsInVzZXJuYW1lIjoidmFsbW8iLCJkaXNwbGF5TmFtZSI6IlZhbG1vIiwicGFzc3dvcmQiOm51bGwsImF2YXRhciI6ImQxYTI5MTg1MDE2ZWZiYTQ5NDZjMDA0MTA4YzlmYzM1IiwiZW1haWwiOiJ2YWxfbW9fanJAaG90bWFpbC5jb20iLCJiYW5uZXJDb2xvciI6IiNhMTJjMmMiLCJpYXQiOjE3MDQyNjEzODd9.QnexRemtoTq359GPIoo3Mqn-yostgNrGv6qSZHVlE0Y`;
+	const deleteRoute = `${process.env.ENVIRONMENT_URI}/api/event/delete`;
 
 	it('should only allow POST requests', async () => {
 		const response = await fetch(url, {
@@ -197,5 +198,17 @@ describe('Event Create Route Tests', () => {
 
 		expect(data?.message).toContain('created successfully');
 		expect(data?.event).not.toBeUndefined();
+		expect(typeof data?.event.id).toBe('string');
+
+		await fetch(deleteRoute, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${validJWT}`,
+			},
+			body: JSON.stringify({
+				eventID: data?.event?.id,
+			}),
+		});
 	});
 });

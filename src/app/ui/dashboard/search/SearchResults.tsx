@@ -18,8 +18,8 @@ export default async function SearchResults({
 			body: JSON.stringify({ type, search }),
 		}
 	);
-
-	const events = await response.json();
+	/*
+	const events = JSON.stringify(await response.json());
 
 	return (
 		<ContentContainer className={'w-9/12 h-24'}>
@@ -27,5 +27,6 @@ export default async function SearchResults({
 				return <div key={event.id}>{event.name}</div>;
 			})}
 		</ContentContainer>
-	);
+	); */
+	return <h1>{'Hello World!'}</h1>;
 }
