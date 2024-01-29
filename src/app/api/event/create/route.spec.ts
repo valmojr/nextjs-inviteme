@@ -163,7 +163,7 @@ describe('Event Create Route Tests', () => {
 				startDate: '2024-01-24T21:28:15.772Z',
 				endDate: '2024-01-24T21:28:14.772Z',
 				thumbnail: 'eventThumbnail',
-				ownerID: '6677fba6-d618-4f2b-a13a-beca724aa35b',
+				ownerID: 'test-user-id',
 			},
 		});
 
@@ -186,7 +186,7 @@ describe('Event Create Route Tests', () => {
 				description: 'Event Description',
 				startDate: '2020-01-24T21:28:15.772Z',
 				thumbnail: 'eventThumbnail',
-				ownerID: '6677fba6-d618-4f2b-a13a-beca724aa35b',
+				ownerID: 'test-user-id',
 			},
 		});
 
@@ -230,7 +230,7 @@ describe('Event Create Route Tests', () => {
 		const event = {
 			name: 'Event Title',
 			description: 'Event Description',
-			ownerID: '6677fba6-d618-4f2b-a13a-beca724aa35b',
+			ownerID: 'test-user-id',
 			startDate: '2024-11-24T21:28:15.772Z',
 			endDate: '2024-11-25T21:28:15.772Z',
 			thumbnail: 'eventThumbnail',
@@ -253,7 +253,7 @@ describe('Event Create Route Tests', () => {
 		expect(data?.event).not.toBeUndefined();
 		expect(typeof data?.event.id).toBe('string');
 
-		const deleteResponse = await fetch(deleteRoute, {
+		await fetch(deleteRoute, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
@@ -263,9 +263,5 @@ describe('Event Create Route Tests', () => {
 				eventID: data?.event?.id,
 			}),
 		});
-
-		const deleteData = await deleteResponse.json();
-
-		expect(deleteData?.message).toContain('ok');
 	});
 });

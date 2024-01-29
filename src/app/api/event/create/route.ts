@@ -95,9 +95,10 @@ async function handler(req: Request) {
 		id: eventId,
 		createdAt: new Date(),
 		updatedAt: new Date(),
-		ownerID: null,
 		mainGroupID: eventMainGroup.id,
 	});
+
+	console.log(createdEvent);
 
 	return new HttpResponses().Created({
 		message: `Event ${createdEvent.id} created successfully`,
