@@ -59,8 +59,8 @@ model Event {
   thumbnail   String?
   mainGroupID String    @unique
   mainGroup   Group     @relation(fields: [mainGroupID], references: [id])
-  ownerID     String?
-  owner       User?     @relation("UserToOwnedEvents", fields: [ownerID], references: [id])
+  ownerID     String
+  owner       User      @relation("UserToOwnedEvents", fields: [ownerID], references: [id])
   location    String?
   description String?
   House       House[]
