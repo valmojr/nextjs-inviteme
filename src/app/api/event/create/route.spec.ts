@@ -106,6 +106,55 @@ describe('Event Create Route Tests', () => {
 		expect(data).toContain('bad request');
 		expect(data).toContain('No start time was provided');
 	});
+	it('should return Bad Request if no event owner is provived', async () => {
+		const body = JSON.stringify({
+			event: {
+				name: 'Event Title',
+				description: 'Event Description',
+				startDate: '2024-01-24T21:28:15.772Z',
+				endDate: '2024-01-24T21:28:14.772Z',
+				thumbnail: 'eventThumbnail',
+			},
+		});
+
+		const response = await fetch(url, {
+			method: 'POST',
+			body,
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${validJWT}`,
+			},
+		});
+		const data = (await response.json()).body.message;
+
+		expect(data).toContain('bad request');
+		expect(data).toContain('No Event Owner was provided');
+	});
+	it('should return Bard Request if the event owner is not found in the user table', async () => {
+		const body = JSON.stringify({
+			event: {
+				name: 'Event Title',
+				description: 'Event Description',
+				ownerID: 'someone',
+				startDate: '2024-01-24T21:28:15.772Z',
+				endDate: '2024-01-24T21:28:14.772Z',
+				thumbnail: 'eventThumbnail',
+			},
+		});
+
+		const response = await fetch(url, {
+			method: 'POST',
+			body,
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${validJWT}`,
+			},
+		});
+		const data = (await response.json()).body.message;
+
+		expect(data).toContain('bad request');
+		expect(data).toContain('Event Owner not found');
+	});
 	it('should return Bad Request if the end time is before start time', async () => {
 		const body = JSON.stringify({
 			event: {
@@ -114,6 +163,7 @@ describe('Event Create Route Tests', () => {
 				startDate: '2024-01-24T21:28:15.772Z',
 				endDate: '2024-01-24T21:28:14.772Z',
 				thumbnail: 'eventThumbnail',
+				ownerID: '6677fba6-d618-4f2b-a13a-beca724aa35b',
 			},
 		});
 
@@ -136,6 +186,7 @@ describe('Event Create Route Tests', () => {
 				description: 'Event Description',
 				startDate: '2020-01-24T21:28:15.772Z',
 				thumbnail: 'eventThumbnail',
+				ownerID: '6677fba6-d618-4f2b-a13a-beca724aa35b',
 			},
 		});
 
@@ -149,6 +200,7 @@ describe('Event Create Route Tests', () => {
 		});
 		const data = (await response.json()).body.message;
 
+		expect(data).toContain('bad request');
 		expect(data).toContain('Event cannot start in the past');
 	});
 	it('should return Bad Request if the date time properties are not valid', async () => {
@@ -178,6 +230,7 @@ describe('Event Create Route Tests', () => {
 		const event = {
 			name: 'Event Title',
 			description: 'Event Description',
+			ownerID: '6677fba6-d618-4f2b-a13a-beca724aa35b',
 			startDate: '2024-11-24T21:28:15.772Z',
 			endDate: '2024-11-25T21:28:15.772Z',
 			thumbnail: 'eventThumbnail',
@@ -200,7 +253,7 @@ describe('Event Create Route Tests', () => {
 		expect(data?.event).not.toBeUndefined();
 		expect(typeof data?.event.id).toBe('string');
 
-		await fetch(deleteRoute, {
+		const deleteResponse = await fetch(deleteRoute, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
@@ -210,5 +263,9 @@ describe('Event Create Route Tests', () => {
 				eventID: data?.event?.id,
 			}),
 		});
+
+		const deleteData = await deleteResponse.json();
+
+		expect(deleteData?.message).toContain('ok');
 	});
 });

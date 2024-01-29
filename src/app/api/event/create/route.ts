@@ -3,6 +3,7 @@ import Authenticate from '@/app/functions/authentication/Authenticate';
 import { createEvent } from '@/app/functions/entities/Event';
 import { createGroup, updateGroup } from '@/app/functions/entities/Group';
 import { createRole } from '@/app/functions/entities/Role';
+import { getUserById } from '@/app/functions/entities/User';
 import GetStreamData from '@/app/functions/util/GetStreamData';
 import { Event } from '@prisma/client';
 import { randomUUID } from 'crypto';
@@ -36,6 +37,16 @@ async function handler(req: Request) {
 
 	if (!event.startDate) {
 		return new HttpResponses().BadRequest('No start time was provided');
+	}
+
+	if (!event.ownerID) {
+		return new HttpResponses().BadRequest('No Event Owner was provided');
+	}
+
+	const eventOwner = await getUserById(event.ownerID);
+
+	if (!eventOwner) {
+		return new HttpResponses().BadRequest('Event Owner not found');
 	}
 
 	if (event.endDate && event.startDate > event.endDate) {
