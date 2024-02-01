@@ -1,7 +1,12 @@
+import { sign } from 'jsonwebtoken';
+
 describe('Event Delete Route Tests', () => {
 	const url = `${process.env.ENVIRONMENT_URI}/api/event/delete`;
 	const createRoute = `${process.env.ENVIRONMENT_URI}/api/event/create`;
-	const validJWT = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE3NzE3Y2NmLTJmMGMtNDQxOS1hZWVlLWI2OWIxNThhZDIzYSIsImRpc2NvcmRJZCI6IjI3MjE4NzkwNTI0MDIwMzI2NiIsImNyZWF0ZWRBdCI6IjIwMjQtMDEtMDNUMDU6NDY6MjcuOTU4WiIsInVwZGF0ZWRBdCI6IjIwMjQtMDEtMDNUMDU6NDY6MjcuOTU4WiIsInVzZXJuYW1lIjoidmFsbW8iLCJkaXNwbGF5TmFtZSI6IlZhbG1vIiwicGFzc3dvcmQiOm51bGwsImF2YXRhciI6ImQxYTI5MTg1MDE2ZWZiYTQ5NDZjMDA0MTA4YzlmYzM1IiwiZW1haWwiOiJ2YWxfbW9fanJAaG90bWFpbC5jb20iLCJiYW5uZXJDb2xvciI6IiNhMTJjMmMiLCJpYXQiOjE3MDQyNjEzODd9.QnexRemtoTq359GPIoo3Mqn-yostgNrGv6qSZHVlE0Y`;
+	const validJWT = sign(
+		{ id: 'test-user-id', username: 'username', displayName: 'username' },
+		process.env.AUTH_SECRET as string
+	);
 
 	it('should only allow DELETE requests', async () => {
 		{
@@ -111,7 +116,7 @@ describe('Event Delete Route Tests', () => {
 
 		expect(data).toContain('bad request');
 	});
-	it('should return Ok if the event was deleted', async () => {
+	it('should return Success if the event was deleted', async () => {
 		const createResponse = await fetch(createRoute, {
 			method: 'POST',
 			headers: {
@@ -122,6 +127,7 @@ describe('Event Delete Route Tests', () => {
 				event: {
 					name: 'Test Event',
 					description: 'Event Description',
+					ownerID: 'test-user-id',
 					startDate: '2025-01-01T00:00:00.000Z',
 				},
 			}),
@@ -141,8 +147,9 @@ describe('Event Delete Route Tests', () => {
 			}),
 		});
 
-		const data = (await response.json()).body.message;
-		expect(data).toContain('ok');
-		expect(data).toContain('was deleted');
+		const data = (await response.json()).body;
+
+		expect(data?.message).toContain(event.name);
+		expect(data?.message).toContain('was deleted');
 	});
 });
