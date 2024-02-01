@@ -98,8 +98,6 @@ async function handler(req: Request) {
 		mainGroupID: eventMainGroup.id,
 	});
 
-	console.log(createdEvent);
-
 	return new HttpResponses().Created({
 		message: `Event ${createdEvent.id} created successfully`,
 		event: createdEvent,
