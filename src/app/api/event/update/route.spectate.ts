@@ -1,20 +1,64 @@
 import { sign } from 'jsonwebtoken';
 
-describe('Event Create Route Tests', () => {
-	const url = `${process.env.ENVIRONMENT_URI}/api/event/create`;
+describe('Event Update Route Tests', () => {
+	const url = `${process.env.ENVIRONMENT_URI}/api/event/update`;
+	const createRoute = `${process.env.ENVIRONMENT_URI}/api/event/create`;
+	const deleteRoute = `${process.env.ENVIRONMENT_URI}/api/event/delete`;
+
 	const validJWT = sign(
 		{ id: 'test-user-id', username: 'username', displayName: 'username' },
 		process.env.AUTH_SECRET as string
 	);
-	const deleteRoute = `${process.env.ENVIRONMENT_URI}/api/event/delete`;
+	const notEventOwnerJWT = sign(
+		{
+			id: 'not-the-event-owner',
+			username: 'nottheeventowner',
+			displayName: 'notTheEventOwner',
+		},
+		process.env.AUTH_SECRET as string
+	);
 
-	it('should only allow POST requests', async () => {
-		const response = await fetch(url, {
-			method: 'GET',
-		});
-		const data = (await response.json()).body.message;
+	it('should only allow PATCH requests', async () => {
+		{
+			const response = await fetch(url, {
+				method: 'GET',
+			});
+			const data = (await response.json()).body.message;
 
-		expect(data).toContain('method not allowed');
+			expect(data).toContain('method not allowed');
+		}
+		{
+			const response = await fetch(url, {
+				method: 'POST',
+			});
+			const data = (await response.json()).body.message;
+
+			expect(data).toContain('method not allowed');
+		}
+		{
+			const response = await fetch(url, {
+				method: 'PUT',
+			});
+			const data = (await response.json()).body.message;
+
+			expect(data).toContain('method not allowed');
+		}
+		{
+			const response = await fetch(url, {
+				method: 'PATCH',
+			});
+			const data = (await response.json()).body.message;
+
+			expect(data).not.toContain('method not allowed');
+		}
+		{
+			const response = await fetch(url, {
+				method: 'DELETE',
+			});
+			const data = (await response.json()).body.message;
+
+			expect(data).toContain('method not allowed');
+		}
 	});
 	it("should return unauthorized if the user doesn't provide a valid JWT", async () => {
 		const body = JSON.stringify({
@@ -65,52 +109,6 @@ describe('Event Create Route Tests', () => {
 		expect(data).toContain('bad request');
 		expect(data).toContain('No event was provided');
 	});
-	it('should return Bad Request missing title if the request body event title is missing', async () => {
-		const body = JSON.stringify({
-			event: {
-				description: 'Event Description',
-				startDate: 'eventStartTime',
-				endDate: 'eventEndTime',
-				thumbnail: 'eventThumbnail',
-			},
-		});
-
-		const response = await fetch(url, {
-			method: 'POST',
-			body,
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${validJWT}`,
-			},
-		});
-		const data = (await response.json()).body.message;
-
-		expect(data).toContain('bad request');
-		expect(data).toContain('No event title was provided');
-	});
-	it('should return Bad Request missing start time if the request body event start time is missing', async () => {
-		const body = JSON.stringify({
-			event: {
-				name: 'Event Title',
-				description: 'Event Description',
-				endDate: 'eventEndTime',
-				thumbnail: 'eventThumbnail',
-			},
-		});
-
-		const response = await fetch(url, {
-			method: 'POST',
-			body,
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${validJWT}`,
-			},
-		});
-		const data = (await response.json()).body.message;
-
-		expect(data).toContain('bad request');
-		expect(data).toContain('No start time was provided');
-	});
 	it('should return Bad Request if no event owner is provived', async () => {
 		const body = JSON.stringify({
 			event: {
@@ -134,6 +132,31 @@ describe('Event Create Route Tests', () => {
 
 		expect(data).toContain('bad request');
 		expect(data).toContain('No Event Owner was provided');
+	});
+	it('should return Unauthorized if the event owner provided is not the same as the original event owner', async () => {
+		const event = {
+			name: 'Event Title',
+			description: 'Event Description',
+			ownerID: 'test-user-id',
+			startDate: '2024-11-24T21:28:15.772Z',
+			endDate: '2024-11-25T21:28:15.772Z',
+			thumbnail: 'eventThumbnail',
+		};
+
+		const body = JSON.stringify({ event });
+
+		const response = await fetch(url, {
+			method: 'POST',
+			body,
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${notEventOwnerJWT}`,
+			},
+		});
+
+		const data = (await response.json()).body;
+
+		expect(data?.message).toContain('Unauthorized');
 	});
 	it('should return Bard Request if the event owner is not found in the user table', async () => {
 		const body = JSON.stringify({
@@ -231,7 +254,7 @@ describe('Event Create Route Tests', () => {
 
 		expect(data).toContain('bad request');
 	});
-	it('should create the event and return a success status if the provided body and auth bearer are correct', async () => {
+	it('should update the event and return a success status if the provided body and auth bearer are correct', async () => {
 		const event = {
 			name: 'Event Title',
 			description: 'Event Description',
