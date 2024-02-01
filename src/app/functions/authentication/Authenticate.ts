@@ -8,7 +8,9 @@ export default async function Authenticate(bearerToken: string | null) {
 
 	const token = bearerToken.split(' ')[1];
 
-	const user = Verify(token) as User;
-
-	return user;
+	try {
+		return Verify(token) as User;
+	} catch (error) {
+		return false;
+	}
 }
