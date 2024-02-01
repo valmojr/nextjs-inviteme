@@ -1,4 +1,3 @@
-import { NextRequest } from 'next/server';
 import { cookies } from 'next/headers';
 import { sign } from 'jsonwebtoken';
 import { User } from '@prisma/client';
@@ -8,13 +7,6 @@ import { randomUUID } from 'crypto';
 import DiscordUser from '@/app/functions/types/DiscordUser';
 import { createUser } from '@/app/functions/entities/User';
 import { GetUserFromDatabase } from '@/app/functions/authentication/DiscordOAuth2';
-
-type ResponseData = {
-	status: number;
-	headers: { 'Content-Type': string };
-	message?: string;
-	body: { status: number; user: User };
-};
 
 function userCheck(user: any) {
 	if (!user) return false;
