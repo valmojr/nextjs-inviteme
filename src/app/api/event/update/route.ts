@@ -5,7 +5,7 @@ import GetStreamData from '@/app/functions/util/GetStreamData';
 import { Event } from '@prisma/client';
 
 async function Handler(req: Request) {
-	if (req.method != 'POST') return new HttpResponses().UnauthorizedMethod();
+	if (req.method != 'PATCH') return new HttpResponses().UnauthorizedMethod();
 
 	const token = req.headers.get('Authorization');
 
@@ -33,11 +33,30 @@ async function Handler(req: Request) {
 		);
 	}
 
+	if (event.endDate && event.startDate > event.endDate) {
+		return new HttpResponses().BadRequest(
+			'End time cannot be before start time'
+		);
+	}
+
+	const todayMidnight = new Date();
+	todayMidnight.setHours(0, 0, 0, 0);
+
+	const eventStartDateMidnight = new Date(event.startDate);
+	eventStartDateMidnight.setHours(0, 0, 0, 0);
+
+	if (eventStartDateMidnight < todayMidnight) {
+		return new HttpResponses().BadRequest('Event cannot start in the past');
+	}
+
 	const eventOnDatabase = await getEventById(event.id);
 
 	const updatedEvent = await updateEvent({ ...eventOnDatabase, ...event });
 
-	return new HttpResponses().Ok({ cache: updatedEvent });
+	return new HttpResponses().Ok({
+		message: `Event updated succefully`,
+		cache: { event: updatedEvent },
+	});
 }
 
 export {
