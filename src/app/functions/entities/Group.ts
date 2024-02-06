@@ -15,6 +15,10 @@ export async function getGroupById(id: string) {
 	return await prisma.group.findUnique({ where: { id } });
 }
 
+export async function getGroupByName(name: string) {
+	return await prisma.group.findMany({ where: { name } });
+}
+
 export async function getGroupByGroup(group: Group) {
 	return await prisma.group.findUnique({ where: { id: group.id } });
 }
@@ -25,6 +29,10 @@ export async function getGroupByRole(role: Role) {
 
 export async function getGroupByRoleId(roleId: string) {
 	return await prisma.group.findUnique({ where: { id: roleId } });
+}
+
+export async function getGroupByFatherGroupId(fatherGroupID: string) {
+	return await prisma.group.findMany({ where: { fatherGroupID } });
 }
 
 export async function getGroupChildGroups(group: Group) {
@@ -38,11 +46,11 @@ export async function getGroupFatherGroup(group: Group) {
 }
 
 export async function getGroupByEvent(event: Event) {
-	return await prisma.group.findMany({ where: { Event: { id: event.id } } });
+	return await prisma.group.findMany({ where: { event: { id: event.id } } });
 }
 
 export async function getGroupByEventId(eventId: string) {
-	return await prisma.group.findMany({ where: { Event: { id: eventId } } });
+	return await prisma.group.findMany({ where: { event: { id: eventId } } });
 }
 
 export async function updateGroup(data: Partial<Group>) {

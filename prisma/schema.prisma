@@ -37,16 +37,18 @@ model Role {
 }
 
 model Group {
-  id            String   @id @unique @default(cuid())
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  name          String
-  roleIDs       String[]
-  roles         Role[]
-  childGroups   Group[]  @relation("GroupToFatherGroup")
-  fatherGroupID String?
-  fatherGroup   Group?   @relation("GroupToFatherGroup", fields: [fatherGroupID], references: [id])
-  Event         Event?
+  id                   String   @id @unique @default(cuid())
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  name                 String
+  roleIDs              String[]
+  roles                Role[]
+  childGroups          Group[]  @relation("GroupToFatherGroup")
+  fatherGroupID        String?
+  fatherGroup          Group?   @relation("GroupToFatherGroup", fields: [fatherGroupID], references: [id])
+  isFatherGroupOfEvent Event?   @relation("fatherGroupToEvent")
+  eventID              String
+  event                Event    @relation("GroupsToEvent", fields: [eventID], references: [id])
 }
 
 model Event {
@@ -58,13 +60,14 @@ model Event {
   name        String
   thumbnail   String?
   mainGroupID String    @unique
-  mainGroup   Group     @relation(fields: [mainGroupID], references: [id])
+  mainGroup   Group     @relation("fatherGroupToEvent", fields: [mainGroupID], references: [id])
   ownerID     String
   owner       User      @relation("UserToOwnedEvents", fields: [ownerID], references: [id])
   location    String?
   description String?
   House       House[]
   users       User[]    @relation("UserToAttendedEvents")
+  groups      Group[]   @relation("GroupsToEvent")
 }
 
 model House {
