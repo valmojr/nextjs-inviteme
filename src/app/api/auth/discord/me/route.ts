@@ -5,8 +5,7 @@ import StreamToBuffer from '@/app/functions/util/GetStreamData';
 import HttpResponse from '@/app/functions/API/HttpResponses';
 import { randomUUID } from 'crypto';
 import DiscordUser from '@/app/functions/types/DiscordUser';
-import { createUser } from '@/app/functions/entities/User';
-import { GetUserFromDatabase } from '@/app/functions/authentication/DiscordOAuth2';
+import { createUser, getUserByDiscordId } from '@/app/functions/entities/User';
 
 function userCheck(user: any) {
 	if (!user) return false;
@@ -41,12 +40,20 @@ async function handler(req: Request) {
 		password: null,
 	};
 
-	let user: User | undefined = undefined;
+	let user: User | undefined;
 
 	try {
-		user = await GetUserFromDatabase(userData);
+		user = await getUserByDiscordId(fetchedUser.id) as User;
+
+		if (!user) {
+			user = await createUser(userData);
+			if (!user) {
+				throw new Error('Failed to upsert user');
+			}
+		}
+		console.log(user);
 	} catch (error) {
-		user = await createUser(userData);
+		console.error(error);
 	}
 
 	const jwt = sign(user || '', process.env.AUTH_SECRET as string);

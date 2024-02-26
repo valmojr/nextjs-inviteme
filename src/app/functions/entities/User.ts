@@ -3,6 +3,7 @@
 import { User } from '@prisma/client';
 import prisma from '../Database';
 import DiscordUser from '../types/DiscordUser';
+import HttpResponses from '../API/HttpResponses';
 
 export async function createUser(data: User) {
 	return await prisma.user.create({ data });
@@ -48,6 +49,13 @@ export async function getUserByEventId(eventId: string) {
 
 export async function getUserByEmail(email: string) {
 	return await prisma.user.findUnique({ where: { email } });
+}
+
+export async function upsertUser(data: User) {
+	if (!data.id || !data.username) {
+		return new HttpResponses().BadRequest('Invalid user data provided');
+	}
+	return await prisma.user.upsert({ where: { id: data.id }, update: data, create: data });
 }
 
 export async function updateUser(data: Partial<User>) {

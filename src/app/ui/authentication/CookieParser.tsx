@@ -12,7 +12,8 @@ export default function CookieParser({ cookies }: { cookies: string }) {
 		setCookie('token', jwt, {
 			path: '/',
 			maxAge: 60 * 60 * 24 * 30,
-			sameSite: true,
+			sameSite: false,
+			expires: new Date(new Date().getTime() + 60 * 60 * 24 * 7),
 		});
 		if (fetchedCookies) {
 			redirect('/dashboard');
