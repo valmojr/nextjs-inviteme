@@ -155,6 +155,7 @@ export const groups: Group[] = [
 		updatedAt: new Date(),
 		fatherGroupID: null,
 		roleIDs: [],
+		eventID: '3a1e6f9c-8b5d-4c7a-9e2d-1f0c2e5b8d4',
 	},
 	{
 		id: 'e1b4c9a7-8f2d-4e3c-9b5a-0d6c7a1f8e9',
@@ -166,6 +167,7 @@ export const groups: Group[] = [
 			'f4b0e9c2-3d7a-4936-aa81-1e6c9b5f8d2e',
 			'7c8e5d2b-9a0f-43cd-8e6b-1d5f8a0c9b7d',
 		],
+		eventID: '3a1e6f9c-8b5d-4c7a-9e2d-1f0c2e5b8d4',
 	},
 	{
 		id: '9d0c7b2e-6a1f-4f8e-8c3d-5b9a0e2f1c7',
@@ -177,6 +179,7 @@ export const groups: Group[] = [
 			'2f9c8e1b-6a4d-4b9f-a0c8-5e3d7a8f1c9e',
 			'b2e0d9c8-1f5d-4a8e-9c7b-3a6f2d4c5e8a',
 		],
+		eventID: '3a1e6f9c-8b5d-4c7a-9e2d-1f0c2e5b8d4',
 	},
 	{
 		id: 'jrfw8e2d-5a7b-493c-6e0d-8c9a1f3b2e7',
@@ -185,6 +188,7 @@ export const groups: Group[] = [
 		updatedAt: new Date(),
 		fatherGroupID: null,
 		roleIDs: ['gewji3f9-8d6a-40a2-9e87-cb9cfeef3171'],
+		eventID: '3a1e6f9c-8b5d-4c7a-9e2d-1f0c2e5b8d4',
 	},
 	{
 		id: 'efweoqi3-8d6a-40a2-9e87-cb9cfeef3171',
@@ -196,6 +200,7 @@ export const groups: Group[] = [
 			'fjewio3f-8d6a-40a2-9e87-cb9cfeef3171',
 			'frgrt3f9-8d6a-40a2-9e87-cb9cfeef3171',
 		],
+		eventID: '3a1e6f9c-8b5d-4c7a-9e2d-1f0c2e5b8d4',
 	},
 	{
 		id: 'vfgt3f9-8d6a-40a2-9e87-cb9cfeef3171',
@@ -204,6 +209,7 @@ export const groups: Group[] = [
 		updatedAt: new Date(),
 		fatherGroupID: null,
 		roleIDs: [],
+		eventID: '3a1e6f9c-8b5d-4c7a-9e2d-1f0c2e5b8d4',
 	},
 	{
 		id: 'geirij3f9-8d6a-40a2-9e87-cb9cfeef3171',
@@ -212,6 +218,7 @@ export const groups: Group[] = [
 		updatedAt: new Date(),
 		fatherGroupID: null,
 		roleIDs: [],
+		eventID: '3a1e6f9c-8b5d-4c7a-9e2d-1f0c2e5b8d4',
 	},
 ];
 
