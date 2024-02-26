@@ -7,9 +7,10 @@ import { Suspense } from 'react';
 export default function Page({
 	searchParams,
 }: {
-	searchParams?: { query?: string };
+	searchParams?: { query?: string, type: | 'event' | 'user' | 'house'};
 }) {
 	const query = searchParams?.query || '';
+	const type = searchParams?.type || 'event';
 
 	return (
 		<ScreenContainer className={'justify-start p-4'}>
@@ -18,7 +19,7 @@ export default function Page({
 			</ContentContainer>
             
 			<Suspense fallback={<div>Loading...</div>}>
-				<SearchResults search={query} type={'event'} />
+				<SearchResults search={query} type={type} />
 			</Suspense>
 		</ScreenContainer>
 	);

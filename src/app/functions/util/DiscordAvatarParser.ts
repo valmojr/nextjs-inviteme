@@ -1,9 +1,9 @@
-export default function DiscordAvatarParser(userId: string, userAvatar: string): string {
-    return `https://cdn.discordapp.com/avatars/${userId}/${userAvatar}.png`
+export default function DiscordAvatarParser(discordId: string, userAvatar: string): string {
+    return `https://cdn.discordapp.com/avatars/${discordId}/${userAvatar}.png`
 }
 
-export function DiscordGuildMemberAvatarParser(userId: string, userAvatar: string): string {
-    return `https://cdn.discordapp.com/avatars/${userId}/${userAvatar}.png`
+export function DiscordGuildMemberAvatarParser(discordId: string, userAvatar: string): string {
+    return `https://cdn.discordapp.com/avatars/${discordId}/${userAvatar}.png`
 }
 
 export function DiscordGuildIconParser(guildId: string, guildIcon: string): string {
