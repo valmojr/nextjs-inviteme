@@ -32,3 +32,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
+
+## Business Requirements
+
+* Approved on Core Web Vitals
+* Zero Runtime UI Libraries
+* Being able to create a Event and organize the groups and roles by drag and dropping
+* Private or Public Events
