@@ -52,10 +52,10 @@ export async function getUserByEmail(email: string) {
 }
 
 export async function upsertUser(data: User) {
-	if (!data.id || !data.username) {
-		return new HttpResponses().BadRequest('Invalid user data provided');
+	if (!data?.id || !data?.username) {
+		throw new HttpResponses().BadRequest('Invalid user data provided');
 	}
-	return await prisma.user.upsert({ where: { id: data.id }, update: data, create: data });
+	return await prisma.user.upsert({ where: { id: data.id }, update: {...data, updatedAt: new Date()}, create: data });
 }
 
 export async function updateUser(data: Partial<User>) {
