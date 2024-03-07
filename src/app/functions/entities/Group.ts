@@ -24,7 +24,7 @@ export async function getGroupByGroup(group: Group) {
 }
 
 export async function getGroupByRole(role: Role) {
-	return await prisma.group.findUnique({ where: { id: role.groupID } });
+	return await prisma.group.findUnique({ where: { id: role.groupID as string } });
 }
 
 export async function getGroupByRoleId(roleId: string) {
