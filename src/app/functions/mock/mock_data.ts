@@ -236,6 +236,7 @@ export const assignedEvents: Event[] = [
 		location: 'Praia do Forte',
 		ownerID: '72e8b3a1-9f6c-4d14-b472-8e1c5638a92c',
 		mainGroupID: '4f8e2d1c-5a7b-493c-6e0d-8c9a1f3b2e7',
+		public: false,
 	},
 	{
 		id: '1f0c2e5b-8b5d-4c7a-9e2d-3a1e6f9c8d4',
@@ -250,6 +251,7 @@ export const assignedEvents: Event[] = [
 		location: 'Praia do Forte',
 		ownerID: '72e8b3a1-9f6c-4d14-b472-8e1c5638a92c',
 		mainGroupID: 'jrfw8e2d-5a7b-493c-6e0d-8c9a1f3b2e7',
+		public: false,
 	},
 	{
 		id: '8b5d4c7a-9e2d-1f0c-2e5b-3a1e6f9c8d4',
@@ -264,6 +266,7 @@ export const assignedEvents: Event[] = [
 		location: 'Sala de Eventos',
 		ownerID: '72e8b3a1-9f6c-4d14-b472-8e1c5638a92c',
 		mainGroupID: 'efweoqi3-8d6a-40a2-9e87-cb9cfeef3171',
+		public: false,
 	},
 ];
 
@@ -281,6 +284,7 @@ export const avaliableEvents: Event[] = [
 		location: 'Rua da Praia',
 		ownerID: 'a4b7e3f9-8d6a-40a2-9e87-cb9cfeef3171',
 		mainGroupID: 'vfgt3f9-8d6a-40a2-9e87-cb9cfeef3171',
+		public: false,
 	},
 	{
 		id: 'iefuwio3f-8d6a-40a2-9e87-cb9cfeef3171',
@@ -295,5 +299,6 @@ export const avaliableEvents: Event[] = [
 		location: 'Rua da Praia',
 		ownerID: 'a4b7e3f9-8d6a-40a2-9e87-cb9cfeef3171',
 		mainGroupID: 'geirij3f9-8d6a-40a2-9e87-cb9cfeef3171',
+		public: false,
 	},
 ];
