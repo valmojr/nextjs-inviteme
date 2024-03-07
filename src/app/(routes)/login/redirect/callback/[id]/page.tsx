@@ -3,12 +3,11 @@ import {
   GetToken,
   GetUser,
 } from "@/app/functions/authentication/DiscordOAuth2";
-import DiscordUser from "@/app/functions/types/DiscordUser";
+import { upsertUser } from "@/app/functions/entities/User";
 import DiscordAvatarParser from "@/app/functions/util/DiscordAvatarParser";
 import { CookieHandler } from "@/app/ui/authentication/CookieHandler";
 import CookieParser from "@/app/ui/authentication/CookieParser";
 import Avatar from "@/app/ui/util/Avatar";
-import Paragrath from "@/app/ui/util/Text/Paragrath";
 import SecondTitle from "@/app/ui/util/Text/SecondTitle";
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -16,47 +15,38 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   const user = await GetUser(access_info);
 
-  const {
-    id,
-    username,
-    avatar,
-    email,
-    banner_color,
-    global_name,
-  }: DiscordUser = user;
-
   const url = `${process.env.ENVIRONMENT_URI}/api/auth/discord/me`;
 
-  console.log("discord user =>", user);
+  const body = JSON.stringify({user});
 
   const response = await fetch(url, {
     method: "POST",
-    body: JSON.stringify({
-      user,
-    }),
+    body,
     headers: {
       "Content-Type": "application/json",
-    },
+    }
   });
 
   const data = await response.json();
-
-  if (!response.ok || !data) {
+  
+  if (!response.ok || !data || !data.body?.user) {
     throw new HttpResponses().BadRequest();
   }
+
+  await upsertUser(data.body.user);
 
   const fetchedCookies = response.headers.get("set-cookie");
 
   return (
     <>
       <Avatar
-        image={DiscordAvatarParser(id || "", avatar)}
+        image={DiscordAvatarParser(user.id, user.avatar)}
         size={"large"}
         border={"circle"}
       />
       <SecondTitle
         className={"text-center"}
-      >{`Logged in as ${global_name}!`}</SecondTitle>
+      >{`Logged in as ${user.global_name}!`}</SecondTitle>
       <CookieHandler>
         <CookieParser cookies={fetchedCookies as string} />
       </CookieHandler>

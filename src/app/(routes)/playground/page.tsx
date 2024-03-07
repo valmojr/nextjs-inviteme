@@ -1,5 +1,5 @@
 import Badge from '@/app/ui/util/Badge';
-import SubmitButton from '@/app/ui/util/Buttons/SubmitButtom';
+import SubmitButton from '@/app/ui/util/Buttons/SubmitButton';
 import MainContainer from '@/app/ui/util/Divisions/MainContainer';
 import Avatar from '@/app/ui/util/Avatar';
 import FirstTitle from '@/app/ui/util/Text/FirstTitle';
