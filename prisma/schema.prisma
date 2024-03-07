@@ -10,17 +10,18 @@ datasource db {
 
 model User {
   id          String   @id @unique @default(cuid())
-  discordId   String?  @unique
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  username    String   @unique
-  displayName String?
-  password    String?
   avatar      String?
   email       String?  @unique
+  password    String?
   bannerColor String?
+  displayName String?
+  username    String   @unique
+  discordId   String?  @unique
   ownedEvents Event[]  @relation("UserToOwnedEvents")
   roles       Role[]
+  groups      Group[]  @relation("GroupToUser")
   houses      House[]  @relation("HouseToUser")
   events      Event[]  @relation("UserToAttendedEvents")
 }
@@ -49,20 +50,22 @@ model Group {
   fatherGroup          Group?   @relation("GroupToFatherGroup", fields: [fatherGroupID], references: [id])
   childGroups          Group[]  @relation("GroupToFatherGroup")
   roles                Role[]
+  users                User[]   @relation("GroupToUser")
 }
 
 model Event {
   id          String    @id @unique @default(cuid())
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  startDate   DateTime
-  endDate     DateTime?
   name        String
-  thumbnail   String?
   mainGroupID String?   @unique
-  ownerID     String
   location    String?
   description String?
+  endDate     DateTime?
+  ownerID     String
+  startDate   DateTime
+  thumbnail   String?
+  public      Boolean
   mainGroup   Group?    @relation("fatherGroupToEvent", fields: [mainGroupID], references: [id])
   owner       User      @relation("UserToOwnedEvents", fields: [ownerID], references: [id])
   groups      Group[]   @relation("GroupsToEvent")
@@ -76,6 +79,7 @@ model House {
   updatedAt DateTime @updatedAt
   name      String
   avatar    String?
+  public    Boolean
   events    Event[]  @relation("EventToHouse")
   users     User[]   @relation("HouseToUser")
 }
