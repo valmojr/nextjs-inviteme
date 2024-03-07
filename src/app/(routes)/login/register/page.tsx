@@ -1,5 +1,5 @@
 'use client';
-import SubmitButton from '@/app/ui/util/Buttons/SubmitButtom';
+import SubmitButton from '@/app/ui/util/Buttons/SubmitButton';
 import Input from '@/app/ui/util/Forms/Input';
 import Label from '@/app/ui/util/Forms/Label';
 import Paragrath from '@/app/ui/util/Text/Paragrath';
