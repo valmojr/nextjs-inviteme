@@ -1,11 +1,10 @@
 import { Event as EventType, House, User } from "@prisma/client";
 import { twMerge } from "tailwind-merge";
-import Avatar from "../../util/Avatar";
-import FirstTitle from "../../util/Text/FirstTitle";
-import SecondTitle from "../../util/Text/SecondTitle";
 import Link from "next/link";
 import ColorCheck from "@/app/functions/util/ColorCheck";
-import Col from "../../util/Divisions/Col";
+import UserResultContainer from "./ResultContainers/UserResultContainer";
+import HouseResultContainer from "./ResultContainers/HouseResultContainer";
+import EventResultContainer from "./ResultContainers/EventResultContainer";
 
 export default function ResultContainer({
   result,
@@ -26,59 +25,26 @@ export default function ResultContainer({
     result = result as House;
   }
 
-  let isLightColor = false; 
-  if (result.bannerColor) {
-    isLightColor = ColorCheck(result.bannerColor);
-  }
-
   return (
     <Link href={`/dashboard/${type}/${result.id}`}>
       {
         // User
-        result.avatar && result.username && (
-          <div
-            className={twMerge(
-              "mx-0 w-auto h-24 rounded-md flex flex-row gap-5 flex-nowrap items-center justify-start p-5 shadow-md hover:shadow-lg cursor-pointer select-none",
-              result.bannerColor
-                ? `bg-[${result.bannerColor}]`
-                : `bg-stone-200`,
-              isLightColor ? "text-black" : "text-white",
-              className
-            )}
-          >
-            <Avatar profile={result} size={"medium"} border={"rounded"} />
-            <div className={"flex flex-col flex-nowrap"}>
-              <FirstTitle>{result.displayName}</FirstTitle>
-              <SecondTitle>{result.username}</SecondTitle>
-            </div>
-          </div>
+        type === 'user' && (
+         <UserResultContainer user={result} />
         )
       }
-      {result.name && result.ownerID && (
-        <div
-          className={twMerge(
-            "mx-0 w-auto h-24 rounded-md flex flex-row gap-5 flex-nowrap items-center justify-start p-5 shadow-md hover:shadow-lg cursor-pointer select-none",
-            result.bannerColor ? `bg-[${result.bannerColor}]` : `bg-stone-200`,
-            isLightColor ? "text-black" : "text-white",
-            className
-          )}
-        >
-          
-        </div>
-      )}
-      {result.name && (
-        <div
-          className={twMerge(
-            "mx-0 w-auto h-24 rounded-md flex flex-row gap-5 flex-nowrap items-center justify-start p-5 shadow-md hover:shadow-lg cursor-pointer select-none bg-gray-300",
-            className
-          )}
-        >
-          <Avatar image={'https://proxy.olhardigital.com.br/wp-content/uploads/2024/01/avatar-netlfix.jpg'} size={"medium"} border={"rounded"} />
-          <Col>
-            <FirstTitle>{result.name}</FirstTitle>
-          </Col>
-        </div>
-      )}
+      {
+        // House
+        type === `house` && (
+          <HouseResultContainer house={result}/>
+        )
+      }
+      {
+        // Event
+        type === `event` && (
+          <EventResultContainer event={result}/>
+        )
+      }
     </Link>
   );
 }
