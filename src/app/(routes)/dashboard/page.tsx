@@ -1,12 +1,11 @@
-import AvaliableEvents from '@/app/ui/dashboard/AvaliableEvents';
+import AvailableEvents from '@/app/ui/dashboard/AvailableEvents';
 import IncomingEvents from '@/app/ui/dashboard/IncomingEvents';
-import Sidebar from '@/app/ui/dashboard/Sidebar';
 
 export default function Page() {
 	return (
 		<>
 			<IncomingEvents />
-			<AvaliableEvents />
+			<AvailableEvents />
 		</>
 	);
-}
+}	
