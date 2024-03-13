@@ -1,9 +1,9 @@
-import { avaliableEvents } from '@/app/functions/mock/mock_data';
+import { availableEvents } from '@/app/functions/mock/mock_data';
 import { Event } from '@prisma/client';
 import Image from 'next/image';
 import { ComponentProps } from 'react';
 
-export function AvaliableEventCard(
+export function AvailableEventCard(
 	props: { event: Event } & ComponentProps<'div'>
 ) {
 	return (
@@ -33,13 +33,13 @@ export function AvaliableEventCard(
 	);
 }
 
-export default async function AvaliableEvents() {
-	const events = avaliableEvents;
+export default async function AvailableEvents() {
+	const events = availableEvents;
 
 	return (
 		<div className="flex flex-col flex-wrap items-center justify-center gap-3 px-4 my-4 w-full">
 			{events.map((event) => (
-				<AvaliableEventCard key={event.id} event={event} />
+				<AvailableEventCard key={event.id} event={event} />
 			))}
 		</div>
 	);
