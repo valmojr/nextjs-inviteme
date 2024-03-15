@@ -7,12 +7,13 @@ import { twMerge } from "tailwind-merge";
 
 export default function UserResultContainer({ user }: { user: User }) {
   const isLightColor = user.bannerColor ? ColorCheck(user.bannerColor) : false;
+  const bannerColor = user.bannerColor || "red-500";
 
   return (
     <div
       className={twMerge(
         "mx-0 w-auto h-24 rounded-md flex flex-row gap-5 flex-nowrap items-center justify-start p-5 shadow-md hover:shadow-lg cursor-pointer select-none",
-        user.bannerColor ? `bg-[${user.bannerColor}]` : "bg-stone-600",
+        user.bannerColor ? `bg-[${bannerColor}]` : "bg-stone-600",
         isLightColor ? "text-black" : "text-white"
       )}
     >
