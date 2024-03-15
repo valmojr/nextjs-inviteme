@@ -2,14 +2,10 @@ import Verify from "@/app/functions/authentication/Verify";
 import { getHouseByUser } from "@/app/functions/entities/House";
 import { User } from "@prisma/client";
 import { cookies } from "next/headers";
-import Link from "next/link";
-import Avatar from "../../util/Avatar";
 import { Suspense } from "react";
 import HouseIcon from "../../../../../public/image/house.svg";
-import ErrorBoundary from "../../util/Error/ErrorBoundary";
 import { twMerge } from "tailwind-merge";
 import Row from "../../util/Divisions/Row";
-import Col from "../../util/Divisions/Col";
 import ProfileHouseContainer from "./ProfileHouseContainer";
 
 export default async function ProfileHouses() {

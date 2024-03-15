@@ -1,7 +1,6 @@
 import { Event as EventType, House, User } from "@prisma/client";
 import { twMerge } from "tailwind-merge";
 import Link from "next/link";
-import ColorCheck from "@/app/functions/util/ColorCheck";
 import UserResultContainer from "./ResultContainers/UserResultContainer";
 import HouseResultContainer from "./ResultContainers/HouseResultContainer";
 import EventResultContainer from "./ResultContainers/EventResultContainer";
