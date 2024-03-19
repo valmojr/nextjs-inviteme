@@ -1,7 +1,9 @@
 import { CookieHandler } from "@/app/ui/authentication/CookieHandler";
 import CookieParser from "@/app/ui/authentication/CookieParser";
 import Avatar from "@/app/ui/util/Avatar";
+import SecondTitle from "@/app/ui/util/Text/SecondTitle";
 import { User } from "@prisma/client";
+import { cookies } from "next/headers";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const response = await fetch(
@@ -19,20 +21,21 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   const { user } = data as { user: User };
 
-  const token = response?.headers
-    ?.get("set-cookie")
-    ?.split(";")[0]
-    ?.split("=")[1] as string;
+  const token = response?.headers?.get("set-cookie");
 
-  if (!token) {
+  if (!token || token === "") {
     throw new Error("No token provided");
   }
 
   return (
     <>
       <Avatar profile={user} />
-      <h1>{`logged in as ${user.displayName}`}</h1>
-      <h1>{`token is ${token}`}</h1>
+      <SecondTitle
+        className={"text-center"}
+      >{`logged in as ${user.displayName}`}</SecondTitle>
+      <div className={"h-8"}>
+        <p className={"text-center"}>{`token is ${token.toString()}`}</p>
+      </div>
       <CookieHandler>
         <CookieParser cookies={token} />
       </CookieHandler>
