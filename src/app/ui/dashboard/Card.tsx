@@ -28,10 +28,10 @@ export default function Card(
 		type?: 'hero_event' | 'large' | 'medium' | 'small';
 		color?: string;
 		className?: string;
-		showTimeLeft?: boolean;
+		showtimeleft?: boolean;
 	}
 ) {
-	const { event, type, color, showTimeLeft, className } = props;
+	const { event, type, color, showtimeleft, className } = props;
 	type ? type : 'medium';
 	event.thumbnail ? event.thumbnail : 'https://i.imgur.com/8Km9tLL.png';
 
@@ -52,7 +52,7 @@ export default function Card(
 			>
 				<h2 className={'text-white text-lg font-semibold'}>
 					{`${event.name}${
-						showTimeLeft
+						showtimeleft
 							? ' - ' + getMissingTime(event.startDate)
 							: ''
 					}`}

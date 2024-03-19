@@ -22,7 +22,7 @@ export default async function IncomingEvents() {
 				<Card
 					event={events[0]}
 					type={'hero_event'}
-					showTimeLeft={true}
+					showtimeleft={true}
 				/>
 			</>
 		);
@@ -39,7 +39,7 @@ export default async function IncomingEvents() {
 				<Card
 					event={closestEvent}
 					type={'hero_event'}
-					showTimeLeft={true}
+					showtimeleft={true}
 					key={closestEvent.id}
 				/>
 				<div className={'flex flex-row flex-nowrap gap-3'}>
