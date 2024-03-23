@@ -4,7 +4,7 @@ import ThirdTitle from '../../util/Text/ThirdTitle';
 
 export default function TypeButton(
 	props: {
-		searchType: 'User' | 'House' | 'Event';
+		searchtype: 'User' | 'House' | 'Event';
 		position: 'first' | 'middle' | 'last';
 		isSelected?: boolean;
 	} & ComponentProps<'button'>
@@ -20,7 +20,7 @@ export default function TypeButton(
 				props.className
 			)}
 		>
-			<ThirdTitle className={'text-bold'}>{props.searchType}</ThirdTitle>
+			<ThirdTitle className={'text-bold'}>{props.searchtype}</ThirdTitle>
 		</button>
 	);
 }

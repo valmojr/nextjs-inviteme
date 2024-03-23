@@ -5,16 +5,26 @@ import SecondTitle from "@/app/ui/util/Text/SecondTitle";
 import { User } from "@prisma/client";
 import { twMerge } from "tailwind-merge";
 
-export default function UserResultContainer({ user }: { user: User }) {
+export default function UserResultContainer({
+  user,
+  className,
+}: {
+  user: User;
+  className?: string;
+}) {
   const isLightColor = user.bannerColor ? ColorCheck(user.bannerColor) : false;
-  const bannerColor = user.bannerColor || "red-500";
 
   return (
     <div
       className={twMerge(
         "mx-0 w-auto h-24 rounded-md flex flex-row gap-5 flex-nowrap items-center justify-start p-5 shadow-md hover:shadow-lg cursor-pointer select-none",
-        user.bannerColor ? `bg-[${bannerColor}]` : "bg-stone-600",
-        isLightColor ? "text-black" : "text-white"
+        `${
+          typeof user.bannerColor === "string"
+            ? `bg-[${user.bannerColor}]`
+            : "bg-stone-600"
+        }`,
+        `${isLightColor ? "text-black" : "text-white"}`,
+        className
       )}
     >
       <Avatar profile={user} size={"medium"} border={"rounded"} />

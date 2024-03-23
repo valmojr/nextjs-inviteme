@@ -8,9 +8,11 @@ import EventResultContainer from "./ResultContainers/EventResultContainer";
 export default function ResultContainer({
   result,
   className,
+  fatherKey
 }: {
   result: any;
   className?: string;
+  fatherKey?: string;
 }) {
   let type: "event" | "house" | "user";
   if (result?.username) {
@@ -25,23 +27,23 @@ export default function ResultContainer({
   }
 
   return (
-    <Link href={`/dashboard/${type}/${result.id}`}>
+    <Link href={`/dashboard/${type}/${result.id}`} key={fatherKey}>
       {
         // User
         type === 'user' && (
-         <UserResultContainer user={result} />
+         <UserResultContainer user={result} className={className} />
         )
       }
       {
         // House
         type === `house` && (
-          <HouseResultContainer house={result}/>
+          <HouseResultContainer house={result} className={className} />
         )
       }
       {
         // Event
         type === `event` && (
-          <EventResultContainer event={result}/>
+          <EventResultContainer event={result} className={className} />
         )
       }
     </Link>

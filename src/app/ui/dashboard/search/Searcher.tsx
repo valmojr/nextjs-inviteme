@@ -35,22 +35,25 @@ export default function Searcher({ placeholder }: { placeholder: string }) {
 				defaultValue={searchParams.get('query')?.toString()}
 			/>
 			<TypeButton
-				searchType="Event"
+				searchtype="Event"
 				position="first"
 				onClick={() => handleTypeChange('event')}
 				isSelected={selectedType == 'event'}
+				key={'event'}
 			/>
 			<TypeButton
-				searchType="House"
+				searchtype="House"
 				position="middle"
 				onClick={() => handleTypeChange('house')}
 				isSelected={selectedType == 'house'}
+				key={'house'}
 			/>
 			<TypeButton
-				searchType="User"
+				searchtype="User"
 				position="last"
 				onClick={() => handleTypeChange('user')}
 				isSelected={selectedType == 'user'}
+				key={'user'}
 			/>
 		</div>
 	);

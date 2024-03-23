@@ -8,8 +8,10 @@ import { cookies } from "next/headers";
 
 export default async function HouseResultContainer({
   house,
+  className,
 }: {
   house: House;
+  className?: string;
 }) {
   const avatarImage = house.avatar ? house.avatar : HouseIcon;
 
@@ -33,6 +35,7 @@ export default async function HouseResultContainer({
       className={twMerge(
         "mx-0 w-auto h-24 rounded-md flex flex-row gap-5 flex-nowrap items-center justify-start p-5 shadow-md hover:shadow-lg cursor-pointer select-none",
         "bg-stone-300",
+        className
       )}
     >
       <Avatar image={avatarImage} size={"medium"} border={"rounded"} />

@@ -28,7 +28,7 @@ export default function Card(
 		type?: 'hero_event' | 'large' | 'medium' | 'small';
 		color?: string;
 		className?: string;
-		showtimeleft?: boolean;
+		showtimeleft?: 'true' | 'false';
 	}
 ) {
 	const { event, type, color, showtimeleft, className } = props;
