@@ -19,6 +19,7 @@ model User {
   displayName String?
   username    String   @unique
   discordId   String?  @unique
+  banner      String?
   ownedEvents Event[]  @relation("UserToOwnedEvents")
   roles       Role[]
   groups      Group[]  @relation("GroupToUser")
@@ -84,6 +85,7 @@ model House {
   avatar    String?
   public    Boolean
   discordId String?  @unique
+  banner    String?
   events    Event[]  @relation("EventToHouse")
   users     User[]   @relation("HouseToUser")
 }
