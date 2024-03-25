@@ -12,15 +12,16 @@ export default function UserResultContainer({
   user: User;
   className?: string;
 }) {
-  const isLightColor = user.bannerColor ? ColorCheck(user.bannerColor) : false;
+  const bannerColorHash = user.bannerColor;
+  const isLightColor = bannerColorHash ? ColorCheck(bannerColorHash) : false;
 
   return (
     <div
       className={twMerge(
         "mx-0 w-auto h-24 rounded-md flex flex-row gap-5 flex-nowrap items-center justify-start p-5 shadow-md hover:shadow-lg cursor-pointer select-none",
         `${
-          typeof user.bannerColor === "string"
-            ? `bg-[${user.bannerColor}]`
+          typeof bannerColorHash === "string"
+            ? `bg-[${bannerColorHash}]`
             : "bg-stone-600"
         }`,
         `${isLightColor ? "text-black" : "text-white"}`,
