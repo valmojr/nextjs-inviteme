@@ -11,6 +11,7 @@ export const loggedUser: User = {
 	email: 'john@doe.com',
 	password: null,
 	bannerColor: null,
+	banner: null,
 };
 
 export const randomUsers: User[] = [
@@ -25,6 +26,7 @@ export const randomUsers: User[] = [
 		bannerColor: null,
 		email: '',
 		password: null,
+		banner: null,
 	},
 	{
 		id: 'a4b7e3f9-8d6a-40a2-9e87-cb9cfeef3171',
@@ -37,6 +39,7 @@ export const randomUsers: User[] = [
 		bannerColor: null,
 		email: '',
 		password: null,
+		banner: null,
 	},
 	{
 		id: '1f3c5d8e-7b2a-42bf-9f2c-6ec3a897d90a',
@@ -49,6 +52,7 @@ export const randomUsers: User[] = [
 		bannerColor: null,
 		email: '',
 		password: null,
+		banner: null,
 	},
 	{
 		id: 'c9a2f6b4-8e7d-4c66-9321-5d5f3a2bf81f',
@@ -61,6 +65,7 @@ export const randomUsers: User[] = [
 		bannerColor: null,
 		email: '',
 		password: null,
+		banner: null,
 	},
 	{
 		id: '5e3b1a8d-614c-4e26-bf22-90c8fa24d51a',
@@ -73,6 +78,7 @@ export const randomUsers: User[] = [
 		bannerColor: null,
 		email: '',
 		password: null,
+		banner: null,
 	},
 	{
 		id: '8d6c7a5e-3f1b-48a7-aae1-2e0d9c4d81c2',
@@ -85,6 +91,7 @@ export const randomUsers: User[] = [
 		bannerColor: null,
 		email: '',
 		password: null,
+		banner: null,
 	},
 ];
 
