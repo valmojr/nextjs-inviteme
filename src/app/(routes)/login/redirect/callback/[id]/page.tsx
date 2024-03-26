@@ -1,3 +1,4 @@
+import { UserJWTPayload } from "@/app/functions/authentication/Verify";
 import { CookieHandler } from "@/app/ui/authentication/CookieHandler";
 import CookieParser from "@/app/ui/authentication/CookieParser";
 import Avatar from "@/app/ui/util/Avatar";
@@ -18,7 +19,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     throw new Error("No user provided");
   }
 
-  const { user } = data as { user: User };
+  const { user } = data as UserJWTPayload;
 
   const token = response?.headers?.get("set-cookie");
 

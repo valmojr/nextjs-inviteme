@@ -1,6 +1,5 @@
 import Verify from "@/app/functions/authentication/Verify";
 import { getHouseByUser } from "@/app/functions/entities/House";
-import { User } from "@prisma/client";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
 import HouseIcon from "../../../../../public/image/house.svg";
@@ -11,7 +10,9 @@ import ProfileHouseContainer from "./ProfileHouseContainer";
 export default async function ProfileHouses() {
   const token = cookies().get("token")?.value;
 
-  const profile = Verify(token as string) as User;
+  const payload = Verify(token as string);
+
+  const profile = payload?.user;
 
   const houses = await getHouseByUser(profile);
 

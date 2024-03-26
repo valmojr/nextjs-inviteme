@@ -34,6 +34,7 @@ async function handler(req: Request) {
     avatar: fetchedUser.avatar,
     email: fetchedUser.email,
     bannerColor: fetchedUser.banner_color,
+    banner: fetchedUser.banner,
     displayName: fetchedUser.global_name,
     createdAt: new Date(),
     updatedAt: new Date(),
