@@ -17,9 +17,9 @@ export default async function Page({ params }: { params: { id: string } }) {
     throw new Error("User not found");
   }
 
-  const requestUser = Verify(cookies().get("token")?.value as string) as User;
+  const requestUser = Verify(cookies().get("token")?.value as string);
 
-  const isUser = user.id === requestUser?.id;
+  const isUser = user.id === requestUser?.user?.id;
 
   const houses = await getHouseByUserId(id);
   const assignedEvents = await getEventByUserId(id);
