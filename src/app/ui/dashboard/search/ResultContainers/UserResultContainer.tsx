@@ -19,12 +19,9 @@ export default function UserResultContainer({
     <div
       className={twMerge(
         "mx-0 w-auto h-24 rounded-md flex flex-row gap-5 flex-nowrap items-center justify-start p-5 shadow-md hover:shadow-lg cursor-pointer select-none",
-        `${
-          typeof bannerColorHash === "string"
-            ? `bg-[${bannerColorHash}]`
-            : "bg-stone-600"
-        }`,
+        `${!!bannerColorHash ? `bg-[${bannerColorHash}]` : "bg-blue-300"}`,
         `${isLightColor ? "text-black" : "text-white"}`,
+        "hover:bg-blue-500 hover:text-white hover:my-3",
         className
       )}
     >
