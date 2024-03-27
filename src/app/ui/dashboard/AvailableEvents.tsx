@@ -37,10 +37,6 @@ export default async function AvailableEvents() {
 	const events = availableEvents;
 
 	return (
-		<div className="flex flex-col flex-wrap items-center justify-center gap-3 px-4 my-4 w-full">
-			{events.map((event) => (
-				<AvailableEventCard key={event.id} event={event} />
-			))}
-		</div>
+		<h1>TODO - Available Events</h1>
 	);
 }
