@@ -34,7 +34,8 @@ export default async function HouseResultContainer({
     <div
       className={twMerge(
         "mx-0 w-auto h-24 rounded-md flex flex-row gap-5 flex-nowrap items-center justify-start p-5 shadow-md hover:shadow-lg cursor-pointer select-none",
-        "bg-stone-300",
+        "bg-blue-300",
+        "hover:bg-blue-500 hover:my-3 hover:text-white",
         className
       )}
     >
