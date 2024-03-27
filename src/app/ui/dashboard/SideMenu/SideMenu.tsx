@@ -1,10 +1,14 @@
+import { cn } from '@/lib/utils';
 import SideMenuButton from './SideMenuButton';
 
 export default function SideMenu() {
 	return (
 		<div
 			className={
-				'fixed flex flex-row flex-nowrap bg-black h-12 w-screen bottom-0 justify-center items-center gap-3'
+				cn(
+					'fixed flex flex-row flex-nowrap bg-black h-12 w-screen bottom-0 justify-center items-center gap-',
+					'lg:relative lg:w-72 lg:h-[600px] lg:bg-stone-300 lg:rounded-md'
+				)
 			}
 		>
 			<SideMenuButton label="Create" icon="create" />

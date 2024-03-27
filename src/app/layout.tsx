@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { twMerge } from 'tailwind-merge';
+import { cn } from '@/lib/utils';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,8 +19,9 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={twMerge(
-					'flex flex-col flex-nowrap min-h-screen h-fit items-center justify-center text-neutral-800',
+				className={cn(
+					'flex flex-col flex-nowrap min-h-screen h-fit items-center justify-start text-neutral-800',
+					'lg:flex-row lg:flex-wrap lg:justify-center lg:items-start lg:gap-6 lg:p-4',
 					inter.className
 				)}
 			>

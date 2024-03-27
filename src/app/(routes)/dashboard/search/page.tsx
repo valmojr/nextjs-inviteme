@@ -1,8 +1,6 @@
 import SearchResults from "@/app/ui/dashboard/search/SearchResults";
-import Searcher from "@/app/ui/dashboard/search/Searcher";
-import ContentContainer from "@/app/ui/util/Divisions/ContentContainer";
-import ScreenContainer from "@/app/ui/util/Divisions/ScreenContainer";
-import { Suspense } from "react";
+import MainContainer from "@/app/ui/util/Divisions/MainContainer";
+import { cn } from "@/lib/utils";
 
 export default function Page({
   searchParams,
@@ -13,13 +11,12 @@ export default function Page({
   const type = searchParams?.type || "event";
 
   return (
-    <ScreenContainer className={"justify-start p-4"}>
-      <ContentContainer>
-        <Searcher placeholder="Search" />
-      </ContentContainer>
-      <ContentContainer className={'w-full h-[615px] justify-start items-center'}>
-          <SearchResults search={query} type={type} />
-      </ContentContainer>
-    </ScreenContainer>
+    <>
+      <MainContainer
+        className={cn("w-full justify-start items-center", "h-[635px]")}
+      >
+        <SearchResults search={query} type={type} />
+      </MainContainer>
+    </>
   );
 }

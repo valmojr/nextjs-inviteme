@@ -10,7 +10,7 @@ export default async function Sidebar() {
 
   return (
     <div className="h-14 w-screen top-0 bg-neutral-900 text-white flex flex-row flex-nowrap justify-center items-center gap-4 shadow-neutral-500 shadow-lg">
-      <SecondTitle>{`${user.displayName?.toUpperCase()}`}</SecondTitle>
+      <SecondTitle>{`${user.username}`}</SecondTitle>
       <Avatar profile={user} size={"small"} border={"circle"} />
     </div>
   );

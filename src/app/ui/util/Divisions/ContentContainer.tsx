@@ -1,7 +1,7 @@
+import { cn } from '@/lib/utils';
 import { ComponentProps } from 'react';
-import { twMerge } from 'tailwind-merge';
 
-export default async function ContentContainer(
+export default function ContentContainer(
 	props: { orientation?: 'row' | 'col' } & ComponentProps<'div'>
 ) {
 	const { className, orientation } = props;
@@ -9,8 +9,10 @@ export default async function ContentContainer(
 	return (
 		<div
 			{...props}
-			className={twMerge(
-				'flex flex-wrap bg-neutral-200 items-center justify-center gap-3 drop-shadow-md px-3 py-2 rounded-md',
+			className={cn(
+				'flex flex-wrap items-center justify-center gap-3',
+				'drop-shadow-md bg-neutral-200 px-3 py-2 rounded-md',
+				'lg:w-[680px] h-[730px]',
 				orientation == 'row' ? 'flex-row' : 'flex-col',
 				className
 			)}
