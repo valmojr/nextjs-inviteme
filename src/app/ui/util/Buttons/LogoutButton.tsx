@@ -1,5 +1,5 @@
 'use client';
-import BottomMenuButton from "../../dashboard/BottomMenu/BottomMenuButton";
+import SideMenuButton from "../../dashboard/SideMenu/SideMenuButton";
 import { useRouter } from "next/navigation";
 
 export default function LogoutButton() {
@@ -9,5 +9,5 @@ export default function LogoutButton() {
     useRouter().push('/login');
   }
 
-  return <BottomMenuButton onClick={Logout} icon={'logout'} label={'Logout'} />;
+  return <SideMenuButton onClick={Logout} icon={'logout'} label={'Logout'} />;
 }

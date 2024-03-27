@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { ComponentProps, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-export default function BottomMenuButton(
+export default function SideMenuButton(
 	props: {
 		label?: string;
 		icon?:
