@@ -1,7 +1,6 @@
 import Verify from '@/app/functions/authentication/Verify';
 import ProfileHouses from '@/app/ui/dashboard/Profile/ProfileHouses';
 import Avatar from '@/app/ui/util/Avatar';
-import LogoutButton from '@/app/ui/util/Buttons/LogoutButton';
 import FirstTitle from '@/app/ui/util/Text/FirstTitle';
 import { cookies } from 'next/headers';
 
@@ -14,7 +13,6 @@ export default async function Page() {
 			<Avatar profile={user} size={'extralarge'} border={'circle'} />
 			<FirstTitle>{user.displayName}</FirstTitle>
 			<ProfileHouses/>
-			<LogoutButton />
 		</>
 	);
 }
