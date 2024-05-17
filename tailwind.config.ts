@@ -10,6 +10,9 @@ const config = {
 	],
   prefix: "",
   theme: {
+    colors: {
+      'blurple': '#5865F2',
+    },
     container: {
       center: true,
       padding: "2rem",
