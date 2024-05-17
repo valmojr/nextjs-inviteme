@@ -1,10 +1,10 @@
 import DiscordUser from '@/app/functions/types/DiscordUser';
 import DiscordAvatarParser from '@/app/functions/util/DiscordAvatarParser';
 import { User } from '@prisma/client';
+import { PersonStandingIcon } from 'lucide-react';
 import Image from 'next/image';
 import { ComponentProps } from 'react';
 import { twMerge } from 'tailwind-merge';
-import Person from '../../../../public/image/person.svg';
 export function FallbackAvatar() {
 	return <h1>Loading...</h1>;
 }
@@ -84,12 +84,9 @@ export default function Avatar(
 		);
 	} else if (profile && !profile.discordId) {
 		return (
-			<Image
-				src={Person}
+			<PersonStandingIcon
 				width={300}
 				height={300}
-				alt={alt ? alt : ''}
-				placeholder={'empty'}
 				className={twMerge(
 					'my-2 select-none shadow-md hover:shadow-xl',
 					border === 'circle' ? 'rounded-full' : null,
