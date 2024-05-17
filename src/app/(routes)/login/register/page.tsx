@@ -1,55 +1,119 @@
-'use client';
-import SubmitButton from '@/app/ui/util/Buttons/SubmitButton';
-import Input from '@/app/ui/util/Forms/Input';
-import Label from '@/app/ui/util/Forms/Label';
-import Paragrath from '@/app/ui/util/Text/Paragrath';
-import { useState } from 'react';
-import Image from 'next/image';
-import DiscordLogo from './../../../../../public/image/discord-mark-white.svg';
-import FirstTitle from '@/app/ui/util/Text/FirstTitle';
+"use client";
+
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 export default function Page() {
-	const [registerUsername, setRegisterUsername] = useState<string>();
-	const [registerPassword, setRegisterPassword] = useState<string>();
-	const [confirmPassword, setConfirmPassword] = useState<string>();
+  const registerSchema = z.object({
+    username: z
+      .string()
+      .min(6, { message: "must be at least 6 characters long" })
+      .max(30, { message: "must be 30 characters long limited" }),
+    email: z.string().email({ message: "must be a valid email" }),
+    password: z
+      .string()
+      .min(6, { message: "must be a least 6 characters long" })
+      .max(40, { message: "password is too large" }),
+    confirmPassword: z.string(),
+  });
 
-	return (
-		<>
-			<FirstTitle>(TODO) Register Page / Handler</FirstTitle>
-			{/*
-			<fieldset>
-				<Label>Username</Label>
-				<Input></Input>
-			</fieldset>
-			<fieldset>
-				<Label>Password</Label>
-				<Input id="password" type="password"></Input>
-			</fieldset>
-			<fieldset>
-				<Label>Confirm Password</Label>
-				<Input id="confirmPassword" type="password"></Input>
-			</fieldset>
-			<div className={'flex flex-row flex-nowrap gap-2'}>
-				<SubmitButton color={'primary'}>REGISTER</SubmitButton>
-				<a href={process.env.NEXT_PUBLIC_DISCORD_OAUTH2_URL}>
-					<SubmitButton>
-						<Paragrath
-							color={'secondary'}
-							className={
-								'py-1 flex flex-row flex-nowrap items-center justify-center gap-2'
-							}
-						>
-							<Image
-								src={DiscordLogo}
-								width={25}
-								height={25}
-								alt={''}
-							/>
-							DISCORD
-						</Paragrath>
-					</SubmitButton>
-				</a>
-			</div> */}
-		</>
-	);
+  const registerForm = useForm<z.infer<typeof registerSchema>>({
+    resolver: zodResolver(registerSchema),
+  });
+
+  return (
+    <div className="w-full">
+      <Form {...registerForm}>
+        <FormField
+          control={registerForm.control}
+          name="username"
+          render={(field) => (
+            <FormItem>
+              <FormLabel>Username</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Username"
+                  {...field}
+                  className="w-full h-10 rounded-md p-4"
+                />
+              </FormControl>
+              <FormDescription />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={registerForm.control}
+          name="email"
+          render={(field) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="your@email.com"
+                  type="email"
+                  {...field}
+                  className="w-full h-10 rounded-md p-4"
+                />
+              </FormControl>
+              <FormDescription />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={registerForm.control}
+          name="password"
+          render={(field) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Password"
+                  type="password"
+                  {...field}
+                  className="w-full h-10 rounded-md p-4"
+                />
+              </FormControl>
+              <FormDescription />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={registerForm.control}
+          name="confirmPassword"
+          render={(field) => (
+            <FormItem>
+              <FormLabel>Confirm Password</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Confirm Password"
+                  {...field}
+                  className="w-full h-10 rounded-md p-4"
+                />
+              </FormControl>
+              <FormDescription />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button className="w-full mt-3" type="submit">
+          Register
+        </Button>
+      </Form>
+    </div>
+  );
 }

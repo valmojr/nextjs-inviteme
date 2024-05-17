@@ -1,76 +1,106 @@
-'use client';
-import SubmitButton from '@/app/ui/util/Buttons/SubmitButton';
-import Input from '@/app/ui/util/Forms/Input';
-import Label from '@/app/ui/util/Forms/Label';
-import Paragrath from '@/app/ui/util/Text/Paragrath';
-import { useState } from 'react';
-import DiscordLogo from './../../../../public/image/discord-mark-white.svg';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { config } from 'dotenv';
+"use client";
+
+import Input from "@/app/ui/util/Forms/Input";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import GitHubLogo from "../../../../public/GithubLogo";
+import DiscordLogo from "../../../../public/DiscordLogo";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
-	const [storedUsername, setStoredUsername] = useState<string>('');
-	const [storedPassword, setStoredPassword] = useState<string>('');
+  const router = useRouter();
 
-	const [loginStatus, setLoginStatus] = useState<
-		'primary' | 'success' | 'danger'
-	>('primary');
+  const loginSchema = z.object({
+    usernameOrEmail: z.string(),
+    password: z.string(),
+  });
 
-	const { push } = useRouter();
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
+  });
 
-	async function HandleSubmit() {
-		push('dashboard');
-	}
-
-	config();
-
-	return (
-		<>
-			<Paragrath>{'Insert your login info'}</Paragrath>
-			<fieldset className="Fieldset">
-				<Label htmlFor="name">Username</Label>
-				<Input
-					id="username"
-					placeholder={'username'}
-					onChange={(event) => setStoredUsername(event.target.value)}
-				/>
-			</fieldset>
-			<fieldset className="Fieldset">
-				<Label htmlFor="username">Password</Label>
-				<Input
-					id="password"
-					placeholder={'********'}
-					type={'password'}
-					onChange={(event) => setStoredPassword(event.target.value)}
-				/>
-			</fieldset>
-			<div className={'flex flex-row flex-nowrap gap-2'}>
-				<SubmitButton
-					color={loginStatus}
-					onClick={() => HandleSubmit()}
-				>
-					LOGIN
-				</SubmitButton>
-				<a href={process.env.NEXT_PUBLIC_DISCORD_OAUTH2_URL}>
-					<SubmitButton>
-						<Paragrath
-							color={'secondary'}
-							className={
-								'py-1 flex flex-row flex-nowrap items-center justify-center gap-2'
-							}
-						>
-							<Image
-								src={DiscordLogo}
-								width={25}
-								height={25}
-								alt={''}
-							/>
-							DISCORD
-						</Paragrath>
-					</SubmitButton>
-				</a>
-			</div>
-		</>
-	);
+  return (
+    <>
+      <Form {...form}>
+        <FormField
+          control={form.control}
+          name="usernameOrEmail"
+          render={(field) => (
+            <FormItem className="w-full">
+              <FormLabel>Username or Email</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Username or Email"
+                  {...field}
+                  className="w-full h-10 rounded-md p-4"
+                />
+              </FormControl>
+              <FormDescription />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={(field) => (
+            <FormItem className="w-full">
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Password"
+                  type="password"
+                  {...field}
+                  className="w-full h-10 rounded-md p-4"
+                />
+              </FormControl>
+              <FormDescription />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button className="w-full" type="submit">
+          Login
+        </Button>
+      </Form>
+      <Button
+        variant={"outline"}
+        className="w-full"
+        onClick={() => router.push("/login/register")}
+      >
+        Register
+      </Button>
+      <Button
+        variant={"ghost"}
+        className="w-full"
+        onClick={() => router.push("/login/register")}
+      >
+        Forgot Password
+      </Button>
+      <div className="w-full flex flex-row justify-start">
+        <h3 className="">or you can...</h3>
+      </div>
+      <Button className="w-full gap-2">
+        Login with GitHub
+        <GitHubLogo />
+      </Button>
+      <a href={process.env.NEXT_PUBLIC_DISCORD_OAUTH2_URL} className="w-full">
+        <Button className="w-full gap-2 bg-blurple hover:bg-blue-500 dark:text-white">
+          Login with Discord
+          <DiscordLogo />
+        </Button>
+      </a>
+    </>
+  );
 }
