@@ -3,7 +3,6 @@ import { CookieHandler } from "@/app/ui/authentication/CookieHandler";
 import CookieParser from "@/app/ui/authentication/CookieParser";
 import Avatar from "@/app/ui/util/Avatar";
 import SecondTitle from "@/app/ui/util/Text/SecondTitle";
-import { User } from "@prisma/client";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const response = await fetch(
