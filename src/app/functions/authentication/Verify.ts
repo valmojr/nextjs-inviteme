@@ -7,9 +7,10 @@ export type UserJWTPayload = {
   exp: number;
 }
 
-export default function Verify(jsonwebtoken?: string): UserJWTPayload {
+export default function Verify(jsonwebtoken?: string): UserJWTPayload  {
   if (!jsonwebtoken) {
     throw new Error("No token provided");
   }
+  
   return verifyJWT(jsonwebtoken, process.env.AUTH_SECRET as string) as UserJWTPayload;
 }
