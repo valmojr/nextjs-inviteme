@@ -6,7 +6,7 @@ function LeftMenu() {
     <Card
       className={cn(
         "lg:w-[600px] h-screen justify-center items-center",
-        "border bg-zinc-900",
+        "border dark:bg-zinc-900 bg-zinc-100",
         "flex flex-col flex-nowrap"
       )}
     >

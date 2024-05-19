@@ -8,7 +8,7 @@ function RightMenu() {
         className={cn(
           "h-96 w-[300px]",
           "flex flex-col flex-nowrap justify-center items-center",
-          "border bg-zinc-900"
+          "border dark:bg-zinc-900 bg-zinc-100"
         )}
       >
         <h1>User Notification Timeline</h1>
