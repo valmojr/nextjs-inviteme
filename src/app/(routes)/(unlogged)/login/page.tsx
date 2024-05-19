@@ -96,7 +96,7 @@ export default function Page() {
         <GitHubLogo />
       </Button>
       <a href={process.env.NEXT_PUBLIC_DISCORD_OAUTH2_URL} className="w-full">
-        <Button className="w-full gap-2 bg-blurple hover:bg-blue-500 dark:text-white">
+        <Button className="w-full gap-2 bg-blue-600 hover:bg-blue-500 dark:text-white">
           Login with Discord
           <DiscordLogo />
         </Button>
