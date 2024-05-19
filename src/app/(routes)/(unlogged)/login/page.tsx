@@ -14,8 +14,8 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import GitHubLogo from "../../../../public/GithubLogo";
-import DiscordLogo from "../../../../public/DiscordLogo";
+import GitHubLogo from "../../../../../public/GithubLogo";
+import DiscordLogo from "../../../../../public/DiscordLogo";
 import { useRouter } from "next/navigation";
 
 export default function Page() {
@@ -31,7 +31,7 @@ export default function Page() {
   });
 
   return (
-    <>
+    <div className="mt-6 flex flex-col flex-nowrap gap-3">
       <Form {...form}>
         <FormField
           control={form.control}
@@ -77,14 +77,14 @@ export default function Page() {
       <Button
         variant={"outline"}
         className="w-full"
-        onClick={() => router.push("/login/register")}
+        onClick={() => router.push("/register")}
       >
         Register
       </Button>
       <Button
         variant={"ghost"}
         className="w-full"
-        onClick={() => router.push("/login/register")}
+        onClick={() => router.push("/forgot")}
       >
         Forgot Password
       </Button>
@@ -101,6 +101,6 @@ export default function Page() {
           <DiscordLogo />
         </Button>
       </a>
-    </>
+    </div>
   );
 }

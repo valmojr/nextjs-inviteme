@@ -14,6 +14,8 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import GitHubLogo from "../../../../../public/GithubLogo";
+import DiscordLogo from "../../../../../public/DiscordLogo";
 
 export default function Page() {
   const registerSchema = z.object({
@@ -34,7 +36,7 @@ export default function Page() {
   });
 
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col flex-nowrap gap-2">
       <Form {...registerForm}>
         <FormField
           control={registerForm.control}
@@ -114,6 +116,9 @@ export default function Page() {
           Register
         </Button>
       </Form>
+      <h1>or you can...</h1>
+      <Button className="w-full gap-2">Register with GitHub<GitHubLogo/></Button>
+      <Button className="w-full gap-2 bg-blurple dark:text-white hover:bg-blurple">Register with Discord<DiscordLogo/></Button>
     </div>
   );
 }
