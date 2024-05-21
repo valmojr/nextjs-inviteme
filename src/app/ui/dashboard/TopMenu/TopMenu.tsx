@@ -146,11 +146,11 @@ function TopMenu() {
             <DropdownMenuItem className="gap-1">
               <Calendar height={17} />
               Create Event
-            </DropdownMenuItem>{" "}
+            </DropdownMenuItem>
             {/* TODO - Create Event Dialog */}
             <DropdownMenuItem className="gap-1">
               <Home height={17} /> Create House
-            </DropdownMenuItem>{" "}
+            </DropdownMenuItem>
             {/* TODO - Create House/Organization Dialog */}
           </DropdownMenuContent>
         </DropdownMenu>
