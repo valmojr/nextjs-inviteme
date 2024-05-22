@@ -8,9 +8,9 @@ function CreateHousePage({ children }: { children: React.ReactNode }) {
   return (
     <Card
       className={cn(
-        "flex flex-col flex-nowrap justify-center items-center",
-        "w-full h-full dark:bg-zinc-900 bg-zinc-100",
-        "border"
+        "flex flex-col flex-wrap justify-start items-center",
+        "w-full h-fit p-4",
+        "border dark:bg-zinc-900 bg-zinc-100"
       )}
     >
       {children}
