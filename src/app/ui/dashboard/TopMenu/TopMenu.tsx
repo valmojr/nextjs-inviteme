@@ -135,23 +135,25 @@ function TopMenu() {
         </div>
       </div>
       <div className="flex flex-row gap-3 w-full justify-end">
-        <ModeToggle/>
+        <ModeToggle />
         <DropdownMenu>
           <DropdownMenuTrigger>
-            <div className="rounded-full h-10 w-10 p-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground m-0 justify-center items-center flex flex-col flex-nowrap">
+            <div className="rounded-full h-10 w-10 p-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground m-0 justify-center items-center flex flex-col flex-nowrap cursor-pointer">
               <PlusCircle color="#EEE" />
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem className="gap-1">
-              <Calendar height={17} />
-              Create Event
-            </DropdownMenuItem>
-            {/* TODO - Create Event Dialog */}
-            <DropdownMenuItem className="gap-1">
-              <Home height={17} /> Create House
-            </DropdownMenuItem>
-            {/* TODO - Create House/Organization Dialog */}
+            <Link href={"/create/event"}>
+              <DropdownMenuItem className="gap-1 cursor-pointer">
+                <Calendar height={17} />
+                Create Event
+              </DropdownMenuItem>
+            </Link>
+            <Link href={"/create/house"}>
+              <DropdownMenuItem className="gap-1 cursor-pointer">
+                <Home height={17} /> Create House
+              </DropdownMenuItem>
+            </Link>
           </DropdownMenuContent>
         </DropdownMenu>
         <Button className="rounded-full h-10 w-10 p-2" variant={"outline"}>
