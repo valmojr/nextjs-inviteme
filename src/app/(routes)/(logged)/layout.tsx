@@ -6,14 +6,14 @@ import { cn } from "@/lib/utils";
 
 function LoggedLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="fixed top-0 w-full h-screen flex lg:flex-row justify-start items-center">
+    <div className="fixed top-0 w-full h-screen flex lg:flex-row justify-center items-start gap-3">
       <TopMenu />
       <LeftMenu />
       <Card
         className={cn(
           "w-full h-screen",
           "rounded-none border-none",
-          "flex flex-col flex-nowrap justify-center items-center"
+          "flex flex-col flex-nowrap justify-start items-center p-2 pt-20"
         )}
       >
         {children}
