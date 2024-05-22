@@ -138,9 +138,9 @@ function TopMenu() {
         <ModeToggle/>
         <DropdownMenu>
           <DropdownMenuTrigger>
-            <Button className="rounded-full h-10 w-10 p-2" variant={"outline"}>
+            <div className="rounded-full h-10 w-10 p-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground m-0 justify-center items-center flex flex-col flex-nowrap">
               <PlusCircle color="#EEE" />
-            </Button>
+            </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem className="gap-1">
@@ -158,7 +158,6 @@ function TopMenu() {
           <Bell color="#EEE" />
         </Button>
         <Sheet>
-          {" "}
           {/* TODO - Arrumar Sidemenu de Profile */}
           <SheetTrigger asChild>
             <Avatar className="cursor-pointer">
