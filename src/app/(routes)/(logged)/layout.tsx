@@ -13,7 +13,7 @@ function LoggedLayout({ children }: { children: React.ReactNode }) {
         className={cn(
           "w-full h-screen",
           "rounded-none border-none",
-          "flex flex-col flex-nowrap justify-start items-center p-2 pt-20"
+          "flex flex-col flex-nowrap justify-start items-center p-2 pt-20 pb-3"
         )}
       >
         {children}
