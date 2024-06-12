@@ -74,7 +74,7 @@ function TopMenu() {
         "flex flex-row flex-nowrap items-center justify-between"
       )}
     >
-      <div className="flex flex-row justify-start items-center gap-3 w-full">
+      <Link href="/dashboard" className="flex flex-row justify-start items-center gap-3 w-full">
         <Sheet>
           {/* TODO - Arrumar Sidemenu de Funções */}
           <SheetTrigger asChild>
@@ -122,7 +122,7 @@ function TopMenu() {
         </Sheet>
         <AppLogo height={45} width={45} />
         <h1 className="text-xl font-semibold">Dashboard</h1>
-      </div>
+      </Link>
       <div className="flex flex-row w-full">
         <div className="flex items-center border px-3 rounded-lg w-96 h-12">
           <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
