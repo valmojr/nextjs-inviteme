@@ -1,8 +1,12 @@
 import { Card } from "@/components/ui/card";
 import Logo from "../../../../public/AppLogo";
 import { ModeToggle } from "@/components/ModeToggle";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  cookies().get('token') ? redirect('/dashboard') : null;
+
   return (
     <div className="absolute w-full h-screen top-0 left 0 flex flex-row flex-nowrap items-center justify-center p-0">
       <div className="md:w-full w-0 h-screen flex flex-row flex-nowrap items-center justify-center dark:bg-zinc-900">
