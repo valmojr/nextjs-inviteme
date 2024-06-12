@@ -16,6 +16,7 @@ describe('JWT authorization tests', () => {
 		email: null,
 		password: null,
 		bannerColor: '#a12c2c',
+		banner: null
 	};
 
 	const invalidUser = {
