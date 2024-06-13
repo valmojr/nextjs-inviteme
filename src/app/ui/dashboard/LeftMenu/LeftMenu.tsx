@@ -6,7 +6,6 @@ import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Event } from "@prisma/client";
 import Link from "next/link";
-import Image from "next/image";
 
 function Loading() {
   return (
@@ -26,11 +25,11 @@ function EventCard({ event }: { event: Event }) {
   const endTime = event.endDate ? new Date(event.endDate) : null;
 
   return (
-    <Link href={`/event/${event.id}`}>
+    <Link href={`/event/${event.id}`} className="w-full">
       <Card
         className={cn(
           "flex flex-col flex-nowrap",
-          " w-[310px] h-24 dark:bg-zinc-800 bg-zinc-300",
+          "w-full h-24 dark:bg-zinc-800 bg-zinc-300",
           `bg-[${
             event.thumbnail ||
             "https://eventbrite-s3.s3.amazonaws.com/marketing/landingpages/assets/2023/organizer/a_organizer_event--creator-eventbrite-.jpeg"
@@ -65,9 +64,10 @@ async function LeftMenu() {
   return (
     <Card
       className={cn(
-        "lg:w-[600px] h-screen justify-start items-center",
+        "lg:w-[320px] h-screen justify-start items-center",
         "border dark:bg-zinc-900 bg-zinc-100",
-        "flex flex-col flex-nowrap pt-20"
+        "flex flex-col flex-nowrap pt-20 px-3",
+        "rounded-none"
       )}
     >
       <Suspense fallback={<Loading />}>
@@ -75,11 +75,11 @@ async function LeftMenu() {
           <div
             className={cn(
               "w-[300px] h-full ml-4 mr-4 mb-4",
-              "border border-dashed border-zinc-300 dark:border-zinc-700",
+              "border border-dashed rounded-lg border-zinc-300 dark:border-zinc-700",
               "flex flex-col flex-nowrap justify-center items-center"
             )}
           >
-            <h1 className="text-center font-semibold italic">
+            <h1 className="text-center font-semibold italic dark:text-zinc-700 text-zinc-300">
               If you join any event, it will be displayed here
             </h1>
           </div>

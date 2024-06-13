@@ -6,19 +6,33 @@ import { cn } from "@/lib/utils";
 
 function LoggedLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="fixed top-0 w-full min-h-screen h-fit flex lg:flex-row justify-center items-start gap-3">
+    <div
+      className={cn(
+        "fixed top-0 w-full h-screen flex lg:flex-row justify-center items-start"
+      )}
+    >
       <TopMenu />
       <LeftMenu />
-      <Card
+      <div
         className={cn(
-          "w-full min-h-screen h-fit",
-          "rounded-none border-none",
-          "flex flex-col flex-nowrap justify-start items-center p-2 pt-20 pb-3"
+          "flex flex-row flex-nowrap justify-start items-start",
+          "w-full h-screen overflow-auto pt-20 pb-4 pl-4 gap-4",
+          ""
         )}
       >
-        {children}
-      </Card>
-      <RightMenu />
+        <Card
+          className={cn(
+            "w-full h-fit",
+            "flex flex-col flex-nowrap justify-start items-center",
+            "p-4",
+            "dark:bg-zinc-900 bg-zinc-100",
+            "overflow-auto"
+          )}
+        >
+          {children}
+        </Card>
+        <RightMenu />
+      </div>
     </div>
   );
 }
