@@ -31,7 +31,8 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { useState } from "react";
+import EventCard from "./EventCard";
 
 function CreateEventForm({ user }: { user: User }) {
   const createEventSchema = z.object({
@@ -45,9 +46,27 @@ function CreateEventForm({ user }: { user: User }) {
     startDateDate: z.date(),
     startDateTime: z.string(),
     endDateDate: z.date().optional(),
-    endDateTime: z.number().min(0, {message: 'must not be negative'}).max(2400, {message: 'must be a valid time'}),
+    endDateTime: z
+      .number()
+      .min(0, { message: "must not be negative" })
+      .max(2400, { message: "must be a valid time" }),
     thumbnail: z.string().optional(),
     public: z.boolean(),
+  });
+
+  const [createdEvent, setCreatedEvent] = useState<Event>({
+    id: "",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    name: "",
+    mainGroupID: "",
+    location: "",
+    description: "",
+    endDate: new Date(),
+    ownerID: "",
+    startDate: new Date(),
+    thumbnail: "",
+    public: false,
   });
 
   const createEventForm = useForm<z.infer<typeof createEventSchema>>({
@@ -69,11 +88,13 @@ function CreateEventForm({ user }: { user: User }) {
   }
 
   return (
+    <div className={cn("flex flex-row flex-nowrap gap-4", "w-full h-fit")}>
       <Form {...createEventForm}>
         <form
           onSubmit={createEventForm.handleSubmit(onSubmit)}
-          className="space-y-8"
+          className="space-y-8 w-full"
         >
+          <h1 className="text-2xl font-semibold">Create Event</h1>
           <FormField
             control={createEventForm.control}
             name="title"
@@ -81,7 +102,16 @@ function CreateEventForm({ user }: { user: User }) {
               <FormItem>
                 <FormLabel>Title*</FormLabel>
                 <FormControl>
-                  <Input placeholder="Your epic event title" {...field} />
+                  <Input
+                    placeholder="Your epic event title"
+                    {...field}
+                    onChange={(event) =>
+                      setCreatedEvent({
+                        ...createdEvent,
+                        name: event.target.value || "",
+                      })
+                    }
+                  />
                 </FormControl>
                 <FormDescription>What</FormDescription>
                 <FormMessage />
@@ -153,15 +183,15 @@ function CreateEventForm({ user }: { user: User }) {
               <FormItem>
                 <FormLabel>Time</FormLabel>
                 <FormControl>
-                <InputOTP maxLength={4} {...field}>
-                  <InputOTPGroup>
-                    <InputOTPSlot index={0} className="bg-background" />
-                    <InputOTPSlot index={1} className="bg-background mr-2" />
-                    :
-                    <InputOTPSlot index={2} className="bg-background ml-2" />
-                    <InputOTPSlot index={3} className="bg-background" />
-                  </InputOTPGroup>
-                </InputOTP>
+                  <InputOTP maxLength={4} {...field}>
+                    <InputOTPGroup>
+                      <InputOTPSlot index={0} className="bg-background" />
+                      <InputOTPSlot index={1} className="bg-background mr-2" />
+                      :
+                      <InputOTPSlot index={2} className="bg-background ml-2" />
+                      <InputOTPSlot index={3} className="bg-background" />
+                    </InputOTPGroup>
+                  </InputOTP>
                 </FormControl>
                 <FormDescription>Time</FormDescription>
                 <FormMessage />
@@ -179,6 +209,12 @@ function CreateEventForm({ user }: { user: User }) {
                     placeholder="Your epic event description"
                     className="resize-none"
                     {...field}
+                    onChange={(event) =>
+                      setCreatedEvent({
+                        ...createdEvent,
+                        description: event.target.value,
+                      })
+                    }
                   />
                 </FormControl>
                 <FormDescription>Why, How, How Much</FormDescription>
@@ -186,9 +222,15 @@ function CreateEventForm({ user }: { user: User }) {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button type="submit" className="w-full">
+            Submit
+          </Button>
         </form>
       </Form>
+      <div className={cn("flex w-full h-screen", "")}>
+        <EventCard event={createdEvent} />
+      </div>
+    </div>
   );
 }
 
