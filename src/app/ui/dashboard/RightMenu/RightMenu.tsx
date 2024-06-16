@@ -18,7 +18,7 @@ function RightMenu() {
             "flex flex-col flex-nowrap justify-center items-center"
           )}
         >
-          <h1 className="text-center font-semibold italic dark:text-zinc-700 text-zinc-300">
+          <h1 className="text-lg text-center font-semibold italic dark:text-zinc-700 text-zinc-300">
             No notifications here!
             {/* TODO - Notifications (how the fuck i am going to do it?) */}
           </h1>
