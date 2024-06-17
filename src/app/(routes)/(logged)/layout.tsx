@@ -22,9 +22,9 @@ function LoggedLayout({ children }: { children: React.ReactNode }) {
       >
         <Card
           className={cn(
-            "w-full h-fit",
+            "w-full h-fit min-h-[680px]",
             "flex flex-col flex-nowrap justify-start items-center",
-            "p-4",
+            "p-0",
             "dark:bg-zinc-900 bg-zinc-100",
             "overflow-auto"
           )}

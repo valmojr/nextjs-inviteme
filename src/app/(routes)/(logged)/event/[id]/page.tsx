@@ -1,6 +1,7 @@
-import { Event, Group } from "@prisma/client";
+import { CardContent, CardHeader } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { Event } from "@prisma/client";
 import { cookies } from "next/headers";
-import Image from "next/image";
 
 async function EventPage({ params }: { params: { id: string } }) {
   const token = cookies().get("token")?.value;
@@ -20,11 +21,46 @@ async function EventPage({ params }: { params: { id: string } }) {
     headerParams
   );
 
+  const startTime = new Date(Date.parse(event.startDate.toString()));
+
   return (
     <>
-      <Image alt={""} src={""} />
-      <h1 className="text-2xl">{event.name}</h1>
-      <h2 className="text-lg">{event.description}</h2>
+      <CardHeader
+        className={cn(
+          "flex flex-row flex-nowrap",
+          "w-full h-48 mx-0",
+          "justify-end items-end gap-4",
+          event.thumbnail ? `bg-[${event.thumbnail}]` : "dark:bg-zinc-800 bg-zinc-50"
+        )}
+      >
+        <div className="flex flex-col flex-nowrap w-full">
+          <h1 className="text-3xl">{event.name}</h1>
+          <h2 className="text-xl">{event.description}</h2>
+        </div>
+        <div className="flex flex-col flex-nowrap items-end">
+          <h1 className="text-2xl">
+            {startTime.getDay() > 10
+              ? startTime.getDay()
+              : "0" + startTime.getDay()}
+            /
+            {startTime.getMonth() > 10
+              ? startTime.getMonth()
+              : "0" + startTime.getMonth()}
+          </h1>
+          <h1 className="text-3xl">
+            {startTime.getHours() > 10
+              ? startTime.getHours()
+              : "0" + startTime.getHours()}
+            :
+            {startTime.getSeconds() > 10
+              ? startTime.getSeconds()
+              : "0" + startTime.getSeconds()}
+          </h1>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <h1>TODO - Groups and Roles</h1>
+      </CardContent>
     </>
   );
 }
