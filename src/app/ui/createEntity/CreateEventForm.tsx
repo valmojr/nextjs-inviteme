@@ -34,6 +34,22 @@ import {
 import { useState } from "react";
 import EventCard from "./EventCard";
 
+export type EventDTO = {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  name: string;
+  mainGroupID: string | null;
+  location: string | null;
+  description: string | null;
+  endDate: Date | null;
+  ownerID: string;
+  startDateDate: string;
+  startDateTime: string;
+  thumbnail: string | null;
+  public: boolean;
+};
+
 function CreateEventForm({ user }: { user: User }) {
   const createEventSchema = z.object({
     title: z
@@ -54,7 +70,7 @@ function CreateEventForm({ user }: { user: User }) {
     public: z.boolean(),
   });
 
-  const [createdEvent, setCreatedEvent] = useState<Event>({
+  const [createdEvent, setCreatedEvent] = useState<EventDTO>({
     id: "",
     createdAt: new Date(),
     updatedAt: new Date(),
@@ -64,7 +80,8 @@ function CreateEventForm({ user }: { user: User }) {
     description: "",
     endDate: new Date(),
     ownerID: "",
-    startDate: new Date(),
+    startDateDate: "",
+    startDateTime: "",
     thumbnail: "",
     public: false,
   });
@@ -137,7 +154,7 @@ function CreateEventForm({ user }: { user: User }) {
             name="startDateDate"
             render={({ field }) => (
               <FormItem className="flex flex-col">
-                <FormLabel>Date of birth</FormLabel>
+                <FormLabel>Date</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
@@ -161,17 +178,24 @@ function CreateEventForm({ user }: { user: User }) {
                     <Calendar
                       mode="single"
                       selected={field.value}
-                      onSelect={field.onChange}
+                      onSelect={(event) => {
+                        field.onChange(event);
+                        setCreatedEvent({
+                          ...createdEvent,
+                          startDateDate: (event as Date).toString(),
+                        });
+                      }}
+                      numberOfMonths={2}
                       disabled={(date) =>
-                        date > new Date() || date < new Date("1900-01-01")
+                        date <
+                          new Date(
+                            new Date().setDate(new Date().getDate() - 1)
+                          ) || date < new Date("1900-01-01")
                       }
-                      initialFocus
                     />
                   </PopoverContent>
                 </Popover>
-                <FormDescription>
-                  Your date of birth is used to calculate your age.
-                </FormDescription>
+                <FormDescription>When</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -183,7 +207,7 @@ function CreateEventForm({ user }: { user: User }) {
               <FormItem>
                 <FormLabel>Time</FormLabel>
                 <FormControl>
-                  <InputOTP maxLength={4} {...field}>
+                  <InputOTP maxLength={4} {...field} onChange={e => setCreatedEvent({...createdEvent, startDateTime: e})}>
                     <InputOTPGroup>
                       <InputOTPSlot index={0} className="bg-background" />
                       <InputOTPSlot index={1} className="bg-background mr-2" />
@@ -193,7 +217,6 @@ function CreateEventForm({ user }: { user: User }) {
                     </InputOTPGroup>
                   </InputOTP>
                 </FormControl>
-                <FormDescription>Time</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
