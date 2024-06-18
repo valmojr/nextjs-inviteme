@@ -30,12 +30,20 @@ async function EventPage({ params }: { params: { id: string } }) {
           "flex flex-row flex-nowrap",
           "w-full h-48 mx-0",
           "justify-end items-end gap-4",
-          event.thumbnail ? `bg-[${event.thumbnail}]` : "dark:bg-zinc-800 bg-zinc-50"
+          event.thumbnail
+            ? `bg-[${event.thumbnail}]`
+            : "dark:bg-zinc-800 bg-zinc-50"
         )}
       >
         <div className="flex flex-col flex-nowrap w-full">
           <h1 className="text-3xl">{event.name}</h1>
-          <h2 className="text-xl">{event.description}</h2>
+          <h2 className="text-xl line-clamp-2">
+            {event.description
+              ? event.description?.length < 60
+                ? event.description
+                : event.description.slice(0, 60)+'...'
+              : null}
+          </h2>
         </div>
         <div className="flex flex-col flex-nowrap items-end">
           <h1 className="text-2xl">
