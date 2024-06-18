@@ -7,9 +7,9 @@ function CreateEventPage() {
   const { user } = Verify(token);
 
   return (
-    <>
+    <div className="w-full h-fit flex flex-row flex-nowrap p-8">
       <CreateEventForm user={user} />
-    </>
+    </div>
   );
 }
 

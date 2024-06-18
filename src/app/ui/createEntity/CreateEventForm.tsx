@@ -24,7 +24,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
-import { toast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
 import {
   InputOTP,
@@ -32,7 +32,6 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { useState } from "react";
-import EventCard from "./EventCard";
 
 export type EventDTO = {
   id: string;
@@ -51,10 +50,12 @@ export type EventDTO = {
 };
 
 function CreateEventForm({ user }: { user: User }) {
+  const { toast } = useToast();
+
   const createEventSchema = z.object({
     title: z
       .string()
-      .min(8, { message: "must be at least 6 characters long" })
+      .min(4, { message: "must be at least 4 characters long" })
       .max(100, { message: "must be lower than 100 characters" }),
     location: z.string().optional(),
     description: z.string().optional(),
@@ -70,22 +71,6 @@ function CreateEventForm({ user }: { user: User }) {
     public: z.boolean(),
   });
 
-  const [createdEvent, setCreatedEvent] = useState<EventDTO>({
-    id: "",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    name: "",
-    mainGroupID: "",
-    location: "",
-    description: "",
-    endDate: new Date(),
-    ownerID: "",
-    startDateDate: "",
-    startDateTime: "",
-    thumbnail: "",
-    public: false,
-  });
-
   const createEventForm = useForm<z.infer<typeof createEventSchema>>({
     resolver: zodResolver(createEventSchema),
     defaultValues: {
@@ -93,19 +78,21 @@ function CreateEventForm({ user }: { user: User }) {
     },
   });
 
-  function onSubmit(data: z.infer<typeof createEventSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+  async function onSubmit(data?: z.infer<typeof createEventSchema>) {
+    console.log(data);
+
+    //toast({
+    //  title: "You submitted the following values:",
+    //  description: (
+    //    <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+    //      <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+    //    </pre>
+    //  ),
+    //});
   }
 
   return (
-    <div className={cn("flex flex-row flex-nowrap gap-4", "w-full h-fit")}>
+    <div className={cn("flex flex-row flex-nowrap gap-6", "w-full h-fit")}>
       <Form {...createEventForm}>
         <form
           onSubmit={createEventForm.handleSubmit(onSubmit)}
@@ -119,16 +106,7 @@ function CreateEventForm({ user }: { user: User }) {
               <FormItem>
                 <FormLabel>Title*</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Your epic event title"
-                    {...field}
-                    onChange={(event) =>
-                      setCreatedEvent({
-                        ...createdEvent,
-                        name: event.target.value || "",
-                      })
-                    }
-                  />
+                  <Input placeholder="Your epic event title" {...field} />
                 </FormControl>
                 <FormDescription>What</FormDescription>
                 <FormMessage />
@@ -180,10 +158,6 @@ function CreateEventForm({ user }: { user: User }) {
                       selected={field.value}
                       onSelect={(event) => {
                         field.onChange(event);
-                        setCreatedEvent({
-                          ...createdEvent,
-                          startDateDate: (event as Date).toString(),
-                        });
                       }}
                       numberOfMonths={2}
                       disabled={(date) =>
@@ -207,7 +181,7 @@ function CreateEventForm({ user }: { user: User }) {
               <FormItem>
                 <FormLabel>Time</FormLabel>
                 <FormControl>
-                  <InputOTP maxLength={4} {...field} onChange={e => setCreatedEvent({...createdEvent, startDateTime: e})}>
+                  <InputOTP maxLength={4} {...field}>
                     <InputOTPGroup>
                       <InputOTPSlot index={0} className="bg-background" />
                       <InputOTPSlot index={1} className="bg-background mr-2" />
@@ -232,12 +206,6 @@ function CreateEventForm({ user }: { user: User }) {
                     placeholder="Your epic event description"
                     className="resize-none"
                     {...field}
-                    onChange={(event) =>
-                      setCreatedEvent({
-                        ...createdEvent,
-                        description: event.target.value,
-                      })
-                    }
                   />
                 </FormControl>
                 <FormDescription>Why, How, How Much</FormDescription>
@@ -250,9 +218,6 @@ function CreateEventForm({ user }: { user: User }) {
           </Button>
         </form>
       </Form>
-      <div className={cn("flex w-full h-screen", "")}>
-        <EventCard event={createdEvent} />
-      </div>
     </div>
   );
 }
