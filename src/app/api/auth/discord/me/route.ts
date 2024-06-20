@@ -31,7 +31,7 @@ async function handler(req: Request) {
     id: randomUUID(),
     discordId: fetchedUser.id,
     username: fetchedUser.username,
-    avatar: fetchedUser.avatar,
+    avatarId: fetchedUser.avatar,
     email: fetchedUser.email,
     bannerColor: fetchedUser.banner_color,
     banner: fetchedUser.banner,
