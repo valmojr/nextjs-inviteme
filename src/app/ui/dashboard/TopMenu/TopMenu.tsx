@@ -163,7 +163,7 @@ function TopMenu() {
           {/* TODO - Arrumar Sidemenu de Profile */}
           <SheetTrigger asChild>
             <Avatar className="cursor-pointer">
-              <AvatarImage src={user.avatar || ""} />
+              <AvatarImage src={user.avatarId || ""} />
               <AvatarFallback>{avatarFallback}</AvatarFallback>
             </Avatar>
           </SheetTrigger>
