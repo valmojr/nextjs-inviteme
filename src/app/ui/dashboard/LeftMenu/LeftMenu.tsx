@@ -30,12 +30,10 @@ function EventCard({ event }: { event: Event }) {
         className={cn(
           "flex flex-col flex-nowrap",
           "w-full h-24 dark:bg-zinc-800 bg-zinc-300",
-          `bg-[${
-            event.thumbnail ||
-            "https://eventbrite-s3.s3.amazonaws.com/marketing/landingpages/assets/2023/organizer/a_organizer_event--creator-eventbrite-.jpeg"
-          }]`,
           "mb-4 items-end justify-end p-3"
         )}
+
+        style={{backgroundImage: event.thumbnailId || undefined}}
       >
         <h1 className="text-lg">{event.name}</h1>
         <h3 className="text-sm">{`${startTime.getDay()}/${startTime.getMonth()}/${startTime.getFullYear()} - ${startTime.getHours()}:${startTime.getMinutes()}`}</h3>
