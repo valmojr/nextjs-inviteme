@@ -7,7 +7,7 @@ export const loggedUser: User = {
 	displayName: 'Valmin',
 	createdAt: new Date(),
 	updatedAt: new Date(),
-	avatar: 'https://avatars.githubusercontent.com/u/70849974?v=4',
+	avatarId: 'https://avatars.githubusercontent.com/u/70849974?v=4',
 	email: 'john@doe.com',
 	password: null,
 	bannerColor: null,
@@ -22,7 +22,7 @@ export const randomUsers: User[] = [
 		displayName: 'Abner',
 		createdAt: new Date(),
 		updatedAt: new Date(),
-		avatar: 'https://avatars.githubusercontent.com/u/59853942?v=4',
+		avatarId: 'https://avatars.githubusercontent.com/u/59853942?v=4',
 		bannerColor: null,
 		email: '',
 		password: null,
@@ -35,7 +35,7 @@ export const randomUsers: User[] = [
 		displayName: 'Roberto',
 		createdAt: new Date(),
 		updatedAt: new Date(),
-		avatar: 'https://avatars.githubusercontent.com/u/7755073?v=4',
+		avatarId: 'https://avatars.githubusercontent.com/u/7755073?v=4',
 		bannerColor: null,
 		email: '',
 		password: null,
@@ -48,7 +48,7 @@ export const randomUsers: User[] = [
 		displayName: 'Jill',
 		createdAt: new Date(),
 		updatedAt: new Date(),
-		avatar: 'https://avatars.githubusercontent.com/u/59853942?v=4',
+		avatarId: 'https://avatars.githubusercontent.com/u/59853942?v=4',
 		bannerColor: null,
 		email: '',
 		password: null,
@@ -61,7 +61,7 @@ export const randomUsers: User[] = [
 		displayName: 'Luiz',
 		createdAt: new Date(),
 		updatedAt: new Date(),
-		avatar: 'https://avatars.githubusercontent.com/u/37157516?v=4',
+		avatarId: 'https://avatars.githubusercontent.com/u/37157516?v=4',
 		bannerColor: null,
 		email: '',
 		password: null,
@@ -74,7 +74,7 @@ export const randomUsers: User[] = [
 		displayName: 'Vini',
 		createdAt: new Date(),
 		updatedAt: new Date(),
-		avatar: 'https://avatars.githubusercontent.com/u/20646897?v=4',
+		avatarId: 'https://avatars.githubusercontent.com/u/20646897?v=4',
 		bannerColor: null,
 		email: '',
 		password: null,
@@ -87,7 +87,7 @@ export const randomUsers: User[] = [
 		displayName: 'Rodrigo',
 		createdAt: new Date(),
 		updatedAt: new Date(),
-		avatar: 'https://avatars.githubusercontent.com/u/49030804?v=4',
+		avatarId: 'https://avatars.githubusercontent.com/u/49030804?v=4',
 		bannerColor: null,
 		email: '',
 		password: null,
@@ -168,6 +168,7 @@ export const groups: Group[] = [
 		createdAt: new Date(),
 		updatedAt: new Date(),
 		fatherGroupID: null,
+		thumbnailId: null,
 		roleIDs: [],
 		eventID: '3a1e6f9c-8b5d-4c7a-9e2d-1f0c2e5b8d4',
 	},
@@ -177,6 +178,7 @@ export const groups: Group[] = [
 		createdAt: new Date(),
 		updatedAt: new Date(),
 		fatherGroupID: '4f8e2d1c-5a7b-493c-6e0d-8c9a1f3b2e7',
+		thumbnailId: null,
 		roleIDs: [
 			'f4b0e9c2-3d7a-4936-aa81-1e6c9b5f8d2e',
 			'7c8e5d2b-9a0f-43cd-8e6b-1d5f8a0c9b7d',
@@ -189,6 +191,7 @@ export const groups: Group[] = [
 		createdAt: new Date(),
 		updatedAt: new Date(),
 		fatherGroupID: '4f8e2d1c-5a7b-493c-6e0d-8c9a1f3b2e7',
+		thumbnailId: null,
 		roleIDs: [
 			'2f9c8e1b-6a4d-4b9f-a0c8-5e3d7a8f1c9e',
 			'b2e0d9c8-1f5d-4a8e-9c7b-3a6f2d4c5e8a',
@@ -201,6 +204,7 @@ export const groups: Group[] = [
 		createdAt: new Date(),
 		updatedAt: new Date(),
 		fatherGroupID: null,
+		thumbnailId: null,
 		roleIDs: ['gewji3f9-8d6a-40a2-9e87-cb9cfeef3171'],
 		eventID: '3a1e6f9c-8b5d-4c7a-9e2d-1f0c2e5b8d4',
 	},
@@ -210,6 +214,7 @@ export const groups: Group[] = [
 		createdAt: new Date(),
 		updatedAt: new Date(),
 		fatherGroupID: null,
+		thumbnailId: null,
 		roleIDs: [
 			'fjewio3f-8d6a-40a2-9e87-cb9cfeef3171',
 			'frgrt3f9-8d6a-40a2-9e87-cb9cfeef3171',
@@ -222,6 +227,7 @@ export const groups: Group[] = [
 		createdAt: new Date(),
 		updatedAt: new Date(),
 		fatherGroupID: null,
+		thumbnailId: null,
 		roleIDs: [],
 		eventID: '3a1e6f9c-8b5d-4c7a-9e2d-1f0c2e5b8d4',
 	},
@@ -231,6 +237,7 @@ export const groups: Group[] = [
 		createdAt: new Date(),
 		updatedAt: new Date(),
 		fatherGroupID: null,
+		thumbnailId: null,
 		roleIDs: [],
 		eventID: '3a1e6f9c-8b5d-4c7a-9e2d-1f0c2e5b8d4',
 	},
@@ -245,12 +252,12 @@ export const assignedEvents: Event[] = [
 		startDate: new Date(new Date().setDate(new Date().getDate() + 5)),
 		endDate: new Date(new Date().setDate(new Date().getDate() + 6)),
 		description: 'Uma breve descrição do Evento 1',
-		thumbnail:
+		thumbnailId:
 			'https://sportlife.com.br/wp-content/uploads/2023/05/Beach-Tennis.jpg',
 		location: 'Praia do Forte',
 		ownerID: '72e8b3a1-9f6c-4d14-b472-8e1c5638a92c',
 		mainGroupID: '4f8e2d1c-5a7b-493c-6e0d-8c9a1f3b2e7',
-		public: false,
+		visibility: "PRIVATE",
 	},
 	{
 		id: '1f0c2e5b-8b5d-4c7a-9e2d-3a1e6f9c8d4',
@@ -260,12 +267,12 @@ export const assignedEvents: Event[] = [
 		startDate: new Date(new Date().setDate(new Date().getDate() + 5)),
 		endDate: new Date(new Date().setDate(new Date().getDate() + 6)),
 		description: 'Uma breve descrição do Evento 2',
-		thumbnail:
+		thumbnailId:
 			'https://www.adobe.com/content/dam/www/us/en/events/overview-page/eventshub_evergreen_opengraph_1200x630_2x.jpg',
 		location: 'Praia do Forte',
 		ownerID: '72e8b3a1-9f6c-4d14-b472-8e1c5638a92c',
 		mainGroupID: 'jrfw8e2d-5a7b-493c-6e0d-8c9a1f3b2e7',
-		public: false,
+		visibility: "PRIVATE",
 	},
 	{
 		id: '8b5d4c7a-9e2d-1f0c-2e5b-3a1e6f9c8d4',
@@ -275,12 +282,12 @@ export const assignedEvents: Event[] = [
 		startDate: new Date(new Date().setDate(new Date().getDate() + 1)),
 		endDate: new Date(new Date().setDate(new Date().getDate() + 2)),
 		description: 'Uma breve descrição do Evento 3',
-		thumbnail:
+		thumbnailId:
 			'https://kayevent.vn/wp-content/uploads/2020/03/mall-img.png',
 		location: 'Sala de Eventos',
 		ownerID: '72e8b3a1-9f6c-4d14-b472-8e1c5638a92c',
 		mainGroupID: 'efweoqi3-8d6a-40a2-9e87-cb9cfeef3171',
-		public: false,
+		visibility: "UNLISTED",
 	},
 ];
 
@@ -293,12 +300,12 @@ export const availableEvents: Event[] = [
 		startDate: new Date(new Date().setDate(new Date().getDate() + 11)),
 		endDate: new Date(new Date().setDate(new Date().getDate() + 12)),
 		description: 'Uma breve descrição do Evento 1',
-		thumbnail:
+		thumbnailId:
 			'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbjNmrqKMyaV01UV62LKQgwYEnik_w5JsHFh-hbFAWuOPOH0FFwwU4KhsBzZd5ZyFSLP0&usqp=CAU',
 		location: 'Rua da Praia',
 		ownerID: 'a4b7e3f9-8d6a-40a2-9e87-cb9cfeef3171',
 		mainGroupID: 'vfgt3f9-8d6a-40a2-9e87-cb9cfeef3171',
-		public: false,
+		visibility: "PRIVATE",
 	},
 	{
 		id: 'iefuwio3f-8d6a-40a2-9e87-cb9cfeef3171',
@@ -308,11 +315,11 @@ export const availableEvents: Event[] = [
 		startDate: new Date(new Date().setDate(new Date().getDate() + 11)),
 		endDate: new Date(new Date().setDate(new Date().getDate() + 12)),
 		description: 'Uma breve descrição do Evento 2',
-		thumbnail:
+		thumbnailId:
 			'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4lF04zozTsbd9sJGD2NGNuyZWIRdYN1TauUKX9099LD35WidFgATEmTFQJTyW7m7B2eU&usqp=CAU',
 		location: 'Rua da Praia',
 		ownerID: 'a4b7e3f9-8d6a-40a2-9e87-cb9cfeef3171',
 		mainGroupID: 'geirij3f9-8d6a-40a2-9e87-cb9cfeef3171',
-		public: false,
+		visibility: "UNLISTED",
 	},
 ];
