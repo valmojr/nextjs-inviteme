@@ -13,7 +13,7 @@ export function AvailableEventCard(
 			}
 		>
 			<Image
-				src={`${props.event.thumbnail}`}
+				src={`${props.event.thumbnailId}`}
 				width={300}
 				height={200}
 				alt={`${props.event.description}`}

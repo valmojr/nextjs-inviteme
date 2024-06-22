@@ -20,18 +20,18 @@ export default function Avatar(
 ) {
 	let { image, profile, border, size, alt } = props;
 
-	if (profile && !profile?.avatar) {
-		profile.avatar = '';
+	if (profile && !profile?.avatarId) {
+		profile.avatarId = '';
 	}
 
 	// if profile.avatar doesn't starts with https://cdn.discordapp.com, add it
 	if (
 		profile &&
-		profile.avatar &&
-		typeof profile.avatar == 'string' &&
-		!profile.avatar.startsWith('https://cdn.discordapp.com')
+		profile.avatarId &&
+		typeof profile.avatarId == 'string' &&
+		!profile.avatarId.startsWith('https://cdn.discordapp.com')
 	) {
-		profile.avatar = DiscordAvatarParser(profile.discordId || '', profile.avatar);
+		profile.avatarId = DiscordAvatarParser(profile.discordId || '', profile.avatarId);
 	}
 
 	if (image) {
@@ -58,10 +58,10 @@ export default function Avatar(
 				)}
 			/>
 		);
-	} else if (profile && profile.discordId && typeof profile.avatar == 'string') {
+	} else if (profile && profile.discordId && typeof profile.avatarId == 'string') {
 		return (
 			<Image
-				src={profile.avatar}
+				src={profile.avatarId}
 				width={300}
 				height={300}
 				alt={alt ? alt : ''}
