@@ -3,10 +3,7 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User, Event } from "@prisma/client";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { format } from "date-fns";
+import { User, Event, $Enums } from "@prisma/client";
 import {
   Form,
   FormControl,
@@ -16,206 +13,339 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { useToast } from "@/components/ui/use-toast";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { ToastAction } from "@/components/ui/toast";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
+import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from "@/components/ui/input-otp";
-import { useState } from "react";
+import { CalendarIcon } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Separator } from "@/components/ui/separator";
+import { Textarea } from "@/components/ui/textarea";
 
-export type EventDTO = {
-  id: string;
-  createdAt: Date;
-  updatedAt: Date;
-  name: string;
-  mainGroupID: string | null;
-  location: string | null;
-  description: string | null;
-  endDate: Date | null;
-  ownerID: string;
-  startDateDate: string;
-  startDateTime: string;
-  thumbnail: string | null;
-  public: boolean;
-};
+const createEventSchema = z.object({
+  name: z
+    .string({
+      required_error: "Mandatory Field",
+      invalid_type_error: "must be a valid text",
+    })
+    .min(6, {
+      message: "must be larger",
+    })
+    .max(100, {
+      message: "must be shorter",
+    }),
+  location: z.string().optional(),
+  description: z.string().optional(),
+  startDate: z.date(),
+  startTime: z.string().optional(),
+  endDate: z.date().optional(),
+  endTime: z.string().optional(),
+  thumbnail: z.any(),
+  visibility: z
+    .string()
+    .refine((value) => ["PRIVATE", "UNLISTED", "PUBLIC"].includes(value)),
+});
 
-function CreateEventForm({ user }: { user: User }) {
+function CreateEventForm({ user, token }: { user: User; token: string }) {
   const { toast } = useToast();
-
-  const createEventSchema = z.object({
-    title: z
-      .string()
-      .min(4, { message: "must be at least 4 characters long" })
-      .max(100, { message: "must be lower than 100 characters" }),
-    location: z.string().optional(),
-    description: z.string().optional(),
-    ownerID: z.string(),
-    startDateDate: z.date(),
-    startDateTime: z.string(),
-    endDateDate: z.date().optional(),
-    endDateTime: z
-      .number()
-      .min(0, { message: "must not be negative" })
-      .max(2400, { message: "must be a valid time" }),
-    thumbnail: z.string().optional(),
-    public: z.boolean(),
-  });
 
   const createEventForm = useForm<z.infer<typeof createEventSchema>>({
     resolver: zodResolver(createEventSchema),
     defaultValues: {
-      ownerID: user?.id,
+      name: "",
+      location: "",
+      startDate: new Date(),
+      visibility: "PUBLIC",
     },
   });
 
-  async function onSubmit(data?: z.infer<typeof createEventSchema>) {
-    console.log(data);
+  async function onSubmit(data: z.infer<typeof createEventSchema>) {
+    // TODO - Create Event DTO
+    const eventDTO: Partial<Event> = {
+      name: data.name,
+      location: data.location || null,
+      description: data.description || null,
+      startDate: new Date(Date.parse(data.startDate as unknown as string)),
+      endDate: data.endDate
+        ? new Date(Date.parse(data.endDate as unknown as string))
+        : null,
+      thumbnailId: data.thumbnail || null,
+      mainGroupID: null,
+      ownerID: user.id,
+      visibility:
+        (data.visibility as $Enums.Visibility) ||
+        ("PUBLIC" as $Enums.Visibility),
+    };
 
-    //toast({
-    //  title: "You submitted the following values:",
-    //  description: (
-    //    <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //      <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-    //    </pre>
-    //  ),
-    //});
+    // TODO - Create Event fetch
+
+    const askForEventCreation = await fetch(
+      `${process.env.BACKEND_URI}/api/event`,
+      {
+        body: JSON.stringify({ event: eventDTO }),
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    //const eventCreatedOnDatabase = await askForEventCreation.json();
+
+    // TODO - Create Main Group Build
+
+    // TODO - Link Main Group to Created Event
+
+    // TODO - Redirect to created Event
+
+    toast({
+      title: `Creating Event: ${data.name}`,
+      description: `${JSON.stringify(askForEventCreation.headers)}`,
+      action: (
+        <ToastAction altText="Confirm event creation">Confirm</ToastAction>
+      ),
+    });
   }
 
   return (
-    <div className={cn("flex flex-row flex-nowrap gap-6", "w-full h-fit")}>
+    <div className="w-full h-fit">
+      <h1 className="text-3xl text-center">Create Event</h1>
+      <Separator className="my-4" />
       <Form {...createEventForm}>
         <form
           onSubmit={createEventForm.handleSubmit(onSubmit)}
-          className="space-y-8 w-full"
+          className="h-fit"
         >
-          <h1 className="text-2xl font-semibold">Create Event</h1>
           <FormField
             control={createEventForm.control}
-            name="title"
+            name={"name"}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Title*</FormLabel>
                 <FormControl>
-                  <Input placeholder="Your epic event title" {...field} />
+                  <Input placeholder="a epic event title" {...field} />
                 </FormControl>
-                <FormDescription>What</FormDescription>
-                <FormMessage />
               </FormItem>
             )}
           />
           <FormField
             control={createEventForm.control}
-            name="location"
+            name={"location"}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Location</FormLabel>
                 <FormControl>
-                  <Input placeholder="GRID 113087" {...field} />
+                  <Input placeholder="a place, a url, anywhere..." {...field} />
                 </FormControl>
-                <FormDescription>Where</FormDescription>
-                <FormMessage />
               </FormItem>
             )}
           />
-          <FormField
-            control={createEventForm.control}
-            name="startDateDate"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>Date</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={"outline"}
-                        className={cn(
-                          "w-[240px] pl-3 text-left font-normal",
-                          !field.value && "text-muted-foreground"
-                        )}
-                      >
-                        {field.value ? (
-                          format(field.value, "PPP")
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={(event) => {
-                        field.onChange(event);
-                      }}
-                      numberOfMonths={2}
-                      disabled={(date) =>
-                        date <
-                          new Date(
-                            new Date().setDate(new Date().getDate() - 1)
-                          ) || date < new Date("1900-01-01")
-                      }
+          <div className="flex flex-row flex-nowrap gap-3">
+            <FormField
+              control={createEventForm.control}
+              name={"startDate"}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="mr-3">Starting at*</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant={"outline"}
+                          className={cn(
+                            "w-[240px] pl3 text-left font-normal",
+                            !field.value && "text-muted-foreground"
+                          )}
+                        >
+                          {field.value ? (
+                            format(field.value, "PPP")
+                          ) : (
+                            <span>Pick a Date</span>
+                          )}
+                          <CalendarIcon className="ml-auto h-4 w-5 opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={(event) => {
+                          field.onChange(event);
+                        }}
+                        numberOfMonths={1}
+                        disabled={(date) =>
+                          date <
+                            new Date(
+                              new Date().setDate(new Date().getDate() - 1)
+                            ) || date < new Date("1900-01-01")
+                        }
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={createEventForm.control}
+              name={"startTime"}
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      className="mt-2"
+                      placeholder="00:00"
+                      type={"time"}
+                      {...field}
                     />
-                  </PopoverContent>
-                </Popover>
-                <FormDescription>When</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="flex flex-row flex-nowrap gap-3">
+            <FormField
+              control={createEventForm.control}
+              name={"endDate"}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="mr-3">Ending at</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant={"outline"}
+                          className={cn(
+                            "w-[240px] pl3 text-left font-normal",
+                            !field.value && "text-muted-foreground"
+                          )}
+                        >
+                          {field.value ? (
+                            format(field.value, "PPP")
+                          ) : (
+                            <span>Pick a Date</span>
+                          )}
+                          <CalendarIcon className="ml-auto h-4 w-5 opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={(event) => {
+                          field.onChange(event);
+                        }}
+                        numberOfMonths={1}
+                        disabled={(date) =>
+                          date <
+                            new Date(
+                              new Date().setDate(new Date().getDate() - 1)
+                            ) || date < new Date("1900-01-01")
+                        }
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={createEventForm.control}
+              name={"endTime"}
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      className="mt-2"
+                      placeholder="00:00"
+                      type={"time"}
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
           <FormField
             control={createEventForm.control}
-            name="startDateTime"
+            name={"thumbnail"}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Time</FormLabel>
+                <FormLabel>Thumbnail</FormLabel>
                 <FormControl>
-                  <InputOTP maxLength={4} {...field}>
-                    <InputOTPGroup>
-                      <InputOTPSlot index={0} className="bg-background" />
-                      <InputOTPSlot index={1} className="bg-background mr-2" />
-                      :
-                      <InputOTPSlot index={2} className="bg-background ml-2" />
-                      <InputOTPSlot index={3} className="bg-background" />
-                    </InputOTPGroup>
-                  </InputOTP>
+                  <Input
+                    placeholder="thumbnail image"
+                    type="file"
+                    accept="image"
+                    {...field}
+                  />
                 </FormControl>
-                <FormMessage />
               </FormItem>
             )}
           />
+
           <FormField
             control={createEventForm.control}
-            name="description"
+            name={"description"}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Description</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Your epic event description"
-                    className="resize-none"
+                    className="h-[100px]"
+                    placeholder="Your event infos"
                     {...field}
                   />
                 </FormControl>
-                <FormDescription>Why, How, How Much</FormDescription>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={createEventForm.control}
+            name="visibility"
+            render={({ field }) => (
+              <FormItem className="space-y-3">
+                <FormLabel>Visibility</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-col space-y-1"
+                  >
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="PUBLIC" />
+                      </FormControl>
+                      <FormLabel className="font-normal">Public</FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="UNLISTED" />
+                      </FormControl>
+                      <FormLabel className="font-normal">Unlisted</FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="PRIVATE" />
+                      </FormControl>
+                      <FormLabel className="font-normal">Private</FormLabel>
+                    </FormItem>
+                  </RadioGroup>
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full">
-            Submit
-          </Button>
+          <Button className="w-full">Submit</Button>
         </form>
       </Form>
     </div>

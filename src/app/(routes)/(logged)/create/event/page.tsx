@@ -8,7 +8,7 @@ function CreateEventPage() {
 
   return (
     <div className="w-full h-fit flex flex-row flex-nowrap p-8">
-      <CreateEventForm user={user} />
+      <CreateEventForm user={user} token={token as string} />
     </div>
   );
 }
