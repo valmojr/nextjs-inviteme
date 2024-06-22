@@ -12,7 +12,11 @@ export default async function Page({ params }: { params: { id: string } }) {
     }
   );
 
+  console.log('User fetching response status ', response.status);
+
   const data = await response.json();
+
+  console.log('data ', data);
 
   if (!data?.user) {
     throw new Error("No user provided");

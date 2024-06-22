@@ -4,8 +4,6 @@ import { redirect } from "next/navigation";
 
 export type UserJWTPayload = {
   user: User;
-  iat: number;
-  exp: number;
 }
 
 export default function Verify(jsonwebtoken?: string): UserJWTPayload  {
