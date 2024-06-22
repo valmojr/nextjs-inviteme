@@ -30,10 +30,10 @@ async function EventPage({ params }: { params: { id: string } }) {
           "flex flex-row flex-nowrap",
           "w-full h-48 mx-0",
           "justify-end items-end gap-4",
-          event.thumbnail
-            ? `bg-[${event.thumbnail}]`
-            : "dark:bg-zinc-800 bg-zinc-50"
+          "dark:bg-zinc-800 bg-zinc-50"
         )}
+
+        style={{backgroundImage: event.thumbnailId || undefined}}
       >
         <div className="flex flex-col flex-nowrap w-full">
           <h1 className="text-3xl">{event.name}</h1>
