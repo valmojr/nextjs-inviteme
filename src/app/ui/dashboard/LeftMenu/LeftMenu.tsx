@@ -62,7 +62,7 @@ async function LeftMenu() {
   return (
     <Card
       className={cn(
-        "lg:w-[320px] h-screen justify-start items-center",
+        "lg:w-[320px] w-full lg:h-screen h-fit justify-start items-center",
         "border dark:bg-zinc-900 bg-zinc-100",
         "flex flex-col flex-nowrap pt-20 px-3",
         "rounded-none"
@@ -72,7 +72,7 @@ async function LeftMenu() {
         {thereIsNoEvents && (
           <div
             className={cn(
-              "w-[300px] h-full ml-4 mr-4 mb-4",
+              "lg:w-[300px] h-full w-full ml-4 mr-4 mb-4",
               "border border-dashed rounded-lg border-zinc-300 dark:border-zinc-700",
               "flex flex-col flex-nowrap justify-center items-center"
             )}

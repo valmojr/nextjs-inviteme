@@ -8,25 +8,25 @@ function LoggedLayout({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={cn(
-        "fixed top-0 w-full h-screen flex lg:flex-row justify-center items-start"
+        "fixed top-0 w-full h-screen flex lg:flex-row flex-col justify-center items-start"
       )}
     >
       <TopMenu />
       <LeftMenu />
       <div
         className={cn(
-          "flex flex-row flex-nowrap justify-start items-start",
-          "w-full h-screen overflow-auto pt-20 pb-4 pl-4 gap-4",
+          "flex lg:flex-row flex-col flex-nowrap justify-start items-start",
+          "w-full h-screen overflow-auto lg:pt-20 lg:pb-4 lg:pl-4 gap-4 lg:rounded-md rounded-none",
           ""
         )}
       >
         <Card
           className={cn(
-            "w-full h-fit min-h-[680px]",
+            "w-full h-fit lg:min-h-[680px]",
             "flex flex-col flex-nowrap justify-start items-center",
-            "p-0",
+            "p-0 lg:rounded-md rounded-none",
             "dark:bg-zinc-900 bg-zinc-100",
-            "overflow-auto"
+            "lg:overflow-auto"
           )}
         >
           {children}
