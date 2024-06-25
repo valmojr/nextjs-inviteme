@@ -345,7 +345,7 @@ function CreateEventForm({ user, token }: { user: User; token: string }) {
               </FormItem>
             )}
           />
-          <Button className="w-full">Submit</Button>
+          <Button className="w-full mt-5">Submit</Button>
         </form>
       </Form>
     </div>
