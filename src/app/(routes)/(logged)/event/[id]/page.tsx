@@ -12,12 +12,12 @@ async function EventPage({ params }: { params: { id: string } }) {
     },
   };
   const eventFetch = await fetch(
-    `${process.env.BACKEND_URI}/api/event/${params.id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URI}/api/event/${params.id}`,
     headerParams
   );
   const event = (await eventFetch.json()) as Event;
   const groupFetch = await fetch(
-    `${process.env.BACKEND_URI}/api/group/${params.id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URI}/api/group/${params.id}`,
     headerParams
   );
 

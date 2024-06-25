@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import { useCookies } from 'react-cookie';
 
 export default function CookieParser({ cookies }: { cookies: string }) {
-	const jwt = cookies.split(';')[0].split('=')[1];
+	const jwt = cookies;
 
 	const [fetchedCookies, setCookie] = useCookies(['token']);
 

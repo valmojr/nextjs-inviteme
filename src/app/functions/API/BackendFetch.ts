@@ -5,7 +5,7 @@ async function BackendFetch(route: RequestInfo, options?: RequestInit) {
     route = `/${route}`;
   }
 
-  const response = await fetch(`${process.env.BACKEND_URI}${route}`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URI}${route}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',

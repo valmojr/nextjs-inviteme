@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { verify as verifyJWT } from "jsonwebtoken";
+import { sign, verify as verifyJWT } from "jsonwebtoken";
 import { redirect } from "next/navigation";
 
 export type UserJWTPayload = {

@@ -47,7 +47,7 @@ async function LeftMenu() {
 
   const { user } = Verify(token);
 
-  const response = await fetch(`${process.env.BACKEND_URI}/api/event`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URI}/api/event`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

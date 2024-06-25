@@ -88,7 +88,7 @@ function CreateEventForm({ user, token }: { user: User; token: string }) {
     // TODO - Create Event fetch
 
     const askForEventCreation = await fetch(
-      `${process.env.BACKEND_URI}/api/event`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URI}/api/event`,
       {
         body: JSON.stringify({ event: eventDTO }),
         method: "POST",
