@@ -74,7 +74,10 @@ function TopMenu() {
         "flex flex-row flex-nowrap items-center justify-between"
       )}
     >
-      <Link href="/dashboard" className="flex flex-row justify-start items-center gap-3 w-full">
+      <Link
+        href="/dashboard"
+        className="flex flex-row justify-start items-center gap-3 w-full"
+      >
         <Sheet>
           {/* TODO - Arrumar Sidemenu de Funções */}
           <SheetTrigger asChild>
@@ -168,39 +171,18 @@ function TopMenu() {
             </Avatar>
           </SheetTrigger>
           <SheetContent>
-            <SheetHeader>
-              <SheetTitle>Edit profile</SheetTitle>
-              <SheetDescription>
-                {
-                  "Make changes to your profile here. Click save when you're done."
-                }
-              </SheetDescription>
+            <SheetHeader className="items-center gap-4">
+              <SheetTitle className="text-3xl">
+                {user.displayName ? user.displayName : user.username}
+              </SheetTitle>
+              <Avatar className="w-fit h-fit">
+                <AvatarImage src={user.avatarId || ""} className="h-48 w-48" />
+                <AvatarFallback>{avatarFallback}</AvatarFallback>
+              </Avatar>
             </SheetHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Name
-                </Label>
-                <Input
-                  id="name"
-                  value="This is my name"
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="username" className="text-right">
-                  Username
-                </Label>
-                <Input
-                  id="username"
-                  value="This is my username"
-                  className="col-span-3"
-                />
-              </div>
-            </div>
             <SheetFooter>
               <SheetClose asChild>
-                <Button type="submit">Save changes</Button>
+                <Button type="submit">Close</Button>
               </SheetClose>
             </SheetFooter>
           </SheetContent>
